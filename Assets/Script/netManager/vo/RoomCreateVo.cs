@@ -20,6 +20,7 @@ namespace AssemblyCSharp
         public int gui;//鬼牌 0无鬼；1白板；2翻鬼
         public bool gangHu;//可抢杠胡
         public int guiPai=-1;
+        public bool queYiMen = false;
 
         public RoomCreateVo()
 		{

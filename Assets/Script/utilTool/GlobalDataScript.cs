@@ -36,8 +36,6 @@ public class GlobalDataScript
     public static int surplusTimes;
     /**总局数**/
     public static int totalTimes;
-    /**默认面板**/
-    public static int userMaJiangKind;
     /// <summary>
     /// 最顶层的容器
     /// </summary>
@@ -88,7 +86,6 @@ public class GlobalDataScript
         roomAvatarVoList = null;
         surplusTimes = 0;
         totalTimes = 0;
-        userMaJiangKind = 0;
         reEnterRoomData = null;
         singalGameOverList = new List<GameObject>();
         lotteryDatas = null;

@@ -58,7 +58,6 @@ public class CrateRoomSettingScript : MonoBehaviour {
 	private GameObject gameSence;
 	private RoomCreateVo sendVo;//创建房间的信息
 	void Start () {
-        // int x = GlobalDataScript.userMaJiangKind;   //userMaJiangKind所有相关的代码可以删除  看看有没有出问题
         int x = PlayerPrefs.GetInt("userDefaultMJ");
         if (x == 0)
         {
@@ -99,7 +98,6 @@ public class CrateRoomSettingScript : MonoBehaviour {
 	public void openZhuanzhuanSeetingPanel(){
 
 		SoundCtrl.getInstance().playSoundByActionButton(1);
-        GlobalDataScript.userMaJiangKind = 0;
         PlayerPrefs.SetInt("userDefaultMJ",0);
 
         Btn_zhuanZ_liang.SetActive(true);
@@ -108,7 +106,6 @@ public class CrateRoomSettingScript : MonoBehaviour {
         Btn_huaS_dark.SetActive(true);
         Btn_run_liang.SetActive(false);
         Btn_run_dark.SetActive(true);
-        button_Create_Sure.gameObject.SetActive(false);
 
         panelZhuanzhuanSetting.SetActive (true);
 		panelChangshaSetting.SetActive (false);
@@ -123,7 +120,6 @@ public class CrateRoomSettingScript : MonoBehaviour {
 	 */ 
 	public void openChangshaSeetingPanel(){
 		SoundCtrl.getInstance().playSoundByActionButton(1);
-        GlobalDataScript.userMaJiangKind = 2;
         PlayerPrefs.SetInt("userDefaultMJ", 2);
         Btn_zhuanZ_liang.SetActive(false);
         Btn_zhuanZ_dark.SetActive(true);
@@ -137,9 +133,6 @@ public class CrateRoomSettingScript : MonoBehaviour {
 		panelHuashuiSetting.SetActive (false);
         panelGuangDongSetting.SetActive(false);
         panelDevoloping.SetActive (true);
-
-        button_Create_Sure.gameObject.SetActive(true);
-
     }
 
 	/***
@@ -147,7 +140,6 @@ public class CrateRoomSettingScript : MonoBehaviour {
 	 */ 
 	public void openHuashuiSeetingPanel(){
 		SoundCtrl.getInstance().playSoundByActionButton(1);
-        GlobalDataScript.userMaJiangKind = 1;
         PlayerPrefs.SetInt("userDefaultMJ", 1);
         Btn_zhuanZ_liang.SetActive(false);
         Btn_zhuanZ_dark.SetActive(true);
@@ -155,14 +147,12 @@ public class CrateRoomSettingScript : MonoBehaviour {
         Btn_huaS_dark.SetActive(false);
         Btn_run_liang.SetActive(false);
         Btn_run_dark.SetActive(true);
-        button_Create_Sure.gameObject.SetActive(false);
+
         panelZhuanzhuanSetting.SetActive (false);
 		panelChangshaSetting.SetActive (false);
 		panelHuashuiSetting.SetActive (true);
         panelGuangDongSetting.SetActive(false);
         panelDevoloping.SetActive (false);
-        button_Create_Sure.gameObject.SetActive(false);
-
     }
 
     /***
@@ -172,7 +162,6 @@ public class CrateRoomSettingScript : MonoBehaviour {
     {
 
         SoundCtrl.getInstance().playSoundByActionButton(1);
-        GlobalDataScript.userMaJiangKind = 3;
         PlayerPrefs.SetInt("userDefaultMJ", 3);
 
         Btn_zhuanZ_liang.SetActive(false);
@@ -181,7 +170,6 @@ public class CrateRoomSettingScript : MonoBehaviour {
         Btn_huaS_dark.SetActive(true);
         Btn_run_liang.SetActive(true);
         Btn_run_dark.SetActive(false);
-        button_Create_Sure.gameObject.SetActive(false);
 
         panelZhuanzhuanSetting.SetActive(false);
         panelChangshaSetting.SetActive(false);
@@ -208,7 +196,6 @@ public class CrateRoomSettingScript : MonoBehaviour {
 		panelHuashuiSetting.SetActive (false);
         panelGuangDongSetting.SetActive(false);
 		panelDevoloping.SetActive (true);
-        button_Create_Sure.gameObject.SetActive(false);
     }
 
 	public void closeDialog(){
@@ -468,22 +455,79 @@ public class CrateRoomSettingScript : MonoBehaviour {
 			TipsManagerScript.getInstance ().setTips ("你的房卡数量不足，不能创建房间");
 		}
 
-	}
+    }
 
-//	public void toggleHongClick(){
-//
-//		if (zhuanzhuanGameRule [2].isOn) {
-//			zhuanzhuanGameRule [0].isOn = true;
-//		}
-//	}
-//
-//	public void toggleQiangGangHuClick(){
-//		if (zhuanzhuanGameRule [1].isOn) {
-//			zhuanzhuanGameRule [2].isOn = false;
-//		}
-//	}
+    /**
+	 * 创建亳州麻将房间
+	 */
+    public void createBoZhouRoom()
+    {
+        SoundCtrl.getInstance().playSoundByActionButton(1);
+        int roundNumber = 8;//房卡数量
+        bool isGangHu = true;//自摸
+        bool hasHong = false;//红中赖子
+        bool isSevenDoube = false;//七小对
+        bool isFengpai = true;//风牌
+        int gui = 0; //鬼牌
+                     //bool isGang = false;
+        int maCount = 0;
+        for (int i = 0; i < guangdongRoomCards.Count; i++)
+        {
+            Toggle item = guangdongRoomCards[i];
+            if (item.isOn)
+            {
+                if (i == 0)
+                {
+                    roundNumber = 8;
+                }
+                else if (i == 1)
+                {
+                    roundNumber = 16;
+                }
+                break;
+            }
+        }
 
-	public void onCreateRoomCallback(ClientResponse response){
+        sendVo = new RoomCreateVo();
+        sendVo.ma = maCount;
+        sendVo.roundNumber = roundNumber;
+        sendVo.ziMo = 1;
+        sendVo.hong = hasHong;
+        sendVo.addWordCard = isFengpai;
+        sendVo.sevenDouble = isSevenDoube;
+        sendVo.gui = gui;
+        sendVo.gangHu = isGangHu;
+        sendVo.roomType = GameConfig.GAME_TYPE_BOZHOU;
+        sendVo.queYiMen = true;
+        string sendmsgstr = JsonMapper.ToJson(sendVo);
+        if (GlobalDataScript.loginResponseData.account.roomcard > 0)
+        {
+            watingPanel.gameObject.SetActive(true);
+
+            CustomSocket.getInstance().sendMsg(new CreateRoomRequest(sendmsgstr));
+        }
+        else
+        {
+            TipsManagerScript.getInstance().setTips("你的房卡数量不足，不能创建房间");
+        }
+
+
+    }
+
+    //	public void toggleHongClick(){
+    //
+    //		if (zhuanzhuanGameRule [2].isOn) {
+    //			zhuanzhuanGameRule [0].isOn = true;
+    //		}
+    //	}
+    //
+    //	public void toggleQiangGangHuClick(){
+    //		if (zhuanzhuanGameRule [1].isOn) {
+    //			zhuanzhuanGameRule [2].isOn = false;
+    //		}
+    //	}
+
+    public void onCreateRoomCallback(ClientResponse response){
         if (watingPanel != null) {
         watingPanel.gameObject.SetActive(false);
         }
