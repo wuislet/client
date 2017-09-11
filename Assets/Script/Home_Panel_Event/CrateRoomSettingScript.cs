@@ -16,6 +16,7 @@ public class CrateRoomSettingScript : MonoBehaviour {
     public GameObject panelGuangDongSetting;
     public GameObject panelDevoloping;
 
+    public GameObject panelBoZhouSeeting;  //亳州
 
     public GameObject Button_zhuanzhuan1;
     public GameObject Button_zhuanzhuan;
@@ -25,12 +26,18 @@ public class CrateRoomSettingScript : MonoBehaviour {
     public GameObject Button_changsha1;
     public GameObject Button_changsha;
 
+    public GameObject Button_BoZhou1; // 亳州麻
+    public GameObject Button_BoZhou;
+
     public GameObject Btn_zhuanZ_liang;
     public GameObject Btn_zhuanZ_dark;
     public GameObject Btn_huaS_liang;
     public GameObject Btn_huaS_dark;
     public GameObject Btn_run_liang;
     public GameObject Btn_run_dark;
+
+    public GameObject Btn_BoZhou_liang;//亳州麻将 按钮亮
+    public GameObject Btn_BoZhou_dark;
 
     public Image watingPanel;
 
@@ -42,20 +49,31 @@ public class CrateRoomSettingScript : MonoBehaviour {
 	public List<Toggle> huashuiRoomCards;//划水麻将房卡数
     public List<Toggle> guangdongRoomCards;//广东麻将房卡数
 
+    public List<Toggle> BoZhouRoomCards;//亳州麻将房卡数
+
     public List<Toggle> zhuanzhuanGameRule;//转转麻将玩法
 	public List<Toggle> changshaGameRule;//长沙麻将玩法
 	public List<Toggle> huashuiGameRule;//划水麻将玩法
     public List<Toggle> guangdongGameRule;//广东麻将玩法
+
+    public List<Toggle> BoZhouGameRule;//亳州麻将玩法
 
     public List<Toggle> zhuanzhuanZhuama;//转转麻将抓码个数
 	public List<Toggle> changshaZhuama;//长沙麻将抓码个数
 	public List<Toggle> huashuixiayu;//划水麻将下鱼条数
     public List<Toggle> guangdongZhuama;//广东麻将抓码个数
 
+    public List<Toggle> bozhouselfDrawn; //亳州自摸加倍
+    public List<Toggle> bozhouxiazui; // 亳州下嘴个数
+
     public List<Toggle> guangdongGui;//广东麻将鬼牌
 
+#pragma warning disable CS0169 // 从不使用字段“CrateRoomSettingScript.roomCardCount”
     private int roomCardCount;//房卡数
+#pragma warning restore CS0169 // 从不使用字段“CrateRoomSettingScript.roomCardCount”
+#pragma warning disable CS0169 // 从不使用字段“CrateRoomSettingScript.gameSence”
 	private GameObject gameSence;
+#pragma warning restore CS0169 // 从不使用字段“CrateRoomSettingScript.gameSence”
 	private RoomCreateVo sendVo;//创建房间的信息
 	void Start () {
         int x = PlayerPrefs.GetInt("userDefaultMJ");
@@ -69,7 +87,8 @@ public class CrateRoomSettingScript : MonoBehaviour {
         }
         else if (x == 2)
         {
-            openChangshaSeetingPanel();
+            //openChangshaSeetingPanel();
+            openBoZhouSeetingPanel();
         }
         else if (x == 3)
         {
@@ -112,27 +131,37 @@ public class CrateRoomSettingScript : MonoBehaviour {
 		panelHuashuiSetting.SetActive (false);
         panelGuangDongSetting.SetActive(false);
         panelDevoloping.SetActive (false);
-	
+
+        Btn_BoZhou_liang.SetActive(false);
+        Btn_BoZhou_dark.SetActive(true);
+        panelBoZhouSeeting.SetActive(false);
 	}
 
-	/***
+    /***
 	 * 打开长沙麻将设置面板
-	 */ 
-	public void openChangshaSeetingPanel(){
+	 */
+    /*public void openChangshaSeetingPanel()*/
+    //打开亳州麻将设置面板
+    public void openBoZhouSeetingPanel()
+    {
 		SoundCtrl.getInstance().playSoundByActionButton(1);
         PlayerPrefs.SetInt("userDefaultMJ", 2);
         Btn_zhuanZ_liang.SetActive(false);
         Btn_zhuanZ_dark.SetActive(true);
         Btn_huaS_liang.SetActive(false);
         Btn_huaS_dark.SetActive(true);
-        Btn_run_liang.SetActive(true);
-        Btn_run_dark.SetActive(false);
+        Btn_run_liang.SetActive(false);
+        Btn_run_dark.SetActive(true);
 
         panelZhuanzhuanSetting.SetActive (false);
 		panelChangshaSetting.SetActive (false);
 		panelHuashuiSetting.SetActive (false);
         panelGuangDongSetting.SetActive(false);
-        panelDevoloping.SetActive (true);
+        panelDevoloping.SetActive (false);
+
+        Btn_BoZhou_liang.SetActive(true);
+        Btn_BoZhou_dark.SetActive(false);
+        panelBoZhouSeeting.SetActive(true);
     }
 
 	/***
@@ -153,6 +182,10 @@ public class CrateRoomSettingScript : MonoBehaviour {
 		panelHuashuiSetting.SetActive (true);
         panelGuangDongSetting.SetActive(false);
         panelDevoloping.SetActive (false);
+
+        Btn_BoZhou_liang.SetActive(false);
+        Btn_BoZhou_dark.SetActive(true);
+        panelBoZhouSeeting.SetActive(false);
     }
 
     /***
@@ -177,6 +210,10 @@ public class CrateRoomSettingScript : MonoBehaviour {
         panelGuangDongSetting.SetActive(true);
         panelDevoloping.SetActive(false);
 
+        Btn_BoZhou_liang.SetActive(false);
+        Btn_BoZhou_dark.SetActive(true);
+        panelBoZhouSeeting.SetActive(false);
+
     }
 
     public void Button_down()
@@ -196,6 +233,8 @@ public class CrateRoomSettingScript : MonoBehaviour {
 		panelHuashuiSetting.SetActive (false);
         panelGuangDongSetting.SetActive(false);
 		panelDevoloping.SetActive (true);
+
+        panelBoZhouSeeting.SetActive(false);
     }
 
 	public void closeDialog(){
@@ -346,6 +385,7 @@ public class CrateRoomSettingScript : MonoBehaviour {
         sendVo.gui = gui;
         sendVo.gangHu = isGangHu;
         sendVo.roomType = GameConfig.GAME_TYPE_GUANGDONG;
+        print("  creatre  guangdong " + sendVo);
         string sendmsgstr = JsonMapper.ToJson(sendVo);
         if (GlobalDataScript.loginResponseData.account.roomcard > 0)
         {
@@ -463,42 +503,65 @@ public class CrateRoomSettingScript : MonoBehaviour {
     public void createBoZhouRoom()
     {
         SoundCtrl.getInstance().playSoundByActionButton(1);
-        int roundNumber = 8;//房卡数量
-        bool isGangHu = true;//自摸
-        bool hasHong = false;//红中赖子
-        bool isSevenDoube = false;//七小对
-        bool isFengpai = true;//风牌
-        int gui = 0; //鬼牌
-                     //bool isGang = false;
-        int maCount = 0;
-        for (int i = 0; i < guangdongRoomCards.Count; i++)
+        int roundNumber = 4;//房卡数量
+        bool bozhouZiMo = false;  // 亳州麻将胡法
+        bool bubaotingkehu = false;  //不报听可胡
+        bool anhangliang = false;   // 暗杠亮 
+        bool xiazui = false;   //下载
+        int zimojiabei=0;
+        for (int i = 0; i < BoZhouRoomCards.Count; i++)
         {
-            Toggle item = guangdongRoomCards[i];
+            Toggle item = BoZhouRoomCards[i];
             if (item.isOn)
             {
                 if (i == 0)
                 {
-                    roundNumber = 8;
+                    roundNumber = 4;
                 }
                 else if (i == 1)
+                {
+                    roundNumber = 8;
+                }
+                else if (i == 2)
                 {
                     roundNumber = 16;
                 }
                 break;
             }
         }
+        
+            if(BoZhouGameRule[0].isOn){
+                bozhouZiMo = true;
+            }
 
+            if (BoZhouGameRule[2].isOn){
+                bubaotingkehu = true;
+            }
+            if(BoZhouGameRule[3].isOn){
+                anhangliang = true;
+            }
+
+            if(bozhouxiazui[0].isOn){
+              
+            }
+            if(bozhouxiazui[0].isOn)  {
+                 xiazui = true;
+            }
+  
+            for (int i = 0; i <bozhouselfDrawn.Count; i++) {
+                if (bozhouselfDrawn[i].isOn) {
+                    zimojiabei = 2 * i;
+                    break;
+                }
+            }
         sendVo = new RoomCreateVo();
-        sendVo.ma = maCount;
         sendVo.roundNumber = roundNumber;
-        sendVo.ziMo = 1;
-        sendVo.hong = hasHong;
-        sendVo.addWordCard = isFengpai;
-        sendVo.sevenDouble = isSevenDoube;
-        sendVo.gui = gui;
-        sendVo.gangHu = isGangHu;
+        sendVo.BozhouHu = bozhouZiMo ? 1 : 0;
+        sendVo.xiazui = xiazui ? 1 : 0;
+        sendVo.NolisterToBeard = bubaotingkehu;
+        sendVo.angangLiang = anhangliang;
+        sendVo.BozhouZimoMagnification = zimojiabei;    
         sendVo.roomType = GameConfig.GAME_TYPE_BOZHOU;
-        sendVo.queYiMen = true;
         string sendmsgstr = JsonMapper.ToJson(sendVo);
         if (GlobalDataScript.loginResponseData.account.roomcard > 0)
         {
@@ -511,8 +574,11 @@ public class CrateRoomSettingScript : MonoBehaviour {
             TipsManagerScript.getInstance().setTips("你的房卡数量不足，不能创建房间");
         }
 
-
     }
+
+ 
+    
+
 
     //	public void toggleHongClick(){
     //
@@ -533,7 +599,7 @@ public class CrateRoomSettingScript : MonoBehaviour {
         }
         MyDebug.Log (response.message);
 		if (response.status == 1) {
-			
+            print(sendVo);
 			//RoomCreateResponseVo responseVO = JsonMapper.ToObject<RoomCreateResponseVo> (response.message);
 			int roomid = Int32.Parse(response.message);
 			sendVo.roomId = roomid;

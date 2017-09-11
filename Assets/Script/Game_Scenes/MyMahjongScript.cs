@@ -51,7 +51,9 @@ public class MyMahjongScript : MonoBehaviour
 	public Text versionText;
 
 	//======================================
+#pragma warning disable CS0169 // 从不使用字段“MyMahjongScript.uuid”
 	private int uuid;
+#pragma warning restore CS0169 // 从不使用字段“MyMahjongScript.uuid”
 	private float timer = 0;
 	private int LeavedCardsNum;
 	private int MoPaiCardPoint;
@@ -79,18 +81,24 @@ public class MyMahjongScript : MonoBehaviour
     /// </summary>
     private int bankerId;
 	private int curDirIndex;
+#pragma warning disable CS0649 // 从未对字段“MyMahjongScript.curCard”赋值，字段将一直保持其默认值 null
 	private GameObject curCard;
+#pragma warning restore CS0649 // 从未对字段“MyMahjongScript.curCard”赋值，字段将一直保持其默认值 null
+#pragma warning disable CS0414 // 字段“MyMahjongScript.guiPai”已被赋值，但从未使用过它的值
     /// <summary>
     /// 鬼牌
     /// </summary>
     private int guiPai = -1;
+#pragma warning restore CS0414 // 字段“MyMahjongScript.guiPai”已被赋值，但从未使用过它的值
 	/// <summary>
 	/// 打出来的牌
 	/// </summary>
 	private GameObject putOutCard;
 
 
+#pragma warning disable CS0169 // 从不使用字段“MyMahjongScript.otherMoCardPoint”
 	private int otherMoCardPoint;
+#pragma warning restore CS0169 // 从不使用字段“MyMahjongScript.otherMoCardPoint”
 	private GameObject Pointertemp;
 	private int putOutCardPoint = -1;//打出的牌
 	private int putOutCardPointAvarIndex=-1;//最后一个打出牌的人的index
@@ -516,7 +524,9 @@ public class MyMahjongScript : MonoBehaviour
 				
 				try{
 					SelfAndOtherPutoutCard = int.Parse( strs[i].Split(new char[1]{':'})[1]);
+#pragma warning disable CS0168 // 声明了变量“e”，但从未使用过
 				}catch (Exception e){
+#pragma warning restore CS0168 // 声明了变量“e”，但从未使用过
 				
 				}
 
@@ -1352,7 +1362,9 @@ public class MyMahjongScript : MonoBehaviour
 				if (jugeList [i] [0].GetComponent<TopAndBottomCardScript> ().getPoint () == cardPoint) {
 					return i;
 				}
+#pragma warning disable CS0168 // 声明了变量“e”，但从未使用过
 			}catch (Exception e){
+#pragma warning restore CS0168 // 声明了变量“e”，但从未使用过
 				return -1;
 			}
 
@@ -1585,8 +1597,12 @@ public class MyMahjongScript : MonoBehaviour
 		UpateTimeReStart ();
 		GangBackVO gangBackVo = JsonMapper.ToObject<GangBackVO>(response.message);
 		gangKind = gangBackVo.type;
+#pragma warning disable CS0219 // 变量“Num”已被赋值，但从未使用过它的值
 		int Num = 0;
+#pragma warning restore CS0219 // 变量“Num”已被赋值，但从未使用过它的值
+#pragma warning disable CS0219 // 变量“pengOrNot”已被赋值，但从未使用过它的值
 		bool pengOrNot = false;
+#pragma warning restore CS0219 // 变量“pengOrNot”已被赋值，但从未使用过它的值
 		//checkHuOrGangOrPengOrChi (MoPaiCardPoint,2);
 	//	GlobalDataScript.isDrag = true;
 
@@ -1831,7 +1847,33 @@ public class MyMahjongScript : MonoBehaviour
 		string str = "房间号：\n"+roomvo.roomId+"\n";
         str += "圈数：" + roomvo.roundNumber + "\n\n";
 
-        if (roomvo.roomType == 3) {
+        if (roomvo.roomType == 5){  //-----亳州
+            str += "亳州麻将\n";
+            if (roomvo.BozhouHu == 1){  // ---亳州麻将自摸
+                str += "推倒胡\n";
+            }
+            else {
+                str += "断一门\n";
+            }
+            if (roomvo.xiazui == 1){
+                str += "不下嘴\n";
+            }
+            else
+            {
+                str += "下嘴\n";
+            }
+
+            if (roomvo.NolisterToBeard)
+                str += "不报听可胡\n";
+            if (roomvo.angangLiang)
+                str += "暗杠亮\n";
+            if (roomvo.BozhouZimoMagnification > 0){
+                str += "自摸翻倍：" + roomvo.BozhouZimoMagnification + "\n";
+            }
+           
+        }
+
+       else  if (roomvo.roomType == 3) {
             str += "长沙麻将\n";
         } else if (roomvo.roomType == 4) {
             if(roomvo.gangHu)
@@ -1858,7 +1900,8 @@ public class MyMahjongScript : MonoBehaviour
             {
                 str += "抓码数：" + roomvo.ma + "";
             }
-        } else {
+        }
+        else {
             if (roomvo.hong) {
                 str += "红中麻将\n";
             } else {
@@ -1868,8 +1911,10 @@ public class MyMahjongScript : MonoBehaviour
                     str += "划水麻将\n";
                 } else if (roomvo.roomType == 3) {
                     str += "长沙麻将\n";
-                }
+                }             
             }
+          
+
             if (roomvo.ziMo == 1) {
                 str += "只能自摸\n";
             } else {
@@ -2967,7 +3012,9 @@ public class MyMahjongScript : MonoBehaviour
 			SelfAndOtherPutoutCard = currentCardPointTemp; 
 
 
+#pragma warning disable CS0168 // 声明了变量“ex”，但从未使用过
 		}catch( Exception ex){
+#pragma warning restore CS0168 // 声明了变量“ex”，但从未使用过
 
 		}
 
