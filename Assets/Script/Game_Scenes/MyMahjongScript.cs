@@ -1562,7 +1562,7 @@ public class MyMahjongScript : MonoBehaviour
 	/// <summary>
 	/// 点击放弃按钮
 	/// </summary>
-	public void myPassBtnClick()
+	public void myPassBtnClick()// 麻将过 按钮事件 
 	{
 		//GlobalDataScript.isDrag = true;
 		btnActionScript.cleanBtnShow ();
@@ -1579,8 +1579,13 @@ public class MyMahjongScript : MonoBehaviour
 		passType = "";
 		CustomSocket.getInstance().sendMsg(new GaveUpRequest());
 	}
+    // 亳州麻将下嘴按钮方法
+    public void myxiazuiBtnClick()
+    {
 
-	public void myPengBtnClick()
+    }
+
+    public void myPengBtnClick() //麻将碰按钮事件 
 	{
 		GlobalDataScript.isDrag = true;
 		UpateTimeReStart ();
@@ -1759,6 +1764,7 @@ public class MyMahjongScript : MonoBehaviour
 		return obj;
 	}
 
+    //杠牌按钮事件
 	public void myGangBtnClick()
 
 	{

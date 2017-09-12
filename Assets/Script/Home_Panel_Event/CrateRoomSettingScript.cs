@@ -65,6 +65,7 @@ public class CrateRoomSettingScript : MonoBehaviour {
 
     public List<Toggle> bozhouselfDrawn; //亳州自摸加倍
     public List<Toggle> bozhouxiazui; // 亳州下嘴个数
+    //public GameObject xiazuiBtn;  // 亳州麻将选择下嘴   游戏开始界面下嘴按钮才会出现
 
     public List<Toggle> guangdongGui;//广东麻将鬼牌
 
@@ -96,6 +97,7 @@ public class CrateRoomSettingScript : MonoBehaviour {
         }
 
         SocketEventHandle.getInstance ().CreateRoomCallBack += onCreateRoomCallback;
+        //xiazuiBtn.SetActive(false);
 
 	}
 	
@@ -507,7 +509,7 @@ public class CrateRoomSettingScript : MonoBehaviour {
         bool bozhouZiMo = false;  // 亳州麻将胡法
         bool bubaotingkehu = false;  //不报听可胡
         bool anhangliang = false;   // 暗杠亮 
-        bool xiazui = false;   //下载
+        bool xiazui = false;   //下嘴
         int zimojiabei=0;
         for (int i = 0; i < BoZhouRoomCards.Count; i++)
         {
@@ -546,6 +548,7 @@ public class CrateRoomSettingScript : MonoBehaviour {
             }
             if(bozhouxiazui[0].isOn)  {
                  xiazui = true;
+            //xiazuiBtn.SetActive(true);
             }
   
             for (int i = 0; i <bozhouselfDrawn.Count; i++) {
@@ -563,6 +566,8 @@ public class CrateRoomSettingScript : MonoBehaviour {
         sendVo.BozhouZimoMagnification = zimojiabei;    
         sendVo.roomType = GameConfig.GAME_TYPE_BOZHOU;
         string sendmsgstr = JsonMapper.ToJson(sendVo);
+
+
         if (GlobalDataScript.loginResponseData.account.roomcard > 0)
         {
             watingPanel.gameObject.SetActive(true);
