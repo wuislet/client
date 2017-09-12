@@ -1583,6 +1583,8 @@ public class MyMahjongScript : MonoBehaviour
     public void myxiazuiBtnClick()
     {
 
+
+
     }
 
     public void myPengBtnClick() //麻将碰按钮事件 
