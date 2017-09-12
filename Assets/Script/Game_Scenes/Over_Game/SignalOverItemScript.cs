@@ -327,7 +327,7 @@ public class SignalOverItemScript : MonoBehaviour {
 
 
         //显示中码牌信息==>广东麻将单独处理
-		if (GlobalDataScript.roomVo.roomType == GameConfig.GAME_TYPE_GUANGDONG && (hu.IndexOf("zi_")!=-1 || hu.IndexOf("self_")!=-1 ))
+		if (GlobalDataScript.roomVo.roomType == GameConfig.GAME_TYPE_GUANGDONG && hu!= null && (hu.IndexOf("zi_")!=-1 || hu.IndexOf("self_")!=-1 ))
         {
             for (int i = 0; i < validMas.Count; i++)
             {
