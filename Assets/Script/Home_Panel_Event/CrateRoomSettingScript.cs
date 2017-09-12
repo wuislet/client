@@ -43,6 +43,7 @@ public class CrateRoomSettingScript : MonoBehaviour {
 
     public Image button_Create_Sure;
 
+    //public GameObject xiazuiSelect;// 亳州麻将下嘴选项
 
     public List<Toggle> zhuanzhuanRoomCards;//转转麻将房卡数
 	public List<Toggle> changshaRoomCards;//长沙麻将房卡数
@@ -98,6 +99,7 @@ public class CrateRoomSettingScript : MonoBehaviour {
 
         SocketEventHandle.getInstance ().CreateRoomCallBack += onCreateRoomCallback;
         //xiazuiBtn.SetActive(false);
+        //xiazuiSelect.SetActive(false);
 
 	}
 	
@@ -246,6 +248,20 @@ public class CrateRoomSettingScript : MonoBehaviour {
 		Destroy (this);
 		Destroy (gameObject);
 	}
+
+   // public void closeXiazui()// 关闭下嘴选项页面
+   // {
+   //     xiazuiSelect.SetActive(false);
+   //     //SoundCtrl.getInstance().playSoundByActionButton(1);
+   //     //MyDebug.Log("closeXiazui");
+   //     //SocketEventHandle.getInstance().CreateRoomCallBack -= onCreateRoomCallback;
+   //     //Destroy(this);
+   //     //Destroy(gameObject);
+   // }
+   // public void showXiazui()
+   // {
+   //     xiazuiSelect.SetActive(true);
+   // }
 
 	/**
 	 * 创建转转麻将房间
@@ -566,16 +582,10 @@ public class CrateRoomSettingScript : MonoBehaviour {
         sendVo.BozhouZimoMagnification = zimojiabei;    
         sendVo.roomType = GameConfig.GAME_TYPE_BOZHOU;
         string sendmsgstr = JsonMapper.ToJson(sendVo);
-
-
-        if (GlobalDataScript.loginResponseData.account.roomcard > 0)
-        {
+        if (GlobalDataScript.loginResponseData.account.roomcard > 0){
             watingPanel.gameObject.SetActive(true);
-
             CustomSocket.getInstance().sendMsg(new CreateRoomRequest(sendmsgstr));
-        }
-        else
-        {
+        } else{
             TipsManagerScript.getInstance().setTips("你的房卡数量不足，不能创建房间");
         }
 
@@ -629,6 +639,7 @@ public class CrateRoomSettingScript : MonoBehaviour {
 			//GlobalDataScript.gamePlayPanel.GetComponent<MyMahjongScript> ().createRoomAddAvatarVO (GlobalDataScript.loginResponseData);
 		
 			closeDialog ();
+            //closeXiazui();
 
 		} else {
 			TipsManagerScript.getInstance ().setTips (response.message);
