@@ -10,12 +10,9 @@ public class ButtonActionScript : MonoBehaviour {
 	public GameObject chiBtn;
 	public GameObject passBtn;
 
-    private GameObject xiazuiBtn; //亳州麻将下嘴按钮
-    private List<Toggle>  xiazuiSelect;
-
     // Use this for initialization
     void Start () {
-	xiazuiSelect=GameObject.Find("")
+	
 	}
 	
 	// Update is called once per frame
