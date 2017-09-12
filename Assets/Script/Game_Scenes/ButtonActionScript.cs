@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class ButtonActionScript : MonoBehaviour {
 	public GameObject huBtn;
@@ -7,9 +9,13 @@ public class ButtonActionScript : MonoBehaviour {
 	public GameObject pengBtn;
 	public GameObject chiBtn;
 	public GameObject passBtn;
-	// Use this for initialization
-	void Start () {
-	
+
+    private GameObject xiazuiBtn; //亳州麻将下嘴按钮
+    private List<Toggle>  xiazuiSelect;
+
+    // Use this for initialization
+    void Start () {
+	xiazuiSelect=GameObject.Find("")
 	}
 	
 	// Update is called once per frame
