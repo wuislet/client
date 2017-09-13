@@ -29,6 +29,8 @@ namespace AssemblyCSharp
 	    public ServerCallBackEvent gangCardNotice;//
 		public ServerCallBackEvent btnActionShow;//碰杠行为按钮显示
 
+        public ServerCallBackEvent XiazuiCallBack;   // 下嘴回调
+
 		public ServerCallBackEvent outRoomCallback;//退出房间回调
 		public ServerCallBackEvent dissoliveRoomResponse;
 		public ServerCallBackEvent gameReadyNotice;//准备游戏通知返回

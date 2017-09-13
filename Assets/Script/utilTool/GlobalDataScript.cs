@@ -23,6 +23,9 @@ public class GlobalDataScript
     /**全局游戏结束服务器返回数据**/
     public static FinalGameEndVo finalGameEndVo;
 
+    public static XiazuiVO xiazuiVo = new XiazuiVO();
+    public static bool xiazui = false;  /**全局游戏下嘴返回数据**/
+
     public static int mainUuid;
     /**房间成员信息**/
     public static List<AvatarVO> roomAvatarVoList;
@@ -78,6 +81,9 @@ public class GlobalDataScript
     public static void reinitData()
     {
         isDrag = false;
+
+        xiazui = false;  // 初始化下嘴
+
         loginResponseData = null;
         roomJoinResponseData = null;
         roomVo = new RoomCreateVo();
