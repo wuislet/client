@@ -46,10 +46,10 @@ public class ZhanjiRoomItemScript :MonoBehaviour
 	}
 	private void pareseContent(string content){
 		if (content != null && content != "") {
-			string[] infoList = content.Split (new char[1]{','});
+			string[] infoList = content.Split(',');
 			for (int i = 0; i < infoList.Length-1; i++) {
-				string name = infoList [i].Split (new char[1]{':'})[0];
-				string score = infoList [i].Split (new char[1]{':'})[1];
+				string name = infoList [i].Split(':')[0];
+				string score = infoList [i].Split(':')[1];
 				names [i].text = name;
 				scores [i].text = score;
 			}

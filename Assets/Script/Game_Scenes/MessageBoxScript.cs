@@ -41,7 +41,7 @@ public class MessageBoxScript : MonoBehaviour {
 	}
 
     public void messageBoxNotice(ClientResponse response) {
-        string[] arr = response.message.Split(new char[1] { '|' });
+        string[] arr = response.message.Split('|');
         int code = int.Parse(arr[0]);
         //传输性别  大于3000为女
         if (code > 3000)

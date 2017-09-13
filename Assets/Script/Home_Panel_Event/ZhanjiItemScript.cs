@@ -26,9 +26,9 @@ namespace AssemblyCSharp
 		}
 		private void pareseContent(string content){
 			if (content != null && content != "") {
-				string[] infoList = content.Split (new char[1]{','});
+				string[] infoList = content.Split(',');
 				for (int i = 0; i < infoList.Length-1; i++) {
-					string score = infoList [i].Split (new char[1]{':'})[1];
+					string score = infoList [i].Split(':')[1];
 					scoresText [i].text = score;
 				}
 			}

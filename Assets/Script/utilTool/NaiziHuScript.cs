@@ -3,8 +3,8 @@ using System.Collections.Generic;
 
 namespace AssemblyCSharp
 {
-	public class NaiziHuScript
-	{
+	public class NaiziHuScript //可删，服务器判断
+    {
 		public NaiziHuScript ()
 		{
 		}

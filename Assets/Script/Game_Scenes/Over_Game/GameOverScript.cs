@@ -130,7 +130,7 @@ public class GameOverScript : MonoBehaviour {
 
 
 
-	private void  getMas(string mas){
+	private void  getMas(string mas){ //todo 神经病
         //广东麻将
         if(GlobalDataScript.roomVo.roomType == GameConfig.GAME_TYPE_GUANGDONG)
         {
@@ -141,11 +141,11 @@ public class GameOverScript : MonoBehaviour {
             List<string> paiList = new List<string>();
             if (mas != null && mas != "")
             {
-                string uuid = mas.Split(new char[1] { ':' })[0];
-                string[] paiArray = mas.Split(new char[1] { ':' });
+                string[] paiArray = mas.Split(':');
+                int uuid = int.Parse(paiArray[0]);
                 paiList = new List<string>(paiArray);
                 paiList.RemoveAt(0);
-                int referIndex = getIndex(int.Parse(uuid));
+                int referIndex = getIndex(uuid);
                 List<int> temp = new List<int>();
 
                 int resultIndex = 0;
@@ -374,7 +374,9 @@ public class GameOverScript : MonoBehaviour {
 		if (GlobalDataScript.hupaiResponseVo != null && GlobalDataScript.hupaiResponseVo.avatarList.Count > 0) {
 			for (int i = 0; i < GlobalDataScript.hupaiResponseVo.avatarList.Count; i++) {
 				HupaiResponseItem itemdata = GlobalDataScript.hupaiResponseVo.avatarList [i];
-				if (allMasList != null && allMasList.Count != 0) {
+                print("   wxd>>>   for - " + itemdata.nickname + " info " + itemdata.totalInfo.toString());
+                print("   wxd>>>   for + " + itemdata.uuid + " score " + itemdata.totalScore + ", " + itemdata.gangScore + ", ");
+                if (allMasList != null && allMasList.Count != 0) {
 					itemdata.setMaPoints (allMasList[i]);
 				}
 				GameObject itemTemp = Instantiate (Resources.Load("Prefab/Panel_Current_Item")) as GameObject;

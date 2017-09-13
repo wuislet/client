@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 public class GangpaiObj{
 	public int cardPiont;//出牌的下标
-	public string uuid;//出牌的玩家
+	public int uuid;//出牌的玩家
 	public string type;
 }
 
@@ -16,7 +16,7 @@ public class GangpaiObj{
 
 public class HuipaiObj{
 	public int cardPiont;//出牌的下标
-	public string uuid;
+	public int uuid;
 	public string type;
 }
 
@@ -62,7 +62,6 @@ public class SignalOverItemScript : MonoBehaviour {
 	private int[] paiArray;//牌列表
 
 	private List<int> validMas;
-	private HupaiResponseItem mHupaiResponseItemData;
 
 
 	// Use this for initialization
@@ -76,45 +75,34 @@ public class SignalOverItemScript : MonoBehaviour {
 	}
 
 	public void setUI(HupaiResponseItem itemData,List<int> validMasParm ,int mainuuid){
-		mHupaiResponseItemData = itemData;
 		validMas = validMasParm;
 		nickName.text = itemData.nickname;
-		totalScroe.text = itemData.totalScore+"";
-		gangScore.text = itemData.gangScore+"";
-        fanCount.text = (itemData.totalScore- itemData.gangScore)+"";
+		totalScroe.text = itemData.totalScore + "";
+		gangScore.text = itemData.gangScore + "";
+        fanCount.text = (itemData.totalScore - itemData.gangScore) + "";
 
 		paiArray = itemData.paiArray;
-		huFlagImg.SetActive (false);
+		huFlagImg.SetActive(false);
 		if (itemData.totalInfo.genzhuang == "1" && itemData.uuid == GlobalDataScript.mainUuid) {
-			GenzhuangFlag.SetActive (true);
-		} else {
-			GenzhuangFlag.SetActive (false);
-		}
-			
-		/*
-		if (GlobalDataScript.isGenzhuang && mainuuid == itemData.uuid) {
 			GenzhuangFlag.SetActive(true);
 		} else {
 			GenzhuangFlag.SetActive(false);
 		}
-*/
-		analysisPaiInfo (itemData);
-
+		analysisPaiInfo(itemData);
 	}
 
-
-	TotalInfo itemData;
+    
 	private void analysisPaiInfo(HupaiResponseItem parms){
-		itemData = parms.totalInfo;
+		var itemData = parms.totalInfo;
 		string gangpaiStr = itemData.gang;
 		if (gangpaiStr != null && gangpaiStr.Length > 0) {
-			string[] gangtemps = gangpaiStr.Split (new char[1]{','});
+			string[] gangtemps = gangpaiStr.Split(',');
 			for (int i = 0; i < gangtemps.Length; i++) {
-				string item = gangtemps [i];
-				GangpaiObj gangpaiObj = new GangpaiObj ();
-				gangpaiObj.uuid  =item.Split (new char[1]{':'})[0];
-				gangpaiObj.cardPiont =int.Parse( item.Split (new char[1]{':'})[1]);
-				gangpaiObj.type = item.Split (new char[1]{':'})[2];
+                var itemList = gangtemps[i].Split(':');
+                GangpaiObj gangpaiObj = new GangpaiObj();
+                gangpaiObj.uuid = int.Parse(itemList[0]);
+                gangpaiObj.cardPiont = int.Parse(itemList[1]);
+                gangpaiObj.type = itemList[2];
 				//增加判断是否为自己的杠牌的操作
 
 				paiArray [gangpaiObj.cardPiont] -= 4;
@@ -132,7 +120,7 @@ public class SignalOverItemScript : MonoBehaviour {
 		string pengpaiStr = itemData.peng;
 		if (pengpaiStr != null && pengpaiStr.Length > 0) {
 			
-			pengpaiList = pengpaiStr.Split (new char[1]{','});
+			pengpaiList = pengpaiStr.Split(',');
 
 
 			//string[] pengpaiListTTT = pengpaiList;
@@ -150,11 +138,11 @@ public class SignalOverItemScript : MonoBehaviour {
 
 		string chipaiStr = itemData.chi;
 		if (chipaiStr != null && chipaiStr.Length > 0) {
-			string[] chitemps = chipaiStr.Split (new char[1]{','});
+			string[] chitemps = chipaiStr.Split(',');
 			for (int i = 0; i < chitemps.Length; i++) {
 				string item = chitemps[i];
 				ChipaiObj chipaiObj = new ChipaiObj ();
-				string[] pointStr = item.Split (new char[1]{ ':' }); 
+				string[] pointStr = item.Split(':'); 
 				chipaiObj.cardPionts = pointStr;
 				chipaiList.Add (chipaiObj);
 				paiArray [int.Parse(chipaiObj.cardPionts[0])] -= 1;
@@ -163,56 +151,49 @@ public class SignalOverItemScript : MonoBehaviour {
 			}
 
 		}
-
-
+        
 
 		string hupaiStr = itemData.hu;
-		if(hupaiStr!=null && hupaiStr.Length>0){
-			hupaiObj.uuid =hupaiStr.Split (new char[1]{ ':' }) [0];
-			hupaiObj.cardPiont  =int.Parse(hupaiStr.Split (new char[1]{ ':' }) [1]);
-			hupaiObj.type = hupaiStr.Split (new char[1]{ ':' }) [2];
-			//增加判断是否是自己胡牌的判断
+		if(!string.IsNullOrEmpty(hupaiStr)){
+            var strList = hupaiStr.Split(':');
+            hupaiObj.uuid = int.Parse(strList[0]);
+			hupaiObj.cardPiont = int.Parse(strList[1]);
+			hupaiObj.type = strList[2];
+            //增加判断是否是自己胡牌的判断
 
-			if (hupaiStr.Contains ("d_other")) {//排除一炮多响的情况
-				mdesCribe += "点炮";
-			}else if (hupaiObj.type == "zi_common") {
-				mdesCribe += "自摸";
-				huFlagImg.SetActive (true);
-				paiArray [hupaiObj.cardPiont]-= 1;
+            var huType = MyMahjongScript.checkAvarHupai(itemData.hu);
+            if (huType == 0)
+            {
+                mdesCribe += "点炮";
+            }
+            else
+            {
+                if (huType == 1)
+                {
+                    mdesCribe += "接炮";
+                }
+                else if (huType == 2)
+                {
+                    mdesCribe += "自摸";
+                }
 
-			} else if (hupaiObj.type == "d_self") {
-				mdesCribe += "接炮";
-				huFlagImg.SetActive (true);
-				paiArray [hupaiObj.cardPiont]-= 1;
-			} else if (hupaiObj.type == "qiyise") {
-				mdesCribe += "清一色";
-				huFlagImg.SetActive (true);
-				paiArray [hupaiObj.cardPiont]-= 1;
-			}else if (hupaiObj.type == "zi_qingyise") {
-				mdesCribe += "自摸清一色";
-				huFlagImg.SetActive (true);
-				paiArray [hupaiObj.cardPiont]-= 1;
-			}else if (hupaiObj.type == "qixiaodui") {
-				mdesCribe += "七小对";
-				huFlagImg.SetActive (true);
-				paiArray [hupaiObj.cardPiont]-= 1;
-			}else if (hupaiObj.type == "self_qixiaodui") {
-				mdesCribe += "自摸七小对";
-				huFlagImg.SetActive (true);
-				paiArray [hupaiObj.cardPiont]-= 1;
-			}else if (hupaiObj.type == "gangshangpao") {
-				mdesCribe += "杠上炮";
-			}else if (hupaiObj.type == "gangshanghua") {
-				mdesCribe += "杠上花";
-				huFlagImg.SetActive (true);
-				paiArray [hupaiObj.cardPiont]-= 1;
-			}
+                if (hupaiObj.type == "qingyise")
+                {
+                    mdesCribe += "清一色";
+                }
+                if (hupaiObj.type == "qixiaodui")
+                {
+                    mdesCribe += "七小对";
+                }
+                if (hupaiObj.type == "gangshanghua")
+                {
+                    mdesCribe += "杠上花";
+                }
+                huFlagImg.SetActive(true);
+                paiArray[hupaiObj.cardPiont] -= 1;
+            }
 		}
-
-		if (mHupaiResponseItemData.huType != null) {
-			mdesCribe += mHupaiResponseItemData.huType;
-		}
-			
+		
 		resultDes.text = mdesCribe;
 		maPais = parms.getMaPoints ();
 		arrangePai (hupaiStr);
@@ -288,18 +269,17 @@ public class SignalOverItemScript : MonoBehaviour {
 		}
 
 
-		for(int i=0 ; i<paiArray.Length ;i++){
+		for(int i = 0; i < paiArray.Length; i++){
 			
 			if (paiArray [i] > 0) {
 
-				for (int j = 0; j < paiArray [i]; j++) {
+				for (int j = 0; j < paiArray[i]; j++) {
 					itemTemp = Instantiate (Resources.Load ("Prefab/ThrowCard/TopAndBottomCard")) as GameObject;
 					itemTemp.transform.parent = paiArrayPanel.transform;
-					//itemTemp.transform.localScale = new Vector3(0.8f,0.8f,1f);
 					itemTemp.transform.localScale = Vector3.one;
-					itemTemp.GetComponent<TopAndBottomCardScript> ().setPoint (i);
+					itemTemp.GetComponent<TopAndBottomCardScript>().setPoint(i);
 
-					itemTemp.transform.localPosition = new Vector3 (startPosition+subPaiConut*36f, 0, 0);
+					itemTemp.transform.localPosition = new Vector3(startPosition + subPaiConut * 36f, 0, 0);
 
 					subPaiConut += 1;
 				}
@@ -309,10 +289,10 @@ public class SignalOverItemScript : MonoBehaviour {
 		}
 		MyDebug.Log ("subPaiConut:"+subPaiConut);
 
-		startPosition =startPosition +  (subPaiConut * 36f + 8f);
+		startPosition = startPosition + (subPaiConut * 36f + 8f);
 		if (hupaiObj != null) {
-			if (hupaiObj.type == "zi_common" || hupaiObj.type == "d_self" || hupaiObj.type == "qiyise" || hupaiObj.type == "zi_qingyise"
-			   || hupaiObj.type == "qixiaodui" || hupaiObj.type == "self_qixiaodui" || hupaiObj.type == "gangshanghua") {
+			if (hupaiObj.type == "zi_common" || hupaiObj.type == "d_self" || hupaiObj.type == "qingyise"
+			   || hupaiObj.type == "qixiaodui" || hupaiObj.type == "gangshanghua") {
 				itemTemp = Instantiate (Resources.Load ("Prefab/ThrowCard/TopAndBottomCard")) as GameObject;
 				itemTemp.transform.parent = paiArrayPanel.transform;
 				//itemTemp.transform.localScale = new Vector3 (0.8f, 0.8f, 1f);
@@ -327,7 +307,7 @@ public class SignalOverItemScript : MonoBehaviour {
 
 
         //显示中码牌信息==>广东麻将单独处理
-		if (GlobalDataScript.roomVo.roomType == GameConfig.GAME_TYPE_GUANGDONG && hu!= null && (hu.IndexOf("zi_")!=-1 || hu.IndexOf("self_")!=-1 ))
+		if (GlobalDataScript.roomVo.roomType == GameConfig.GAME_TYPE_GUANGDONG && MyMahjongScript.checkAvarHupai(hu) == 2)
         {
             for (int i = 0; i < validMas.Count; i++)
             {
@@ -369,14 +349,8 @@ public class SignalOverItemScript : MonoBehaviour {
 			itemTemp.transform.localScale =  Vector3.one;
 			itemTemp.transform.localPosition = new Vector3 (20*36f, 0, 0);
 		}
-
-
-
-
 	}
-
-
-
+    
 
 	private bool isMaValid(int cardPonit){
 		for (int i = 0; i < validMas.Count; i++) {
@@ -386,8 +360,4 @@ public class SignalOverItemScript : MonoBehaviour {
 		}
 		return false;
 	}
-
-
-
-
 }

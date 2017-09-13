@@ -113,14 +113,6 @@ public class MyMahjongScript : MonoBehaviour
 	/// 当前的方向字符串
 	/// </summary>
 	private string curDirString = "B";
-	/// <summary>
-	/// 普通胡牌算法
-	/// </summary>
-	private NormalHuScript norHu;
-	/// <summary>
-	/// 赖子胡牌算法
-	/// </summary>
-	private NaiziHuScript naiziHu;
 
 	// Use this for initialization
 	private GameToolScript gameTool;
@@ -167,8 +159,6 @@ public class MyMahjongScript : MonoBehaviour
 		timeFlag = true;
         SoundCtrl.getInstance().playBGM(2);
 		//===========================================================================================
-		norHu = new NormalHuScript();
-		naiziHu = new NaiziHuScript ();
 		gameTool = new GameToolScript ();
 		versionText.text = "V" + Application.version;
 		//===========================================================================================
@@ -509,7 +499,7 @@ public class MyMahjongScript : MonoBehaviour
 	/// <param name="response">Response.</param>
 	public void actionBtnShow(ClientResponse response){
 		GlobalDataScript.isDrag = false;
-		string[] strs=response.message.Split (new char[1]{','});
+		string[] strs=response.message.Split(',');
 		if (curDirString == DirectionEnum.Bottom) {
 			passType = "selfPickCard";
 		} else {
@@ -517,16 +507,14 @@ public class MyMahjongScript : MonoBehaviour
 		}
 
 		for (int i = 0; i < strs.Length; i++) {
-			if (strs [i].Equals ("hu")) {
+			if (strs[i].Equals ("hu")) {
 				btnActionScript.showBtn (1);
 
 			}else if(strs[i].Contains("qianghu")){
 				
 				try{
-					SelfAndOtherPutoutCard = int.Parse( strs[i].Split(new char[1]{':'})[1]);
-#pragma warning disable CS0168 // 声明了变量“e”，但从未使用过
+					SelfAndOtherPutoutCard = int.Parse(strs[i].Split(':')[1]);
 				}catch (Exception e){
-#pragma warning restore CS0168 // 声明了变量“e”，但从未使用过
 				
 				}
 
@@ -534,7 +522,7 @@ public class MyMahjongScript : MonoBehaviour
 				isQiangHu = true;
 			}else if(strs[i].Contains("peng")){
 				btnActionScript.showBtn (3);
-				putOutCardPoint =int.Parse(strs [i].Split (new char[1]{ ':' }) [2]);
+				putOutCardPoint = int.Parse(strs[i].Split(':')[2]);
 
 
 			}else if(strs[i].Equals("chi")){
@@ -543,7 +531,7 @@ public class MyMahjongScript : MonoBehaviour
 			if(strs[i].Contains("gang")){
 				
 				btnActionScript.showBtn (2);
-				gangPaiList = strs [i].Split (new char[1]{ ':' });
+				gangPaiList = strs[i].Split(':');
 				List<string> gangPaiListTemp = gangPaiList.ToList ();
 				gangPaiListTemp.RemoveAt (0);
 				gangPaiList = gangPaiListTemp.ToArray ();
@@ -592,51 +580,6 @@ public class MyMahjongScript : MonoBehaviour
 			otherPickCardAndCreate (bankerId);
 		}
 	}
-
-
-
-
-	/// <summary>
-	/// 检测胡牌
-	/// </summary>
-	/**
-	private bool checkHuPai(){
-		RoomCreateVo roomvo = GlobalDataScript.roomVo;
-		if (roomvo.hong) {
-			if (naiziHu.isHu (mineList)) {
-				MyDebug.Log ("赖子胡牌了");
-				effectType = "hu";
-				pengGangHuEffectCtrl();
-				return true;
-
-			} else {
-				GlobalDataScript.isDrag = true;
-				return false;
-			}
-		} else {
-			if (roomvo.sevenDouble) {
-				int result = norHu.checkSevenDouble (mineList [0]);
-				if (result == 0) {
-				} else {
-					effectType = "hu";
-					pengGangHuEffectCtrl();
-					return true;
-				}
-			}
-			if (norHu.isHuPai (mineList [0]))
-			{
-				MyDebug.Log ("胡牌了");
-				effectType = "hu";
-				pengGangHuEffectCtrl();
-				return true;
-			} else {
-				GlobalDataScript.isDrag = true;
-				return false;
-			}
-		}
-
-	}
-	*/
 
 	/*
 	private bool addPointAndCheckHu(int cardPoint){
@@ -2059,12 +2002,6 @@ public class MyMahjongScript : MonoBehaviour
 			CustomSocket.getInstance().sendMsg(new HupaiRequest(sendMsg));
 			btnActionScript.cleanBtnShow ();
 		}
-
-
-		//模拟胡牌操作
-		//ClientResponse response = new ClientResponse();
-		//HupaiResponseItem itemData = new HupaiResponseItem();
-		//itemData.cardlist = new int[2][27]{{},{}}
 	}
 
 
@@ -2080,47 +2017,22 @@ public class MyMahjongScript : MonoBehaviour
 		string scores = GlobalDataScript.hupaiResponseVo.currentScore;
 		hupaiCoinChange (scores);
 
-		/*
-		for (int i = 0; i < GlobalDataScript.hupaiResponseVo.avatarList.Count; i++)
-		{
-			HupaiResponseItem hupaiResponseItem = GlobalDataScript.hupaiResponseVo.avatarList[i];
-
-			int avarIndex = getIndex (hupaiResponseItem.uuid);
-			switch (getDirection(getIndex(hupaiResponseItem.uuid)))
-			{
-				case DirectionEnum.Bottom:
-				huPaiCoinChanges(hupaiResponseItem, 0,avarIndex);
-					break;
-				case DirectionEnum.Left:
-				huPaiCoinChanges(hupaiResponseItem, 3,avarIndex);
-					break;
-				case DirectionEnum.Right:
-				huPaiCoinChanges(hupaiResponseItem, 1,avarIndex);
-					break;
-				case DirectionEnum.Top:
-				huPaiCoinChanges(hupaiResponseItem, 2,avarIndex);
-					break;
-
-			}
-		}
-*/
-
-
 		if (GlobalDataScript.hupaiResponseVo.type == "0") {
 			SoundCtrl.getInstance ().playSoundByAction ("hu", GlobalDataScript.loginResponseData.account.sex);
 			effectType = "hu";
 			pengGangHuEffectCtrl ();
 			for (int i = 0; i < GlobalDataScript.hupaiResponseVo.avatarList.Count; i++) {
-				if (checkAvarHupai (GlobalDataScript.hupaiResponseVo.avatarList [i]) == 1) {//胡
+                var hutype = checkAvarHupai(GlobalDataScript.hupaiResponseVo.avatarList[i].totalInfo.hu);
+
+                if (hutype == 1) { //接炮胡
 					playerItems [getIndexByDir (getDirection (i))].setHuFlagDisplay ();
 					SoundCtrl.getInstance ().playSoundByAction ("hu", avatarList [i].account.sex);
-				} else if (checkAvarHupai (GlobalDataScript.hupaiResponseVo.avatarList [i]) == 2) {
+				} else if (hutype == 2) { //自摸
 					playerItems [getIndexByDir (getDirection (i))].setHuFlagDisplay ();
 					SoundCtrl.getInstance ().playSoundByAction ("zimo", avatarList [i].account.sex);
-				} else {
+				} else { //没胡
 					playerItems [getIndexByDir (getDirection (i))].setHuFlagHidde ();
 				}
-
 			}
 
 			allMas = GlobalDataScript.hupaiResponseVo.allMas;
@@ -2166,67 +2078,40 @@ public class MyMahjongScript : MonoBehaviour
 
 
 	}
-
-	/**
-	 *检测某人是否胡牌 
-	 */
-	public int checkAvarHupai( HupaiResponseItem itemData){
-		string hupaiStr = itemData.totalInfo.hu;
-		HuipaiObj hupaiObj = new HuipaiObj ();
-		if(hupaiStr!=null && hupaiStr.Length>0){
-			hupaiObj.uuid =hupaiStr.Split (new char[1]{ ':' }) [0];
-			hupaiObj.cardPiont  =int.Parse(hupaiStr.Split (new char[1]{ ':' }) [1]);
-			hupaiObj.type = hupaiStr.Split (new char[1]{ ':' }) [2];
-			//增加判断是否是自己胡牌的判断
-
-			if (hupaiStr.Contains ("d_other")) {//排除一炮多响的情况
-				return 0;
-			}else if (hupaiObj.type == "zi_common") {
-				return 2;
-
-			} else if (hupaiObj.type == "d_self") {
-				return 1;
-			} else if (hupaiObj.type == "qiyise") {
-				return 1;
-			}else if (hupaiObj.type == "zi_qingyise") {
-				return 2;
-			}else if (hupaiObj.type == "qixiaodui") {
-				return 1;
-			}else if (hupaiObj.type == "self_qixiaodui") {
-				return 2;
-			}else if (hupaiObj.type == "gangshangpao") {
-				return 1;
-			}else if (hupaiObj.type == "gangshanghua") {
-				return 2;
-			}
-
-
-		}
-		return 0;
+    
+    /// <summary>
+    /// 检测某人是否胡牌
+    /// </summary>
+    /// <param name="hupaiStr"></param>
+    /// <returns>0-没胡; 1-接炮; 2-自摸</returns>
+	public static int checkAvarHupai(string hupaiStr)
+    {
+        if (string.IsNullOrEmpty(hupaiStr)) //没胡
+        {
+            return 0;
+        }
+        if (hupaiStr.Contains("d_other")) //点炮
+        {
+            return 0;
+        }
+        
+        var huid = int.Parse(hupaiStr.Split(':')[0]);
+        if(huid == 0 || huid == GlobalDataScript.loginResponseData.account.uuid) //自摸
+        {
+            return 2;
+        }
+        return 1;
 	}
-
-
-
-	/**
-	public void huPaiCoinChanges(HupaiResponseItem hupaiResponseItem,int index,int avarIndex)
-	{
-		int totalScore = hupaiResponseItem.totalScore;
-		int  curentScore  =  int.Parse(playerItems[index].scoreText.text);
-		playerItems[index].scoreText.text = curentScore+ totalScore +"";
-		avatarList [avarIndex].scores = curentScore + totalScore;
-		//GameOverPlayerCoins[index].ToString();
-	}
-*/
 
 	private void hupaiCoinChange(string scores){
-		string[] scoreList = scores.Split (new char[1]{ ',' });
+		string[] scoreList = scores.Split(',');
 		if (scoreList != null && scoreList.Length > 0) {
 			for (int i = 0; i < scoreList.Length-1; i++) {
-				string itemstr = scoreList [i];
-				int uuid =int.Parse( itemstr.Split (new char[1]{ ':' })[0]);
-				int score = int.Parse( itemstr.Split (new char[1]{ ':' })[1]) +1000;
-				playerItems [getIndexByDir (getDirection (getIndex (uuid)))].scoreText.text = score + "";
-				avatarList [getIndex (uuid)].scores = score;
+				var itemList = scoreList[i].Split(':');
+				int uuid = int.Parse(itemList[0]);
+				int score = int.Parse(itemList[1]) + 1000;
+				playerItems[getIndexByDir(getDirection(getIndex(uuid)))].scoreText.text = score + "";
+				avatarList[getIndex(uuid)].scores = score;
 			}
 		}
 
@@ -2717,13 +2602,13 @@ public class MyMahjongScript : MonoBehaviour
 			if (paiArrayType.Contains<int> (2)) {
 				string gangString = GlobalDataScript.reEnterRoomData.playerList [i].huReturnObjectVO.totalInfo.gang;
 				if (gangString != null) {
-					string[] gangtemps = gangString.Split (new char[1]{','});
+					string[] gangtemps = gangString.Split(',');
 					for (int j = 0; j < gangtemps.Length; j++) {
-						string item = gangtemps [j];
+						var itemList = gangtemps[j].Split(':');
 						GangpaiObj gangpaiObj = new GangpaiObj ();
-						gangpaiObj.uuid  =item.Split (new char[1]{':'})[0];
-						gangpaiObj.cardPiont =int.Parse( item.Split (new char[1]{':'})[1]);
-						gangpaiObj.type = item.Split (new char[1]{':'})[2];
+						gangpaiObj.uuid = int.Parse(itemList[0]);
+						gangpaiObj.cardPiont = int.Parse(itemList[1]);
+						gangpaiObj.type = itemList[2];
 						//增加判断是否为自己的杠牌的操作
 						GlobalDataScript.reEnterRoomData.playerList [i].paiArray [0] [gangpaiObj.cardPiont] -= 4;
 
@@ -2888,8 +2773,8 @@ public class MyMahjongScript : MonoBehaviour
 
 	/**用户离线回调**/
 	public void offlineNotice(ClientResponse response){
-		int uuid =int.Parse( response.message);
-		int index = getIndex (uuid);
+		int uuid = int.Parse(response.message);
+		int index = getIndex(uuid);
 		string dirstr = getDirection (index);
 		switch (dirstr) {
 		case DirectionEnum.Bottom:
@@ -2944,7 +2829,7 @@ public class MyMahjongScript : MonoBehaviour
 
 
 	public void messageBoxNotice(ClientResponse response){
-		string[] arr = response.message.Split (new char[1]{ '|' });
+		string[] arr = response.message.Split('|');
 		int uuid = int.Parse(arr[1]);
 		int myIndex = getMyIndexFromList ();
 		int curAvaIndex = getIndex (uuid);

@@ -124,9 +124,9 @@ public class ZhanjiPanelScript : MonoBehaviour {
 		if (roomDetailData.standingDetail != null && roomDetailData.standingDetail.Count > 0) {
 			string content = roomDetailData.standingDetail [0].content;
 			if (content != null && content != "") {
-				string[] infoList = content.Split (new char[1]{','});
+				string[] infoList = content.Split(',');
 				for (int i = 0; i < infoList.Length-1; i++) {
-					string name = infoList [i].Split (new char[1]{':'})[0];
+					string name = infoList [i].Split(':')[0];
 					playerTexts [i].text = name;
 				}
 			}
