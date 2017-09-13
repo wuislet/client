@@ -366,13 +366,12 @@ public class MyMahjongScript : MonoBehaviour
 	public void ShowLeavedCardsNumForInit()
 	{
 		RoomCreateVo roomCreateVo = GlobalDataScript.roomVo;
-
-		bool hong = (bool) roomCreateVo.hong  ;
-        int RoomType = (int) roomCreateVo.roomType;
+        
+        int RoomType = roomCreateVo.roomType;
 		if (RoomType == 1)//转转麻将
 		{
 			LeavedCardsNum = 108;
-            if (hong)
+            if (roomCreateVo.gui == 3) //红中麻将
 			{
 				LeavedCardsNum = 112;
 			}
@@ -1794,19 +1793,33 @@ public class MyMahjongScript : MonoBehaviour
 		RoomCreateVo roomvo = GlobalDataScript.roomVo;
 		GlobalDataScript.totalTimes = roomvo.roundNumber;
 		GlobalDataScript.surplusTimes = roomvo.roundNumber;
-	//	LeavedRoundNumText.text = GlobalDataScript.surplusTimes + "";
-		string str = "房间号：\n"+roomvo.roomId+"\n";
-        str += "圈数：" + roomvo.roundNumber + "\n\n";
+        //	LeavedRoundNumText.text = GlobalDataScript.surplusTimes + "";
 
-        if (roomvo.roomType == 5){  //-----亳州
+        roomRemark.text = getRoomInfoString(roomvo);
+    }
+
+    public static string getRoomInfoString(RoomCreateVo roomvo, bool isWeChetShare = false)
+    {
+        string str = "";
+        if (!isWeChetShare)
+        {
+            str += "房间号：\n" + roomvo.roomId + "\n";
+            str += "圈数：" + roomvo.roundNumber + "\n\n";
+        }
+
+        if (roomvo.roomType == 5)
+        {  //-----亳州
             str += "亳州麻将\n";
-            if (roomvo.BozhouHu == 1){  // ---亳州麻将自摸
+            if (roomvo.bozhouHu == 1)
+            {  // ---亳州麻将自摸
                 str += "推倒胡\n";
             }
-            else {
+            else
+            {
                 str += "断一门\n";
             }
-            if (roomvo.xiazui == 1){
+            if (roomvo.xiazui == 1)
+            {
                 str += "不下嘴\n";
             }
             else
@@ -1814,33 +1827,38 @@ public class MyMahjongScript : MonoBehaviour
                 str += "下嘴\n";
             }
 
-            if (roomvo.NolisterToBeard)
+            if (roomvo.nolisterToBeard)
                 str += "不报听可胡\n";
             if (roomvo.angangLiang)
                 str += "暗杠亮\n";
-            if (roomvo.BozhouZimoMagnification > 0){
-                str += "自摸翻倍：" + roomvo.BozhouZimoMagnification + "\n";
+            if (roomvo.bozhouZimoMagnification > 0)
+            {
+                str += "自摸翻倍：" + roomvo.bozhouZimoMagnification + "\n";
             }
-           
+
         }
 
-       else  if (roomvo.roomType == 3) {
+        else if (roomvo.roomType == 3)
+        {
             str += "长沙麻将\n";
-        } else if (roomvo.roomType == 4) {
-            if(roomvo.gangHu)
+        }
+        else if (roomvo.roomType == 4)
+        {
+            if (roomvo.huXianzhi == 2)
                 str += "可抢杠胡\n";
             if (roomvo.addWordCard)
             {
                 str += "有风牌\n";
             }
-            else {
+            else
+            {
                 str += "无风牌\n";
             }
 
             if (roomvo.sevenDouble)
                 str += "可胡七对\n";
 
-            if (roomvo.gui==0)
+            if (roomvo.gui == 0)
                 str += "无鬼\n";
             else if (roomvo.gui == 1)
                 str += "白板做鬼\n";
@@ -1852,45 +1870,58 @@ public class MyMahjongScript : MonoBehaviour
                 str += "抓码数：" + roomvo.ma + "";
             }
         }
-        else {
-            if (roomvo.hong) {
-                str += "红中麻将\n";
-            } else {
-                if (roomvo.roomType == 1) {
+        else
+        {
+            if (roomvo.roomType == 1)
+            {
+                if (roomvo.gui == 0)
+                {
                     str += "转转麻将\n";
-                } else if (roomvo.roomType == 2) {
-                    str += "划水麻将\n";
-                } else if (roomvo.roomType == 3) {
-                    str += "长沙麻将\n";
-                }             
+                }
+                else
+                {
+                    str += "红中麻将\n";
+                }
             }
-          
+            else if (roomvo.roomType == 2)
+            {
+                str += "划水麻将\n";
+            }
+            else if (roomvo.roomType == 3)
+            {
+                str += "长沙麻将\n";
+            }
 
-            if (roomvo.ziMo == 1) {
+
+            if (roomvo.huXianzhi == 1)
+            {
                 str += "只能自摸\n";
-            } else {
+            }
+            else
+            {
                 str += "可抢杠胡\n";
             }
-            if (roomvo.sevenDouble && roomvo.roomType != GameConfig.GAME_TYPE_HUASHUI) {
+            if (roomvo.sevenDouble && roomvo.roomType != GameConfig.GAME_TYPE_HUASHUI)
+            {
                 str += "可胡七对\n";
             }
 
-            if (roomvo.addWordCard) {
+            if (roomvo.addWordCard)
+            {
                 str += "有风牌\n";
             }
-            if (roomvo.xiaYu > 0) {
+            if (roomvo.xiaYu > 0)
+            {
                 str += "下鱼数：" + roomvo.xiaYu + "";
             }
 
-            if (roomvo.ma > 0) {
+            if (roomvo.ma > 0)
+            {
                 str += "抓码数：" + roomvo.ma + "";
             }
         }
-		if (roomvo.magnification > 0) {
-			str += "倍率：" + roomvo.magnification+"";
-		}
-		roomRemark.text = str;
-	}
+        return str;
+    }
 
 	private void addAvatarVOToList(AvatarVO avatar){
 		if (avatarList == null) {
@@ -2429,23 +2460,8 @@ public class MyMahjongScript : MonoBehaviour
 
 	/*************************断线重连*********************************/
 	private void reEnterRoom(){
-		
 		if (GlobalDataScript.reEnterRoomData != null) {
-			//显示房间基本信息
-			GlobalDataScript.roomVo.addWordCard = GlobalDataScript.reEnterRoomData.addWordCard;
-			GlobalDataScript.roomVo.hong = GlobalDataScript.reEnterRoomData.hong;
-			GlobalDataScript.roomVo.name = GlobalDataScript.reEnterRoomData.name;
-			GlobalDataScript.roomVo.roomId = GlobalDataScript.reEnterRoomData.roomId;
-			GlobalDataScript.roomVo.roomType = GlobalDataScript.reEnterRoomData.roomType;
-			GlobalDataScript.roomVo.roundNumber = GlobalDataScript.reEnterRoomData.roundNumber;
-			GlobalDataScript.roomVo.sevenDouble = GlobalDataScript.reEnterRoomData.sevenDouble;
-			GlobalDataScript.roomVo.xiaYu = GlobalDataScript.reEnterRoomData.xiaYu;
-			GlobalDataScript.roomVo.ziMo = GlobalDataScript.reEnterRoomData.ziMo;
-			GlobalDataScript.roomVo.magnification = GlobalDataScript.reEnterRoomData.magnification;
-			GlobalDataScript.roomVo.ma = GlobalDataScript.reEnterRoomData.ma;
-            GlobalDataScript.roomVo.gui = GlobalDataScript.reEnterRoomData.gui;
-            GlobalDataScript.roomVo.gangHu = GlobalDataScript.reEnterRoomData.gangHu;
-            GlobalDataScript.roomVo.guiPai = GlobalDataScript.reEnterRoomData.guiPai;
+			GlobalDataScript.roomVo = GlobalDataScript.reEnterRoomData;
             setRoomRemark();
 			//设置座位
 
@@ -2474,11 +2490,7 @@ public class MyMahjongScript : MonoBehaviour
 				dispalySelfhanderCard();//显示自己的手牌
 				CustomSocket.getInstance ().sendMsg (new CurrentStatusRequest ());
 			}
-
-
-
 		}
-
 	}
 
 
@@ -2574,7 +2586,7 @@ public class MyMahjongScript : MonoBehaviour
         touziObj.SetActive(false);
 
         int gui = GlobalDataScript.roomVo.guiPai;
-        if (gui != -1 && (GlobalDataScript.roomVo.hong || GlobalDataScript.roomVo.gui>0))
+        if (gui != -1 && (GlobalDataScript.roomVo.gui > 0))
         { //显示鬼牌         
             bottomScript bts = guiObj.GetComponent<bottomScript>();
             bts.setGuiPoint(gui);

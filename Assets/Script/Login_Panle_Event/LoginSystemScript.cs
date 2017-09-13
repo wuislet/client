@@ -238,7 +238,7 @@ public class LoginSystemScript : MonoBehaviour {
 		if (GlobalDataScript.gamePlayPanel != null) {
 			GlobalDataScript.gamePlayPanel.GetComponent<MyMahjongScript> ().exitOrDissoliveRoom ();
 		}
-		GlobalDataScript.reEnterRoomData = JsonMapper.ToObject<RoomJoinResponseVo> (response.message);
+		GlobalDataScript.reEnterRoomData = JsonMapper.ToObject<RoomCreateVo> (response.message);
 
 		for (int i = 0; i < GlobalDataScript.reEnterRoomData.playerList.Count; i++) {
 			AvatarVO itemData =	GlobalDataScript.reEnterRoomData.playerList [i];

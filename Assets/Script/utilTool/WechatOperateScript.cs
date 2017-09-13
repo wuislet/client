@@ -175,67 +175,10 @@ public class WechatOperateScript : MonoBehaviour {
 			RoomCreateVo roomvo = GlobalDataScript.roomVo;
 			GlobalDataScript.totalTimes = roomvo.roundNumber;
 			GlobalDataScript.surplusTimes = roomvo.roundNumber;
-			string str="" ;
-
-			if (roomvo.hong) {
-				str += "红中麻将,";
-			} else {
-				if (roomvo.roomType == 1) {
-					str += "转转麻将,";
-				} else if (roomvo.roomType == 2){
-					str += "划水麻将,";
-				}else if (roomvo.roomType == 3){
-					str += "长沙麻将,";
-				}else if (roomvo.roomType == 4)
-                {
-                    str += "广东麻将,";
-                }
-            }
-
-			str += "大战"+roomvo.roundNumber+"局,";
-            if (roomvo.roomType == 4)
-            {
-                if (roomvo.gangHu)
-                {
-                    str += "可抢杠胡,";
-                }
-            }
-            else {
-                if (roomvo.ziMo == 1)
-                {
-                    str += "只能自摸,";
-                }
-                else {
-                    str += "可抢杠胡,";
-                }
-            }
-
-            if (roomvo.sevenDouble)
-            {
-                str += "可胡七对,";
-            }
-
-            if (roomvo.addWordCard)
-            {
-                str += "有风牌,";
-            }
-            else {                
-				str += "无风牌,";			
-            }
-
-			if (roomvo.xiaYu > 0) {
-				str += "下鱼"+roomvo.xiaYu+"条,";
-			}
-
-			if (roomvo.ma > 0) {
-				str += "抓"+roomvo.ma+"个码,";
-			}
-			if (roomvo.magnification > 0) {
-				str += "倍率"+roomvo.magnification;
-			}
+			string str = MyMahjongScript.getRoomInfoString(roomvo);
 			str += "有胆，你就来！";
 
-			string title = "友约麻将    "+ "房间号："+roomvo.roomId;
+			string title = "正宗亳州麻将    房间号："+roomvo.roomId;
 			ShareContent customizeShareParams = new ShareContent();
 			customizeShareParams.SetTitle(title);
 			customizeShareParams.SetText (str);

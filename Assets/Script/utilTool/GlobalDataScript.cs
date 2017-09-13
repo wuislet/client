@@ -15,7 +15,7 @@ public class GlobalDataScript
     /**登陆返回数据**/
     public static AvatarVO loginResponseData;
     /**加入房间返回数据**/
-    public static RoomJoinResponseVo roomJoinResponseData;
+    public static RoomCreateVo roomJoinResponseData;
     /**房间游戏规则信息**/
     public static RoomCreateVo roomVo = new RoomCreateVo();
     /**单局游戏结束服务器返回数据**/
@@ -44,7 +44,7 @@ public class GlobalDataScript
     /// </summary>
     public Transform canvsTransfrom;
     /**重新加入房间的数据**/
-    public static RoomJoinResponseVo reEnterRoomData;
+    public static RoomCreateVo reEnterRoomData;
 
     public WechatOperateScript wechatOperate;
     /// <summary>
