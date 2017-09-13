@@ -130,7 +130,7 @@ public class GameOverScript : MonoBehaviour {
 
 
 
-	private void  getMas(string mas){
+	private void  getMas(string mas){ //todo 神经病
         //广东麻将
         if(GlobalDataScript.roomVo.roomType == GameConfig.GAME_TYPE_GUANGDONG)
         {
@@ -375,7 +375,7 @@ public class GameOverScript : MonoBehaviour {
 			for (int i = 0; i < GlobalDataScript.hupaiResponseVo.avatarList.Count; i++) {
 				HupaiResponseItem itemdata = GlobalDataScript.hupaiResponseVo.avatarList [i];
                 print("   wxd>>>   for - " + itemdata.nickname + " info " + itemdata.totalInfo.toString());
-                print("   wxd>>>   for + " + itemdata.uuid + " score " + itemdata.totalScore + ", " + itemdata.gangScore + ", "); // + itemdata.getMaPoints().ToString());
+                print("   wxd>>>   for + " + itemdata.uuid + " score " + itemdata.totalScore + ", " + itemdata.gangScore + ", ");
                 if (allMasList != null && allMasList.Count != 0) {
 					itemdata.setMaPoints (allMasList[i]);
 				}

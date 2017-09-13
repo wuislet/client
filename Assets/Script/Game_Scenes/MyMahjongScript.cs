@@ -2002,12 +2002,6 @@ public class MyMahjongScript : MonoBehaviour
 			CustomSocket.getInstance().sendMsg(new HupaiRequest(sendMsg));
 			btnActionScript.cleanBtnShow ();
 		}
-
-
-		//模拟胡牌操作
-		//ClientResponse response = new ClientResponse();
-		//HupaiResponseItem itemData = new HupaiResponseItem();
-		//itemData.cardlist = new int[2][27]{{},{}}
 	}
 
 
@@ -2023,38 +2017,12 @@ public class MyMahjongScript : MonoBehaviour
 		string scores = GlobalDataScript.hupaiResponseVo.currentScore;
 		hupaiCoinChange (scores);
 
-		/*
-		for (int i = 0; i < GlobalDataScript.hupaiResponseVo.avatarList.Count; i++)
-		{
-			HupaiResponseItem hupaiResponseItem = GlobalDataScript.hupaiResponseVo.avatarList[i];
-
-			int avarIndex = getIndex (hupaiResponseItem.uuid);
-			switch (getDirection(getIndex(hupaiResponseItem.uuid)))
-			{
-				case DirectionEnum.Bottom:
-				huPaiCoinChanges(hupaiResponseItem, 0,avarIndex);
-					break;
-				case DirectionEnum.Left:
-				huPaiCoinChanges(hupaiResponseItem, 3,avarIndex);
-					break;
-				case DirectionEnum.Right:
-				huPaiCoinChanges(hupaiResponseItem, 1,avarIndex);
-					break;
-				case DirectionEnum.Top:
-				huPaiCoinChanges(hupaiResponseItem, 2,avarIndex);
-					break;
-
-			}
-		}
-*/
-
-
 		if (GlobalDataScript.hupaiResponseVo.type == "0") {
 			SoundCtrl.getInstance ().playSoundByAction ("hu", GlobalDataScript.loginResponseData.account.sex);
 			effectType = "hu";
 			pengGangHuEffectCtrl ();
 			for (int i = 0; i < GlobalDataScript.hupaiResponseVo.avatarList.Count; i++) {
-                var hutype = checkAvarHupai(GlobalDataScript.hupaiResponseVo.avatarList[i]);
+                var hutype = checkAvarHupai(GlobalDataScript.hupaiResponseVo.avatarList[i].totalInfo.hu);
 
                 if (hutype == 1) { //接炮胡
 					playerItems [getIndexByDir (getDirection (i))].setHuFlagDisplay ();
@@ -2110,12 +2078,14 @@ public class MyMahjongScript : MonoBehaviour
 
 
 	}
-
-	/**
-	 *检测某人是否胡牌 
-	 */
-	public int checkAvarHupai(HupaiResponseItem itemData){
-		string hupaiStr = itemData.totalInfo.hu;
+    
+    /// <summary>
+    /// 检测某人是否胡牌
+    /// </summary>
+    /// <param name="hupaiStr"></param>
+    /// <returns>0-没胡; 1-接炮; 2-自摸</returns>
+	public static int checkAvarHupai(string hupaiStr)
+    {
         if (string.IsNullOrEmpty(hupaiStr)) //没胡
         {
             return 0;
@@ -2132,19 +2102,6 @@ public class MyMahjongScript : MonoBehaviour
         }
         return 1;
 	}
-
-
-
-	/**
-	public void huPaiCoinChanges(HupaiResponseItem hupaiResponseItem,int index,int avarIndex)
-	{
-		int totalScore = hupaiResponseItem.totalScore;
-		int  curentScore  =  int.Parse(playerItems[index].scoreText.text);
-		playerItems[index].scoreText.text = curentScore+ totalScore +"";
-		avatarList [avarIndex].scores = curentScore + totalScore;
-		//GameOverPlayerCoins[index].ToString();
-	}
-*/
 
 	private void hupaiCoinChange(string scores){
 		string[] scoreList = scores.Split(',');
