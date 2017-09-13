@@ -3,8 +3,8 @@ using System.Collections.Generic;
 
 namespace AssemblyCSharp
 {
-	public class NormalHuScript
-	{
+	public class NormalHuScript //可删，服务器判断
+    {
 
 		private int JIANG;
 		public NormalHuScript ()

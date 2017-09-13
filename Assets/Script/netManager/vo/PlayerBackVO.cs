@@ -26,7 +26,7 @@ namespace AssemblyCSharp
 		/// <returns>The pai array.</returns>
 		public int[] getPaiArray(){
 			if (pai == null) {
-				string[] temp = cardList.Split(new char[1]{','});
+				string[] temp = cardList.Split(',');
 				pai = new int[temp.Length];
 				for (int i = 0; i < temp.Length; i++) {
 					pai [i] = Int32.Parse (temp[i]);

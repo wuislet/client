@@ -28,7 +28,7 @@ public class BroadcastScript : MonoBehaviour {
 
 	private void gameBroadcastNotice(ClientResponse response){
 		string noticeString = response.message;
-		string[] noticeList = noticeString.Split (new char[1]{ '*' });
+		string[] noticeList = noticeString.Split('*');
 	//	List<string> notices = new List<string> ();
 		if (noticeList != null)
 		{

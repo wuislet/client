@@ -102,7 +102,7 @@ public class ZhuMaScript : MonoBehaviour
         {
             return;
         }
-        string[] paiArray = allMas.Split(new char[1] { ':' });
+        string[] paiArray = allMas.Split(':');
         uuid = int.Parse(paiArray[0]);
         mapaiList = new List<string>(paiArray);
         mapaiList.RemoveAt(0);

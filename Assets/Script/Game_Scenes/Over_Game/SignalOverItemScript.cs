@@ -107,9 +107,9 @@ public class SignalOverItemScript : MonoBehaviour {
 		var itemData = parms.totalInfo;
 		string gangpaiStr = itemData.gang;
 		if (gangpaiStr != null && gangpaiStr.Length > 0) {
-			string[] gangtemps = gangpaiStr.Split (new char[1]{','});
+			string[] gangtemps = gangpaiStr.Split(',');
 			for (int i = 0; i < gangtemps.Length; i++) {
-                var itemList = gangtemps[i].Split(new char[1] { ':' });
+                var itemList = gangtemps[i].Split(':');
                 GangpaiObj gangpaiObj = new GangpaiObj();
                 gangpaiObj.uuid = int.Parse(itemList[0]);
                 gangpaiObj.cardPiont = int.Parse(itemList[1]);
@@ -131,7 +131,7 @@ public class SignalOverItemScript : MonoBehaviour {
 		string pengpaiStr = itemData.peng;
 		if (pengpaiStr != null && pengpaiStr.Length > 0) {
 			
-			pengpaiList = pengpaiStr.Split (new char[1]{','});
+			pengpaiList = pengpaiStr.Split(',');
 
 
 			//string[] pengpaiListTTT = pengpaiList;
@@ -149,11 +149,11 @@ public class SignalOverItemScript : MonoBehaviour {
 
 		string chipaiStr = itemData.chi;
 		if (chipaiStr != null && chipaiStr.Length > 0) {
-			string[] chitemps = chipaiStr.Split (new char[1]{','});
+			string[] chitemps = chipaiStr.Split(',');
 			for (int i = 0; i < chitemps.Length; i++) {
 				string item = chitemps[i];
 				ChipaiObj chipaiObj = new ChipaiObj ();
-				string[] pointStr = item.Split (new char[1]{ ':' }); 
+				string[] pointStr = item.Split(':'); 
 				chipaiObj.cardPionts = pointStr;
 				chipaiList.Add (chipaiObj);
 				paiArray [int.Parse(chipaiObj.cardPionts[0])] -= 1;
@@ -167,7 +167,8 @@ public class SignalOverItemScript : MonoBehaviour {
 
 		string hupaiStr = itemData.hu;
 		if(hupaiStr!=null && hupaiStr.Length>0){
-            var strList = hupaiStr.Split(new char[1] {':'});
+            var strList = hupaiStr.Split(':');
+
             hupaiObj.uuid = int.Parse(strList[0]);
 			hupaiObj.cardPiont = int.Parse(strList[1]);
 			hupaiObj.type = strList[2];

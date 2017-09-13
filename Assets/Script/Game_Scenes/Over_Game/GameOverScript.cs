@@ -141,7 +141,7 @@ public class GameOverScript : MonoBehaviour {
             List<string> paiList = new List<string>();
             if (mas != null && mas != "")
             {
-                string[] paiArray = mas.Split(new char[1] { ':' });
+                string[] paiArray = mas.Split(':');
                 int uuid = int.Parse(paiArray[0]);
                 paiList = new List<string>(paiArray);
                 paiList.RemoveAt(0);
