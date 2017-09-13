@@ -23,7 +23,7 @@ public class ZhuMaScript : MonoBehaviour
     private List<AvatarVO> avatarList;
     private List<int> validMas;
     private List<string> mapaiList;
-    private string uuid;
+    private int uuid;
 
 
 
@@ -96,15 +96,14 @@ public class ZhuMaScript : MonoBehaviour
 
     public void arrageMas(string allMas, List<AvatarVO> list, List<int> validMasParms, int type = -1)
     {
-
         avatarList = list;
         validMas = validMasParms;
         if (allMas == null)
         {
             return;
         }
-        uuid = allMas.Split(new char[1] { ':' })[0];
         string[] paiArray = allMas.Split(new char[1] { ':' });
+        uuid = int.Parse(paiArray[0]);
         mapaiList = new List<string>(paiArray);
         mapaiList.RemoveAt(0);
 
@@ -113,11 +112,10 @@ public class ZhuMaScript : MonoBehaviour
         {
             Invoke("doArrage_gd", 4.5f);
         }
-        else {
+        else
+        {
             Invoke("doArrage", 4.5f);
         }
-
-
     }
 
     private bool checkIsVaild(int ma)
@@ -159,7 +157,7 @@ public class ZhuMaScript : MonoBehaviour
 
     private void doArrage()
     {
-        int referIndex = getIndex(int.Parse(uuid));
+        int referIndex = getIndex(uuid);
         int startPositionB = 0;
         int startPositionT = 0;
         int startPositionL = 0;
@@ -290,7 +288,7 @@ public class ZhuMaScript : MonoBehaviour
 
     private void doArrage_gd()
     {
-        int referIndex = getIndex(int.Parse(uuid));
+        int referIndex = getIndex(uuid);
         mapaiBg.SetActive(false);
         int startPosition = 0;
         string resultPonsition = getDirection(referIndex);

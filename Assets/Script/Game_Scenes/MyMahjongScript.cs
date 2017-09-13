@@ -2111,16 +2111,17 @@ public class MyMahjongScript : MonoBehaviour
 			effectType = "hu";
 			pengGangHuEffectCtrl ();
 			for (int i = 0; i < GlobalDataScript.hupaiResponseVo.avatarList.Count; i++) {
-				if (checkAvarHupai (GlobalDataScript.hupaiResponseVo.avatarList [i]) == 1) {//胡
+                var hutype = checkAvarHupai(GlobalDataScript.hupaiResponseVo.avatarList[i]);
+
+                if (hutype == 1) { //接炮胡
 					playerItems [getIndexByDir (getDirection (i))].setHuFlagDisplay ();
 					SoundCtrl.getInstance ().playSoundByAction ("hu", avatarList [i].account.sex);
-				} else if (checkAvarHupai (GlobalDataScript.hupaiResponseVo.avatarList [i]) == 2) {
+				} else if (hutype == 2) { //自摸
 					playerItems [getIndexByDir (getDirection (i))].setHuFlagDisplay ();
 					SoundCtrl.getInstance ().playSoundByAction ("zimo", avatarList [i].account.sex);
-				} else {
+				} else { //没胡
 					playerItems [getIndexByDir (getDirection (i))].setHuFlagHidde ();
 				}
-
 			}
 
 			allMas = GlobalDataScript.hupaiResponseVo.allMas;
@@ -2170,37 +2171,26 @@ public class MyMahjongScript : MonoBehaviour
 	/**
 	 *检测某人是否胡牌 
 	 */
-	public int checkAvarHupai( HupaiResponseItem itemData){
+	public int checkAvarHupai(HupaiResponseItem itemData){
 		string hupaiStr = itemData.totalInfo.hu;
 		HuipaiObj hupaiObj = new HuipaiObj ();
 		if(hupaiStr!=null && hupaiStr.Length>0){
-			hupaiObj.uuid =hupaiStr.Split (new char[1]{ ':' }) [0];
-			hupaiObj.cardPiont  =int.Parse(hupaiStr.Split (new char[1]{ ':' }) [1]);
-			hupaiObj.type = hupaiStr.Split (new char[1]{ ':' }) [2];
+            var strList = hupaiStr.Split(new char[1]{':'});
+
+            hupaiObj.uuid = int.Parse(strList[0]);
+			hupaiObj.cardPiont = int.Parse(strList[1]);
+			hupaiObj.type = strList[2];
 			//增加判断是否是自己胡牌的判断
 
-			if (hupaiStr.Contains ("d_other")) {//排除一炮多响的情况
+			if (hupaiStr.Contains ("d_other")) { //点炮
 				return 0;
-			}else if (hupaiObj.type == "zi_common") {
-				return 2;
-
-			} else if (hupaiObj.type == "d_self") {
-				return 1;
-			} else if (hupaiObj.type == "qiyise") {
-				return 1;
-			}else if (hupaiObj.type == "zi_qingyise") {
-				return 2;
-			}else if (hupaiObj.type == "qixiaodui") {
-				return 1;
-			}else if (hupaiObj.type == "self_qixiaodui") {
-				return 2;
-			}else if (hupaiObj.type == "gangshangpao") {
-				return 1;
-			}else if (hupaiObj.type == "gangshanghua") {
-				return 2;
 			}
 
-
+            if(hupaiObj.uuid == 0 || hupaiObj.uuid == GlobalDataScript.loginResponseData.account.uuid) //自摸
+            {
+                return 2;
+            }
+            return 1;
 		}
 		return 0;
 	}
@@ -2719,11 +2709,11 @@ public class MyMahjongScript : MonoBehaviour
 				if (gangString != null) {
 					string[] gangtemps = gangString.Split (new char[1]{','});
 					for (int j = 0; j < gangtemps.Length; j++) {
-						string item = gangtemps [j];
+						var itemList = gangtemps[j].Split(new char[1]{':'});
 						GangpaiObj gangpaiObj = new GangpaiObj ();
-						gangpaiObj.uuid  =item.Split (new char[1]{':'})[0];
-						gangpaiObj.cardPiont =int.Parse( item.Split (new char[1]{':'})[1]);
-						gangpaiObj.type = item.Split (new char[1]{':'})[2];
+						gangpaiObj.uuid = int.Parse(itemList[0]);
+						gangpaiObj.cardPiont = int.Parse(itemList[1]);
+						gangpaiObj.type = itemList[2];
 						//增加判断是否为自己的杠牌的操作
 						GlobalDataScript.reEnterRoomData.playerList [i].paiArray [0] [gangpaiObj.cardPiont] -= 4;
 
@@ -2888,8 +2878,8 @@ public class MyMahjongScript : MonoBehaviour
 
 	/**用户离线回调**/
 	public void offlineNotice(ClientResponse response){
-		int uuid =int.Parse( response.message);
-		int index = getIndex (uuid);
+		int uuid = int.Parse(response.message);
+		int index = getIndex(uuid);
 		string dirstr = getDirection (index);
 		switch (dirstr) {
 		case DirectionEnum.Bottom:

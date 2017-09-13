@@ -14,6 +14,10 @@ namespace AssemblyCSharp
 		{
 
 		}
+        public String toString()
+        {
+            return " [class]TotalInfo " + " gang: " + gang + " peng " + peng + " chi " + chi + " hu " + hu + " genzhuang " + genzhuang;
+        }
 	}
 }
 
