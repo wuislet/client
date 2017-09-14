@@ -47,7 +47,7 @@ public class GamePlayBackScript : MonoBehaviour {
 	private int stepNum = 0;
 	private int count= 0;
 	private bool play = false;
-	private GamePlayResponseVo aa = new GamePlayResponseVo ();
+	private GamePlayResponseVo gamePlayResponseVo = new GamePlayResponseVo ();
 	/// <summary>
 	/// 使用过的行为数组
 	/// </summary>
@@ -68,24 +68,48 @@ public class GamePlayBackScript : MonoBehaviour {
 	}
 
 	private  void gameBackPlayResponse(ClientResponse response){
-		aa = JsonMapper.ToObject<GamePlayResponseVo> (response.message);
-		setRoomRemark (aa.roomvo);
-		getMyIndex ();
+		gamePlayResponseVo = JsonMapper.ToObject<GamePlayResponseVo> (response.message);
+
+        var roomvo = gamePlayResponseVo.roomvo;
+        cardCount = getRoomCardCount(roomvo);
+    
+        roomRemark.text = MyMahjongScript.getRoomInfoString(roomvo);
+        showCardNumber();
+        getMyIndex ();
 		chongZu ();
 		initall ();
 		initCard ();
 	}
-	void initall(){
-		for (int i = 0; i < aa.playerItems.Count; i++) {
-			PlayerBackVO player = aa.playerItems [i];
+
+    private int getRoomCardCount(RoomCreateVo roomvo)
+    {
+        if (roomvo.addWordCard) //全套麻将
+        {
+            return 83;
+        }
+        if (roomvo.roomType == 1 && roomvo.gui == 3) //红中麻将
+        {
+            return 59;
+        }
+        if (roomvo.roomType == 4 && roomvo.gui == 1) //广东麻将 白板做鬼
+        {
+            return 59;
+        }
+        return 55; //基础
+    }
+
+
+    void initall(){
+		for (int i = 0; i < gamePlayResponseVo.playerItems.Count; i++) {
+			PlayerBackVO player = gamePlayResponseVo.playerItems [i];
 			playerItems [i].setAvatarVo (player);
 		}
 		int indexCount = 0;
 	}
 	private void initCard(){
-		for (int i = 0; i <aa.playerItems.Count; i++) {
+		for (int i = 0; i <gamePlayResponseVo.playerItems.Count; i++) {
 			List<GameObject> cards = new List<GameObject> ();
-			int[] tempPai = aa.playerItems [i].getPaiArray ();
+			int[] tempPai = gamePlayResponseVo.playerItems [i].getPaiArray ();
 			int aaa = 0;
 			for (int a = 0; a <tempPai.Length; a++) {
 				if (tempPai [a] > 0) {
@@ -146,8 +170,8 @@ public class GamePlayBackScript : MonoBehaviour {
 			timeNum--;
 			if (timeNum <= 0) {
 				timeNum = 70;
-				if (stepNum < aa.behavieList.Count) {
-					processText.text = "播放进度：" + (int)(stepNum*100/aa.behavieList.Count) +"%";
+				if (stepNum < gamePlayResponseVo.behavieList.Count) {
+					processText.text = "播放进度：" + (int)(stepNum*100/gamePlayResponseVo.behavieList.Count) +"%";
 					stepAction ();
 				} else {
 					processText.text = "播放进度：100%";
@@ -158,7 +182,7 @@ public class GamePlayBackScript : MonoBehaviour {
 	}
 
 	private void stepAction(){
-		GameBehaviourVO temp = aa.behavieList[stepNum];
+		GameBehaviourVO temp = gamePlayResponseVo.behavieList[stepNum];
 		usedList.Insert (0,temp);
 		int tempcurIndex = getCurIndex (temp.accountindex_id);
 		if (temp.type == 1) {
@@ -350,47 +374,6 @@ public class GamePlayBackScript : MonoBehaviour {
 		}
 	}
 
-	public void setRoomRemark(RoomCreateVo roomvo){
-		roomType = roomvo.roomType;
-		string str = "房间号：\n"+roomvo.roomId+"\n";
-		str += "圈数："+roomvo.roundNumber+"\n";
-		if (roomvo.hong) {
-			cardCount = 59;
-			str += "红中麻将\n";
-		} else {
-			cardCount = 55;
-			if (roomvo.roomType == 1) {
-				str += "转转麻将\n";
-			} else if (roomvo.roomType == 2){
-				str += "划水麻将\n";
-			}else if (roomvo.roomType == 3){
-				str += "长沙麻将\n";
-			}
-		}
-		if (roomvo.ziMo == 1) {
-			str += "只能自摸\n";
-		} else {
-			str += "可抢杠胡\n";
-		}
-		if(roomvo.sevenDouble){
-			str += "可胡七对\n";
-		}
-
-		if (roomvo.addWordCard) {
-			str += "有风牌\n";
-			cardCount = 83;
-		}
-		if (roomvo.xiaYu > 0) {
-			str += "下鱼数：" + roomvo.xiaYu+"\n";
-		}
-
-		if (roomvo.ma > 0) {
-			str += "抓码数：" + roomvo.ma+"\n";
-		}
-		roomRemark.text = str;
-		showCardNumber ();
-	}
-
 	public void play_Click(){
 		play = true;
 		playBtn.SetActive (false);
@@ -437,7 +420,7 @@ public class GamePlayBackScript : MonoBehaviour {
 			}
 			SetDirGameObjectAction (tempcurIndex);
 			stepNum--;
-			processText.text = "播放进度：" + (int)(stepNum*100/aa.behavieList.Count) +"%";
+			processText.text = "播放进度：" + (int)(stepNum*100/gamePlayResponseVo.behavieList.Count) +"%";
 			//play = true;
 		}
 	}
@@ -903,7 +886,7 @@ public class GamePlayBackScript : MonoBehaviour {
 			for (int i = 0; i < 4; i++) {
 				AvatarVO avo = new AvatarVO ();
 				avo.account = new Account ();
-				avo.account.uuid = aa.playerItems [i].uuid;
+				avo.account.uuid = gamePlayResponseVo.playerItems [i].uuid;
 				avatarList.Add (avo);
 			}
 			zhuamaPanel = PrefabManage.loadPerfab ("prefab/Panel_ZhuaMa");
@@ -919,14 +902,14 @@ public class GamePlayBackScript : MonoBehaviour {
 			if (n > 3) {
 				n -= 4;
 			}
-			templist.Add (aa.playerItems[n]);
+			templist.Add (gamePlayResponseVo.playerItems[n]);
 		}
-		aa.playerItems = templist;
+		gamePlayResponseVo.playerItems = templist;
 	}
 
 	private void getMyIndex(){
-		for(int i=0;i<aa.playerItems.Count;i++){
-			if(aa.playerItems [i].uuid == GlobalDataScript.loginResponseData.account.uuid){
+		for(int i=0;i<gamePlayResponseVo.playerItems.Count;i++){
+			if(gamePlayResponseVo.playerItems [i].uuid == GlobalDataScript.loginResponseData.account.uuid){
 				myIndex =  i;
 			}
 		}

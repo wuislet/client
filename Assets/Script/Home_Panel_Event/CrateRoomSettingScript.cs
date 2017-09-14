@@ -270,9 +270,8 @@ public class CrateRoomSettingScript : MonoBehaviour {
 		SoundCtrl.getInstance().playSoundByActionButton(1);
 		int roundNumber = 4;//房卡数量
 		bool isZimo=false;//自摸
-		bool hasHong=false;//红中赖子
+		int gui = 0;//红中赖子
 		bool isSevenDoube =false;//七小对
-		//bool isGang = false;
 		int maCount = 0;
 		for (int i = 0; i < zhuanzhuanRoomCards.Count; i++) {
 			Toggle item = zhuanzhuanRoomCards [i];
@@ -290,12 +289,8 @@ public class CrateRoomSettingScript : MonoBehaviour {
 			isZimo = true;
 		}
 
-		//if (zhuanzhuanGameRule [1].isOn) {
-		//	isGang = true;
-		//}
-
 		if (zhuanzhuanGameRule [2].isOn) {
-			hasHong = true;
+			gui = 3;
 		}
 
 		if (zhuanzhuanGameRule [3].isOn) {
@@ -312,8 +307,8 @@ public class CrateRoomSettingScript : MonoBehaviour {
 		sendVo = new RoomCreateVo ();
 		sendVo.ma = maCount;
 		sendVo.roundNumber = roundNumber;
-		sendVo.ziMo = isZimo?1:0;
-		sendVo.hong = hasHong;
+		sendVo.huXianzhi = isZimo?1:0;
+		sendVo.gui = gui;
 		sendVo.sevenDouble = isSevenDoube;
 		sendVo.roomType = GameConfig.GAME_TYPE_ZHUANZHUAN;
 		string sendmsgstr = JsonMapper.ToJson (sendVo);
@@ -335,8 +330,7 @@ public class CrateRoomSettingScript : MonoBehaviour {
     {
         SoundCtrl.getInstance().playSoundByActionButton(1);
         int roundNumber = 8;//房卡数量
-        bool isGangHu = false;//自摸
-        bool hasHong = false;//红中赖子
+        int huXianZhi = 1;//胡法限制
         bool isSevenDoube = false;//七小对
         bool isFengpai = false;//风牌
         int gui = 0; //鬼牌
@@ -371,7 +365,7 @@ public class CrateRoomSettingScript : MonoBehaviour {
 
         if (guangdongGameRule[2].isOn)
         {
-            isGangHu = true;
+            huXianZhi = 2;
         }
 
 
@@ -396,14 +390,12 @@ public class CrateRoomSettingScript : MonoBehaviour {
         sendVo = new RoomCreateVo();
         sendVo.ma = maCount;
         sendVo.roundNumber = roundNumber;
-        sendVo.ziMo = 1 ;
-        sendVo.hong = hasHong;
+        sendVo.huXianzhi = huXianZhi;
         sendVo.addWordCard = isFengpai;
         sendVo.sevenDouble = isSevenDoube;
         sendVo.gui = gui;
-        sendVo.gangHu = isGangHu;
         sendVo.roomType = GameConfig.GAME_TYPE_GUANGDONG;
-        print("  creatre  guangdong " + sendVo);
+        print(" creatre  guangdong " + sendVo);
         string sendmsgstr = JsonMapper.ToJson(sendVo);
         if (GlobalDataScript.loginResponseData.account.roomcard > 0)
         {
@@ -451,7 +443,7 @@ public class CrateRoomSettingScript : MonoBehaviour {
 		sendVo = new RoomCreateVo ();
 		sendVo.ma = maCount;
 		sendVo.roundNumber = roundNumber;
-		sendVo.ziMo = isZimo?1:0;
+		sendVo.huXianzhi = isZimo?1:0;
 		sendVo.roomType = GameConfig.GAME_TYPE_CHANGSHA;
 		string sendmsgstr = JsonMapper.ToJson (sendVo);
 		if (GlobalDataScript.loginResponseData.account.roomcard > 0) {
@@ -501,7 +493,7 @@ public class CrateRoomSettingScript : MonoBehaviour {
 		sendVo = new RoomCreateVo ();
 		sendVo.xiaYu = maCount;
 		sendVo.roundNumber = roundNumber;
-		sendVo.ziMo = isZimo?1:0;
+		sendVo.huXianzhi = isZimo?1:0;
 		sendVo.roomType = GameConfig.GAME_TYPE_HUASHUI;
 		sendVo.addWordCard = isFengpai;
 		sendVo.sevenDouble = true;
@@ -558,13 +550,9 @@ public class CrateRoomSettingScript : MonoBehaviour {
             if(BoZhouGameRule[3].isOn){
                 anhangliang = true;
             }
-
-            if(bozhouxiazui[0].isOn){
-              
-            }
+            
             if(bozhouxiazui[0].isOn)  {
                  xiazui = true;
-            //xiazuiBtn.SetActive(true);
             }
   
             for (int i = 0; i <bozhouselfDrawn.Count; i++) {
@@ -575,11 +563,11 @@ public class CrateRoomSettingScript : MonoBehaviour {
             }
         sendVo = new RoomCreateVo();
         sendVo.roundNumber = roundNumber;
-        sendVo.BozhouHu = bozhouZiMo ? 1 : 0;
+        sendVo.bozhouHu = bozhouZiMo ? 1 : 0;
         sendVo.xiazui = xiazui ? 1 : 0;
-        sendVo.NolisterToBeard = bubaotingkehu;
+        sendVo.nolisterToBeard = bubaotingkehu;
         sendVo.angangLiang = anhangliang;
-        sendVo.BozhouZimoMagnification = zimojiabei;    
+        sendVo.bozhouZimoMagnification = zimojiabei;
         sendVo.roomType = GameConfig.GAME_TYPE_BOZHOU;
         string sendmsgstr = JsonMapper.ToJson(sendVo);
         if (GlobalDataScript.loginResponseData.account.roomcard > 0){
@@ -623,7 +611,7 @@ public class CrateRoomSettingScript : MonoBehaviour {
 			//GlobalDataScript.loginResponseData.isReady = true;
 			GlobalDataScript.loginResponseData.main = true;
 			GlobalDataScript.loginResponseData.isOnLine = true;
-			GlobalDataScript.reEnterRoomData=null;
+			GlobalDataScript.reEnterRoomData = null;
 			//SceneManager.LoadSceneAsync(1);
 			/**
 			if (gameSence == null) {

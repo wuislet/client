@@ -219,24 +219,12 @@ public class EnterRoomScript : MonoBehaviour
         MyDebug.Log(response);
         if (response.status == 1)
         {
-            GlobalDataScript.roomJoinResponseData = JsonMapper.ToObject<RoomJoinResponseVo>(response.message);
-            GlobalDataScript.roomVo.addWordCard = GlobalDataScript.roomJoinResponseData.addWordCard;
-            GlobalDataScript.roomVo.hong = GlobalDataScript.roomJoinResponseData.hong;
-            GlobalDataScript.roomVo.ma = GlobalDataScript.roomJoinResponseData.ma;
-            GlobalDataScript.roomVo.name = GlobalDataScript.roomJoinResponseData.name;
-            GlobalDataScript.roomVo.roomId = GlobalDataScript.roomJoinResponseData.roomId;
-            GlobalDataScript.roomVo.roomType = GlobalDataScript.roomJoinResponseData.roomType;
-            GlobalDataScript.roomVo.roundNumber = GlobalDataScript.roomJoinResponseData.roundNumber;
-            GlobalDataScript.roomVo.sevenDouble = GlobalDataScript.roomJoinResponseData.sevenDouble;
-            GlobalDataScript.roomVo.xiaYu = GlobalDataScript.roomJoinResponseData.xiaYu;
-            GlobalDataScript.roomVo.ziMo = GlobalDataScript.roomJoinResponseData.ziMo;
-            GlobalDataScript.roomVo.gui = GlobalDataScript.roomJoinResponseData.gui;
-            GlobalDataScript.roomVo.gangHu = GlobalDataScript.roomJoinResponseData.gangHu;
-            GlobalDataScript.roomVo.guiPai = GlobalDataScript.roomJoinResponseData.guiPai;
+            GlobalDataScript.roomJoinResponseData = JsonMapper.ToObject<RoomCreateVo>(response.message);
+            GlobalDataScript.roomVo = GlobalDataScript.roomJoinResponseData;
             GlobalDataScript.surplusTimes = GlobalDataScript.roomJoinResponseData.roundNumber;
             GlobalDataScript.loginResponseData.roomId = GlobalDataScript.roomJoinResponseData.roomId;
             //loadPerfab("Prefab/Panel_GamePlay");
-			GlobalDataScript.reEnterRoomData=null;
+			GlobalDataScript.reEnterRoomData = null;
 
             GlobalDataScript.gamePlayPanel = PrefabManage.loadPerfab("Prefab/Panel_GamePlay");
             //SocketEventHandle.getInstance().gameReadyNotice += GlobalDataScript.gamePlayPanel.GetComponent<MyMahjongScript>().gameReadyNotice;
