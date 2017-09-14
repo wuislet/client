@@ -11,7 +11,7 @@ namespace AssemblyCSharp
 
 		//public int cardIndex; 
 		public bool isOnLine;
-		public bool isReady;
+		public bool[] isReady;
 		public bool main;
 		public int roomId;
 		public int[] chupais;//出牌
@@ -27,7 +27,7 @@ namespace AssemblyCSharp
 		public void resetData(){
 		//	cardIndex = 0;
 			isOnLine = false;
-			isReady = false;
+			isReady = new bool[]{ false, false, false};
 			main = false;
 			roomId = 0;
 		}

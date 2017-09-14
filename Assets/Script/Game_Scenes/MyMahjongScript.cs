@@ -2440,13 +2440,14 @@ public class MyMahjongScript : MonoBehaviour
 		//===============================================
 		JsonData json = JsonMapper.ToObject(response.message);
 		int avatarIndex = Int32.Parse(json["avatarIndex"].ToString());
-		int myIndex = getMyIndexFromList ();
+        int phase = Int32.Parse(json["phase"].ToString());
+        int myIndex = getMyIndexFromList ();
 		int seatIndex = avatarIndex - myIndex;
 		if (seatIndex < 0) {
 			seatIndex = 4 + seatIndex;
 		}
 		playerItems [seatIndex].readyImg.enabled = true;
-		avatarList [avatarIndex].isReady = true;
+		avatarList [avatarIndex].isReady[phase] = true;
 	}
 
 
@@ -2862,7 +2863,9 @@ public class MyMahjongScript : MonoBehaviour
     *准备游戏
 	*/
 	public void  readyGame(){
-		CustomSocket.getInstance ().sendMsg (new GameReadyRequest ());
+        ReadyVO readyVO = new ReadyVO();
+        readyVO.phase = 0;
+		CustomSocket.getInstance().sendMsg(new GameReadyRequest(readyVO));
 	}
 
 	public void micInputNotice(ClientResponse response){

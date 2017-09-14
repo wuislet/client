@@ -54,7 +54,8 @@ namespace AssemblyCSharp
         public const int GAVEUP_REQUEST = 0x100015;//放弃（胡，杠，碰，吃）
 
         public const int XIAZUI_REQUEST = 0x107777; // 亳州麻将下嘴请求
-        public const int XIAZUI_RESPONSE = 0x107778;  // 亳州麻将下嘴通知
+        public const int START_XIAZUI_RESPONSE = 0x107778;  // 亳州麻将开始下嘴通知
+        public const int XIAZUI_RESPONSE = 0x107779;  // 亳州麻将下嘴通知
 
         public const int BACK_LOGIN_REQUEST = 0x001001;//掉线后重新登录查询当前牌桌情况请求
         public const int BACK_LOGIN_RESPONSE = 0x001002;//掉线后重新登录查询当前牌桌情况返回

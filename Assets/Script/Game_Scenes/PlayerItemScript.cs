@@ -23,15 +23,6 @@ public class PlayerItemScript : MonoBehaviour
     private int showTime;
     private int showChatTime;
 
-
-    // Use this for initialization
-    void Start()
-    {
-        //bankerImg.enabled = false;
-        //readyImg.enabled = false;
-        //	    scoreText.text = 1000 + "";
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -59,7 +50,7 @@ public class PlayerItemScript : MonoBehaviour
         if (value != null)
         {
             avatarvo = value;
-            readyImg.enabled = avatarvo.isReady;
+            readyImg.enabled = avatarvo.isReady[0];
             bankerImg.enabled = avatarvo.main;
             nameText.text = avatarvo.account.nickname;
             scoreText.text = avatarvo.scores + "";

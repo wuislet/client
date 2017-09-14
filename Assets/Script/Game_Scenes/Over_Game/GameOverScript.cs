@@ -404,8 +404,11 @@ public class GameOverScript : MonoBehaviour {
 			return;
 		}
 
-		if (GlobalDataScript.surplusTimes > 0) {
-			CustomSocket.getInstance ().sendMsg (new GameReadyRequest ());
+		if (GlobalDataScript.surplusTimes > 0)
+        {
+            ReadyVO readyVO = new ReadyVO();
+            readyVO.phase = 0;
+            CustomSocket.getInstance().sendMsg(new GameReadyRequest(readyVO));
 			CommonEvent.getInstance ().readyGame ();
 			closeDialog ();
 

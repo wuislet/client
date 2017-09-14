@@ -608,7 +608,6 @@ public class CrateRoomSettingScript : MonoBehaviour {
 			sendVo.roomId = roomid;
 			GlobalDataScript.roomVo = sendVo;
 			GlobalDataScript.loginResponseData.roomId = roomid;
-			//GlobalDataScript.loginResponseData.isReady = true;
 			GlobalDataScript.loginResponseData.main = true;
 			GlobalDataScript.loginResponseData.isOnLine = true;
 			GlobalDataScript.reEnterRoomData = null;

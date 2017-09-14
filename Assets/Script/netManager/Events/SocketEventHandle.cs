@@ -30,8 +30,10 @@ namespace AssemblyCSharp
 		public ServerCallBackEvent btnActionShow;//碰杠行为按钮显示
 
         public ServerCallBackEvent XiazuiCallBack;   // 下嘴回调
+        public ServerCallBackEvent StartXiazuiCallBack;   // 开始下嘴回调
 
-		public ServerCallBackEvent outRoomCallback;//退出房间回调
+
+        public ServerCallBackEvent outRoomCallback;//退出房间回调
 		public ServerCallBackEvent dissoliveRoomResponse;
 		public ServerCallBackEvent gameReadyNotice;//准备游戏通知返回
 		public ServerCallBackEvent micInputNotice;
@@ -179,29 +181,41 @@ namespace AssemblyCSharp
 					otherUserJointRoomCallBack (response);
 				}
 				break;
+            case APIS.XIAZUI_RESPONSE:
+                if (XiazuiCallBack != null)
+                {
+                    XiazuiCallBack(response);
+                }
+                break;
+            case APIS.START_XIAZUI_RESPONSE:
+                if (StartXiazuiCallBack != null)
+                {
+                    StartXiazuiCallBack(response);
+                }
+                break;
             case APIS.PENGPAI_RESPONSE:
-                    if (PengCardCallBack != null)
-                    {
-                        PengCardCallBack(response);
-                    }
-                    break;
+            if (PengCardCallBack != null)
+            {
+                PengCardCallBack(response);
+            }
+            break;
             case APIS.GANGPAI_RESPONSE:
-			        if (GangCardCallBack != null)
-			        {
-			            GangCardCallBack(response);
-			        }
-			        break;
-                case APIS.OTHER_GANGPAI_NOICE:
-			        if (gangCardNotice != null)
-			        {
-			            gangCardNotice(response);
-			        }
-                    break;
-				case APIS.RETURN_INFO_RESPONSE:
-					if (btnActionShow != null) {
-						btnActionShow (response);
-					}
-					break;
+			    if (GangCardCallBack != null)
+			    {
+			        GangCardCallBack(response);
+			    }
+			    break;
+            case APIS.OTHER_GANGPAI_NOICE:
+			    if (gangCardNotice != null)
+			    {
+			        gangCardNotice(response);
+			    }
+                break;
+			case APIS.RETURN_INFO_RESPONSE:
+				if (btnActionShow != null) {
+					btnActionShow (response);
+				}
+				break;
 			case APIS.HUPAI_RESPONSE:
 				if (HupaiCallBack != null) {
 					HupaiCallBack (response);
@@ -249,7 +263,6 @@ namespace AssemblyCSharp
 				if (RoomBackResponse != null) {
 					RoomBackResponse (response);
 				}
-
 				break;
 			case APIS.CARD_CHANGE:
 				if (cardChangeNotice != null) {
@@ -262,7 +275,6 @@ namespace AssemblyCSharp
 				}
 				break;
 			case APIS.RETURN_ONLINE_RESPONSE:
-				
 				if (returnGameResponse != null) {
 					returnGameResponse (response);
 				}
@@ -272,14 +284,12 @@ namespace AssemblyCSharp
 					giftResponse (response);
 				}
 				break;
-
             case APIS.Game_FollowBander_Notice:
                 if (gameFollowBanderNotice != null)
                     {
                         gameFollowBanderNotice(response);
                     }
                 break;
-            
 
 			case APIS.ONLINE_NOTICE:
 				if (onlineNotice != null) {
@@ -327,8 +337,6 @@ namespace AssemblyCSharp
 				}
 				break;
 			}
-
-
         }
 
 		public void addResponse(ClientResponse response){
