@@ -8,7 +8,7 @@ using LitJson;
 
 public class CreateXiazuiScript : MonoBehaviour {
 
-    public GameObject xiazuiSelect;
+    public GameObject xiazuiSelectList;
     public List<Toggle> xiazuiList; // 下嘴组合的列表  0.不下嘴   1. 147     2. 258    3. 369
     public List<Toggle> beishu;  // 1.  5倍   2.   10倍    3. 20倍
 
@@ -84,7 +84,7 @@ public class CreateXiazuiScript : MonoBehaviour {
             GlobalDataScript.loginResponseData.isOnLine = true;
             GlobalDataScript.reEnterRoomData = null;
 
-            GlobalDataScript.gamePlayPanel = PrefabManage.loadPerfab("Prefab/xiazuiSelect");
+            GlobalDataScript.gamePlayPanel = PrefabManage.loadPerfab("Prefab/xiazui_btnList");
         }
         else {
             TipsManagerScript.getInstance().setTips(Xiazuirespone.message);
