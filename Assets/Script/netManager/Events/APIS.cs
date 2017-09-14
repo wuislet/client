@@ -8,11 +8,11 @@ namespace AssemblyCSharp
         {
         }
         public const string UPDATE_INFO_JSON_URL = "http://119.23.128.56:8080/download/update.xml";//服务器上最新的软件版本信息存储文件
-        public static string chatSocketUrl = "61.160.223.36";
-		public static string socketUrl = "61.160.223.36";
+        //public static string chatSocketUrl = "61.160.223.36";
+		//public static string socketUrl = "61.160.223.36";
 
-        //public static string chatSocketUrl = "192.168.10.100";
-        //public static string socketUrl = "192.168.10.100";
+        public static string chatSocketUrl = "192.168.10.100";
+        public static string socketUrl = "192.168.10.100";
         public const int socketPort = 10122;
         public const int chatPort = 10112;
 
