@@ -95,6 +95,7 @@ public class MyMahjongScript : MonoBehaviour
 	/// </summary>
 	private GameObject putOutCard;
 
+    private CreateXiazuiScript createXiazuiScript;
 
 #pragma warning disable CS0169 // 从不使用字段“MyMahjongScript.otherMoCardPoint”
 	private int otherMoCardPoint;
@@ -181,7 +182,8 @@ public class MyMahjongScript : MonoBehaviour
         TipsManagerScript.getInstance().setTips2("");       
         dialog_fanhui.gameObject.SetActive(false);
 
-        
+        createXiazuiScript = GetComponent<CreateXiazuiScript>();
+        createXiazuiScript.addListener();
     }
 
 	void randShowTime(){
@@ -360,6 +362,8 @@ public class MyMahjongScript : MonoBehaviour
       //  tab.transform.gameObject.SetActive(true);
 		centerImage.transform.gameObject.SetActive (true);
 		liujuEffectGame.SetActive (false);
+
+        createXiazuiScript.removeListener();
 	}
 
 
