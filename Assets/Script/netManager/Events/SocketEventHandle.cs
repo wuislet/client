@@ -188,6 +188,7 @@ namespace AssemblyCSharp
                 }
                 break;
             case APIS.START_XIAZUI_RESPONSE:
+                print("   来协议了  START_XIAZUI_RESPONSE ");
                 if (StartXiazuiCallBack != null)
                 {
                     StartXiazuiCallBack(response);

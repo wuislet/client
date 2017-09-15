@@ -8,18 +8,20 @@ using LitJson;
 
 public class CreateXiazuiScript : MonoBehaviour {
 
-    public GameObject xiazuiSelectList;
+    public GameObject RoomxiazuiSelect;
     public List<Toggle> xiazuiList; // 下嘴组合的列表  0.不下嘴   1. 147     2. 258    3. 369
     public List<Toggle> beishu;  // 1.  5倍   2.   10倍    3. 20倍
 
     private XiazuiVO xiazuiVO; //创建下嘴信息
 	
 	void Start () {
+        print("-----------------yc----------- start ");
         addListener();
     }
 
     public void createXiazui()
     {
+        RoomxiazuiSelect.SetActive(false);
         int XZList = 0;  // 下嘴的组合  147  258  369
         int XZbeishu = 0;  // 下嘴的倍数  5  10   20
         for(int i=0; i<xiazuiList.Count;i++)
@@ -71,22 +73,25 @@ public class CreateXiazuiScript : MonoBehaviour {
         //else{
         //    TipsManagerScript.getInstance().setTips("没选择下嘴，没有额外收益可能");
         //}
+        print("---------------------------YC-----------------");
+        print("xiazuiVO");
+        print("---------------------------YC-----------------");
     }
 
     public void onXiazuiCallback(ClientResponse Xiazuirespone)
     {
         MyDebug.Log("   wxd>>>  " + Xiazuirespone.message);
-        if (Xiazuirespone.status == 1){
+        if (Xiazuirespone.status == 1)
+        {
             print(xiazuiVO);
             GlobalDataScript.xiazuiVo = xiazuiVO;
 
             GlobalDataScript.loginResponseData.main = true;
             GlobalDataScript.loginResponseData.isOnLine = true;
             GlobalDataScript.reEnterRoomData = null;
-
-            GlobalDataScript.gamePlayPanel = PrefabManage.loadPerfab("Prefab/xiazui_btnList");
         }
-        else {
+        else
+        {
             TipsManagerScript.getInstance().setTips(Xiazuirespone.message);
         }
     }
@@ -94,6 +99,9 @@ public class CreateXiazuiScript : MonoBehaviour {
     public void onStartXiazuiCallback(ClientResponse StartXiazuiRespone)
     {
         print("   wxd>>>   onStartXiazuiCallback");
+     
+        GlobalDataScript.gamePlayPanel = PrefabManage.loadPerfab("Prefab/xiazui_btnList");
+        //GlobalDataScript.gamePlayPanel.transform.position=new Vector3(350,- 120, 0);
     }
 
     public void gameReadyNotice(ClientResponse response) //todu 时机不对
@@ -115,5 +123,12 @@ public class CreateXiazuiScript : MonoBehaviour {
         SocketEventHandle.getInstance().gameReadyNotice -= gameReadyNotice; //todu 时机不对
         SocketEventHandle.getInstance().XiazuiCallBack -= onXiazuiCallback;
         SocketEventHandle.getInstance().StartXiazuiCallBack += onStartXiazuiCallback; //todu 时机不对
+    }
+
+   
+  
+    public void quxiaoXiazui()
+    {
+        RoomxiazuiSelect.SetActive(false);
     }
 }

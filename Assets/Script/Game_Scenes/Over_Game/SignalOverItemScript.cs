@@ -39,6 +39,7 @@ public class SignalOverItemScript : MonoBehaviour {
 	public Text totalScroe;
 	public Text fanCount;
 	public Text gangScore;
+
 	public GameObject paiArrayPanel;
 	public Image zhongMaFlag;//中码标记
 	public GameObject GenzhuangFlag;
@@ -349,6 +350,17 @@ public class SignalOverItemScript : MonoBehaviour {
 			itemTemp.transform.localScale =  Vector3.one;
 			itemTemp.transform.localPosition = new Vector3 (20*36f, 0, 0);
 		}
+
+        //亳州麻将结算界面下嘴显示处理
+        if(GlobalDataScript.roomVo.roomType == GameConfig.GAME_TYPE_BOZHOU)
+        {
+            itemTemp = Instantiate(Resources.Load("Prefab/Image_xiazui")) as GameObject;
+            itemTemp.transform.parent = paiArrayPanel.transform;
+            itemTemp.GetComponent<XiazuiScript>().setCount(GlobalDataScript.roomVo.xiazui);
+            itemTemp.transform.localScale = Vector3.one;
+            itemTemp.transform.localPosition = new Vector3(20 * 36f, 0, 0);
+
+        }
 	}
     
 

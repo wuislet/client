@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 8f2a08e6954ecbc42a53efc8c963d497
+timeCreated: 1505205360
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - xiazui: {fileID: 1294318225016290, guid: b37f3d7160a44ec4b9cc774b46bc568f, type: 2}
+  - xiazuiBtn: {fileID: 1382674014211856, guid: c034a76b346eeb644bac080b1211d113,
+      type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
