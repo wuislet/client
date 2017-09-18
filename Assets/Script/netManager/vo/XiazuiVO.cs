@@ -11,7 +11,7 @@ namespace AssemblyCSharp
     {
         public int xiazuiList; // 不同下嘴组合的列表  1. 147     2. 258    3. 369
         public int xiazuiMultiple; // 下嘴倍数   1.  5倍   2.   10倍    3. 20倍
-
+        
         public XiazuiVO()
         {
 

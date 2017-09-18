@@ -23,7 +23,7 @@ public class GlobalDataScript
     /**全局游戏结束服务器返回数据**/
     public static FinalGameEndVo finalGameEndVo;
 
-    public static XiazuiVO xiazuiVo = new XiazuiVO();
+    public static XiazuiVO xiazuiVo = new XiazuiVO(); 
     public static bool xiazui = false;  /**全局游戏下嘴返回数据**/
 
     public static int mainUuid;

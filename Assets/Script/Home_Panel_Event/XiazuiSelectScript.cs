@@ -35,7 +35,7 @@ public class XiazuiSelectScript : MonoBehaviour {
 
         for(int i=0;i<beishu.Count;i++)
         {
-            Toggle bs = beishu[1];
+            Toggle bs = beishu[i];
             if(bs.isOn)
             {
                 if(i== 0){
@@ -58,10 +58,6 @@ public class XiazuiSelectScript : MonoBehaviour {
         string sendmsg = JsonMapper.ToJson(xiazuiVO);
         CustomSocket.getInstance().sendMsg(new GameReadyRequest(readyVO));
         CustomSocket.getInstance().sendMsg(new XiazuiRequest(xiazuiVO));
-      
-        print("---------------------------YC-----------------");
-        print("xiazuiVO");
-        print("---------------------------YC-----------------");
     }
  
     public void quxiaoXiazui()

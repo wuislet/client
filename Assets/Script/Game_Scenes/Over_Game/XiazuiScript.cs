@@ -12,8 +12,7 @@ public class XiazuiScript : MonoBehaviour
     {
 
     }
-
-   
+  
     void Update()
     {
 

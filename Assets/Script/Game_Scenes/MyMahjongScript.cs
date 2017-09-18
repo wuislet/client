@@ -164,7 +164,8 @@ public class MyMahjongScript : MonoBehaviour
 		versionText.text = "V" + Application.version;
 		//===========================================================================================
 		btnActionScript = gameObject.GetComponent<ButtonActionScript> ();
-		addListener ();
+        createXiazuiScript = GetComponent<CreateXiazuiScript>();
+        addListener ();
 		initPanel ();
 		initArrayList ();
 		//initPerson ();//初始化每个成员1000分
@@ -181,9 +182,6 @@ public class MyMahjongScript : MonoBehaviour
         GlobalDataScript.reEnterRoomData = null;
         TipsManagerScript.getInstance().setTips2("");       
         dialog_fanhui.gameObject.SetActive(false);
-
-        createXiazuiScript = GetComponent<CreateXiazuiScript>();
-        createXiazuiScript.addListener();
     }
 
 	void randShowTime(){
@@ -219,8 +217,9 @@ public class MyMahjongScript : MonoBehaviour
 		CommonEvent.getInstance ().closeGamePanel += exitOrDissoliveRoom;
 		SocketEventHandle.getInstance ().micInputNotice += micInputNotice;
 		SocketEventHandle.getInstance ().gameFollowBanderNotice += gameFollowBanderNotice;
-
-	}
+        
+        createXiazuiScript.addListener();
+    }
 
 	private void removeListener(){
 		SocketEventHandle.getInstance().StartGameNotice -= startGame;
@@ -245,7 +244,9 @@ public class MyMahjongScript : MonoBehaviour
 		CommonEvent.getInstance ().closeGamePanel -= exitOrDissoliveRoom;
 		SocketEventHandle.getInstance ().micInputNotice -= micInputNotice;
 		SocketEventHandle.getInstance ().gameFollowBanderNotice -= gameFollowBanderNotice;
-	}
+
+        createXiazuiScript.removeListener();
+    }
 
 
 	private void initArrayList(){
@@ -362,8 +363,6 @@ public class MyMahjongScript : MonoBehaviour
       //  tab.transform.gameObject.SetActive(true);
 		centerImage.transform.gameObject.SetActive (true);
 		liujuEffectGame.SetActive (false);
-
-        createXiazuiScript.removeListener();
 	}
 
 
@@ -1542,8 +1541,6 @@ public class MyMahjongScript : MonoBehaviour
 		CustomSocket.getInstance().sendMsg(new PengCardRequest(cardvo));
 		btnActionScript.cleanBtnShow();
 	}
-
-
 
 	public void gangResponse(ClientResponse response)
 	{
