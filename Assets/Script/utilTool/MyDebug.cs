@@ -5,7 +5,7 @@ namespace AssemblyCSharp
 {
 	public class MyDebug
 	{
-		private static bool flag = true;
+		private static bool flag = false;
 
 		public MyDebug ()
 		{

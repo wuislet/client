@@ -135,8 +135,13 @@ namespace AssemblyCSharp
             }
         }
 
-        private void dispatchHandle(ClientResponse response){
-			switch(response.headCode){
+        private void dispatchHandle(ClientResponse response)
+        {
+            if (response.headCode != 0x000031) //不打印心跳包
+            {
+                print(string.Format("   s2c 来协议了  code:0x{0:X6}", response.headCode));
+            }
+            switch (response.headCode){
 			case APIS.CLOSE_RESPONSE:
 				TipsManagerScript.getInstance ().setTips ("服务器关闭了");
 				CustomSocket.getInstance ().closeSocket ();
@@ -188,7 +193,6 @@ namespace AssemblyCSharp
                 }
                 break;
             case APIS.START_XIAZUI_RESPONSE:
-                print("   来协议了  START_XIAZUI_RESPONSE ");
                 if (StartXiazuiCallBack != null)
                 {
                     StartXiazuiCallBack(response);
