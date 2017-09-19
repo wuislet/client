@@ -22,7 +22,6 @@ public class HuipaiObj{
 
 public class ChipaiObj{
 	public string[] cardPionts;//出牌的下标
-
 }
 	
 
@@ -194,7 +193,7 @@ public class SignalOverItemScript : MonoBehaviour {
                 paiArray[hupaiObj.cardPiont] -= 1;
             }
 		}
-		
+        print(" >>>>>>>>>>>   hu pai result  <<<<<<<<<<<<" + resultDes);
 		resultDes.text = mdesCribe;
 		maPais = parms.getMaPoints ();
 		arrangePai (hupaiStr);
@@ -355,13 +354,12 @@ public class SignalOverItemScript : MonoBehaviour {
         if(GlobalDataScript.roomVo.roomType == GameConfig.GAME_TYPE_BOZHOU){
             itemTemp = Instantiate(Resources.Load("Prefab/Image_xiazui")) as GameObject;
             itemTemp.transform.parent = paiArrayPanel.transform;
-            print(" >>>>>>>>>>>  <<<<<<< " + hu);
             if (MyMahjongScript.checkAvarHupai(hu) !=0)
             {
                 itemTemp.GetComponent<XiazuiScript>().setCount(GlobalDataScript.xiazuiVo.xiazuiMultiple);
             }
             itemTemp.transform.localScale = Vector3.one;
-            itemTemp.transform.localPosition = new Vector3(20 * 36f, 0, 0);
+            itemTemp.transform.localPosition = new Vector3(20 * 35f, 0, 0);
 
         }
 	}

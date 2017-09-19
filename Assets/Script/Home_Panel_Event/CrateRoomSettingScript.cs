@@ -569,6 +569,8 @@ public class CrateRoomSettingScript : MonoBehaviour {
         sendVo.angangLiang = anhangliang;
         sendVo.bozhouZimoMagnification = zimojiabei;
         sendVo.roomType = GameConfig.GAME_TYPE_BOZHOU;
+        sendVo.addWordCard = true;
+        sendVo.sevenDouble = true;
         string sendmsgstr = JsonMapper.ToJson(sendVo);
         if (GlobalDataScript.loginResponseData.account.roomcard > 0){
             watingPanel.gameObject.SetActive(true);

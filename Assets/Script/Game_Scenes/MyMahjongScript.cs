@@ -398,6 +398,10 @@ public class MyMahjongScript : MonoBehaviour
                 LeavedCardsNum = 136;
             }
         }
+        else if(RoomType ==5)   // 亳州麻将一共136张
+        {
+            LeavedCardsNum = 136;
+        }
         LeavedCardsNum = LeavedCardsNum - 53;
 		LeavedCastNumText.text = (LeavedCardsNum)+"";
 
@@ -1502,7 +1506,8 @@ public class MyMahjongScript : MonoBehaviour
 	/// </summary>
 	void UpateTimeReStart()
 	{
-		timer = 16;
+        //timer = 16;
+        timer = 30;
 	}
 	/// <summary>
 	/// 点击放弃按钮
@@ -1524,13 +1529,6 @@ public class MyMahjongScript : MonoBehaviour
 		passType = "";
 		CustomSocket.getInstance().sendMsg(new GaveUpRequest());
 	}
-    // 亳州麻将下嘴按钮方法
-    public void myxiazuiBtnClick()
-    {
-
-
-
-    }
 
     public void myPengBtnClick() //麻将碰按钮事件 
 	{
@@ -2126,9 +2124,10 @@ public class MyMahjongScript : MonoBehaviour
         {
             return 0;
         }
-        
+        print(" >>>>>>>>>>   <<<<<<<<<<<<<< " +   hupaiStr    + " =? " + GlobalDataScript.loginResponseData.account.uuid);
         var huid = int.Parse(hupaiStr.Split(':')[0]);
-        if(huid == 0 || huid == GlobalDataScript.loginResponseData.account.uuid) //自摸
+        print(">>>>>>>> YC <<<<<<<<<<<<" + GlobalDataScript.loginResponseData.account.uuid);
+        if((huid == 0) || (huid == GlobalDataScript.loginResponseData.account.uuid)) //自摸
         {
             return 2;
         }
