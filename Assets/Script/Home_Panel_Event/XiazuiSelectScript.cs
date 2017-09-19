@@ -63,5 +63,13 @@ public class XiazuiSelectScript : MonoBehaviour {
     public void quxiaoXiazui()
     {
         gameObject.SetActive(false);
+        ReadyVO readyVO = new ReadyVO();
+        readyVO.phase = 1;
+        XiazuiVO xiazuiVO = new XiazuiVO();
+        xiazuiVO.xiazuiList = 0;
+        xiazuiVO.xiazuiMultiple = 0;
+        string sendmsg = JsonMapper.ToJson(xiazuiVO);
+        CustomSocket.getInstance().sendMsg(new GameReadyRequest(readyVO));
+        CustomSocket.getInstance().sendMsg(new XiazuiRequest(xiazuiVO));
     }
 }
