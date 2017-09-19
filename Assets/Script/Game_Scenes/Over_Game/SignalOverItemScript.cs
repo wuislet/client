@@ -154,6 +154,7 @@ public class SignalOverItemScript : MonoBehaviour {
         
 
 		string hupaiStr = itemData.hu;
+        int huType = -1;
 		if(!string.IsNullOrEmpty(hupaiStr)){
             var strList = hupaiStr.Split(':');
             hupaiObj.uuid = int.Parse(strList[0]);
@@ -161,7 +162,7 @@ public class SignalOverItemScript : MonoBehaviour {
 			hupaiObj.type = strList[2];
             //增加判断是否是自己胡牌的判断
 
-            var huType = MyMahjongScript.checkAvarHupai(itemData.hu);
+            huType = MyMahjongScript.checkAvarHupai(parms.uuid, itemData.hu);
             if (huType == 0)
             {
                 mdesCribe += "点炮";
@@ -196,13 +197,13 @@ public class SignalOverItemScript : MonoBehaviour {
         print(" >>>>>>>>>>>   hu pai result  <<<<<<<<<<<<" + resultDes);
 		resultDes.text = mdesCribe;
 		maPais = parms.getMaPoints ();
-		arrangePai (hupaiStr);
+		arrangePai (huType);
 	}
 
 
 	/**整理牌**/
-	private void arrangePai(string hu){
-		
+	private void arrangePai(int huType)
+    {
 		float startPosition = 30f;
 		GameObject itemTemp;
 
@@ -307,7 +308,7 @@ public class SignalOverItemScript : MonoBehaviour {
 
 
         //显示中码牌信息==>广东麻将单独处理
-		if (GlobalDataScript.roomVo.roomType == GameConfig.GAME_TYPE_GUANGDONG && MyMahjongScript.checkAvarHupai(hu) == 2)
+		if (GlobalDataScript.roomVo.roomType == GameConfig.GAME_TYPE_GUANGDONG && huType == 2)
         {
             for (int i = 0; i < validMas.Count; i++)
             {
@@ -354,7 +355,7 @@ public class SignalOverItemScript : MonoBehaviour {
         if(GlobalDataScript.roomVo.roomType == GameConfig.GAME_TYPE_BOZHOU){
             itemTemp = Instantiate(Resources.Load("Prefab/Image_xiazui")) as GameObject;
             itemTemp.transform.parent = paiArrayPanel.transform;
-            if (MyMahjongScript.checkAvarHupai(hu) !=0)
+            if (huType > 0)
             {
                 itemTemp.GetComponent<XiazuiScript>().setCount(GlobalDataScript.xiazuiVo.xiazuiMultiple);
             }

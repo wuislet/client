@@ -2052,7 +2052,8 @@ public class MyMahjongScript : MonoBehaviour
 			effectType = "hu";
 			pengGangHuEffectCtrl ();
 			for (int i = 0; i < GlobalDataScript.hupaiResponseVo.avatarList.Count; i++) {
-                var hutype = checkAvarHupai(GlobalDataScript.hupaiResponseVo.avatarList[i].totalInfo.hu);
+                var ava = GlobalDataScript.hupaiResponseVo.avatarList[i];
+                var hutype = checkAvarHupai(ava.uuid, ava.totalInfo.hu);
 
                 if (hutype == 1) { //接炮胡
 					playerItems [getIndexByDir (getDirection (i))].setHuFlagDisplay ();
@@ -2114,20 +2115,18 @@ public class MyMahjongScript : MonoBehaviour
     /// </summary>
     /// <param name="hupaiStr"></param>
     /// <returns>0-没胡; 1-接炮; 2-自摸</returns>
-	public static int checkAvarHupai(string hupaiStr)
+	public static int checkAvarHupai(int uuid, string hupaiStr)
     {
         if (string.IsNullOrEmpty(hupaiStr)) //没胡
         {
-            return 0;
+            return -1;
         }
         if (hupaiStr.Contains("d_other")) //点炮
         {
             return 0;
         }
-        print(" >>>>>>>>>>   <<<<<<<<<<<<<< " +   hupaiStr    + " =? " + GlobalDataScript.loginResponseData.account.uuid);
         var huid = int.Parse(hupaiStr.Split(':')[0]);
-        print(">>>>>>>> YC <<<<<<<<<<<<" + GlobalDataScript.loginResponseData.account.uuid);
-        if((huid == 0) || (huid == GlobalDataScript.loginResponseData.account.uuid)) //自摸
+        if((huid == 0) || (huid == uuid)) //自摸
         {
             return 2;
         }
