@@ -10,8 +10,6 @@ using LitJson;
 
 public class CreateXiazuiScript : MonoBehaviour {
 
-  
-
     public void onXiazuiCallback(ClientResponse Xiazuirespone)
     {
         print(">>>>>>>>>>>>>>>>>>>>>>  信息 <<<<<<<<<<<<<<<<<" + Xiazuirespone.message);

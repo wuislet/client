@@ -2310,7 +2310,7 @@ public class MyMahjongScript : MonoBehaviour
     public void openGameSettingDialog()
     {
         SoundCtrl.getInstance().playSoundByActionButton(1);
-        loadPerfab("Prefab/Panel_Setting");
+        loadPerfab("Prefab/Panel_Setting");      
 
         SettingScript ss = panelCreateDialog.GetComponent<SettingScript>();
         if (canClickButtonFlag)

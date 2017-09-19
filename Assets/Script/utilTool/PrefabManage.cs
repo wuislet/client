@@ -18,4 +18,5 @@ public class PrefabManage : MonoBehaviour
 		panelCreateDialog.GetComponent<RectTransform>().offsetMin = new Vector2(0f, 0f);
 		return panelCreateDialog;
 	}
+
 }

@@ -355,9 +355,11 @@ public class SignalOverItemScript : MonoBehaviour {
         if(GlobalDataScript.roomVo.roomType == GameConfig.GAME_TYPE_BOZHOU){
             itemTemp = Instantiate(Resources.Load("Prefab/Image_xiazui")) as GameObject;
             itemTemp.transform.parent = paiArrayPanel.transform;
-            print("  >>>>>>>>>>>>>>>>>   <<<<<<<<<<<<< " + GlobalDataScript.xiazuiVo.xiazuiMultiple);
-            itemTemp.GetComponent<XiazuiScript>().setCount(GlobalDataScript.xiazuiVo.xiazuiMultiple);
-            
+            print(" >>>>>>>>>>>  <<<<<<< " + hu);
+            if (MyMahjongScript.checkAvarHupai(hu) !=0)
+            {
+                itemTemp.GetComponent<XiazuiScript>().setCount(GlobalDataScript.xiazuiVo.xiazuiMultiple);
+            }
             itemTemp.transform.localScale = Vector3.one;
             itemTemp.transform.localPosition = new Vector3(20 * 36f, 0, 0);
 

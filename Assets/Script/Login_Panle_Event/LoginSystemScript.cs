@@ -31,7 +31,8 @@ public class LoginSystemScript : MonoBehaviour {
 		SocketEventHandle.getInstance ().LoginCallBack += LoginCallBack;
 		SocketEventHandle.getInstance ().RoomBackResponse += RoomBackResponse;
 
-    
+        //PrefabManage.loadPerfab("Prefab/xiazui_btnList");
+
         GlobalDataScript.isonLoginPage = true;
 		versionText.text ="版本号：" +Application.version;
 		//WxPayImpl test = new WxPayImpl(gameObject);
