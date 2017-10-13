@@ -32,6 +32,8 @@ namespace AssemblyCSharp
         public ServerCallBackEvent XiazuiCallBack;   // 下嘴回调
         public ServerCallBackEvent StartXiazuiCallBack;   // 开始下嘴回调
 
+        public ServerCallBackEvent SJYCallBack;     // 甩九幺回调 
+        public ServerCallBackEvent DealSJYCallBack;// 发牌甩九幺回调 
 
         public ServerCallBackEvent outRoomCallback;//退出房间回调
 		public ServerCallBackEvent dissoliveRoomResponse;

@@ -12,7 +12,6 @@ public class CreateXiazuiScript : MonoBehaviour {
 
     public void onXiazuiCallback(ClientResponse Xiazuirespone)
     {
-        print(">>>>>>>>>>>>>>>>>>>>>> ---YC--- 信息 <<<<<<<<<<<<<<<<<" + Xiazuirespone.message);
         XiazuiVO xiazuivo = JsonMapper.ToObject<XiazuiVO>(Xiazuirespone.message);
         GlobalDataScript.xiazuiVo = xiazuivo;
     }

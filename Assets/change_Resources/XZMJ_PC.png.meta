@@ -1,0 +1,1385 @@
+fileFormatVersion: 2
+guid: 0777517fe3d9c8e4c86c11e1308f013a
+timeCreated: 1507528349
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: XZMJ_PC_0
+    21300002: XZMJ_PC_1
+    21300004: XZMJ_PC_2
+    21300006: XZMJ_PC_3
+    21300008: XZMJ_PC_4
+    21300010: XZMJ_PC_5
+    21300012: XZMJ_PC_6
+    21300014: XZMJ_PC_7
+    21300016: XZMJ_PC_8
+    21300018: XZMJ_PC_9
+    21300020: XZMJ_PC_10
+    21300022: XZMJ_PC_11
+    21300024: XZMJ_PC_12
+    21300026: XZMJ_PC_13
+    21300028: XZMJ_PC_14
+    21300030: XZMJ_PC_15
+    21300032: XZMJ_PC_16
+    21300034: XZMJ_PC_17
+    21300036: XZMJ_PC_18
+    21300038: XZMJ_PC_19
+    21300040: XZMJ_PC_20
+    21300042: XZMJ_PC_21
+    21300044: XZMJ_PC_22
+    21300046: XZMJ_PC_23
+    21300048: XZMJ_PC_24
+    21300050: XZMJ_PC_25
+    21300052: XZMJ_PC_26
+    21300054: XZMJ_PC_27
+    21300056: XZMJ_PC_28
+    21300058: XZMJ_PC_29
+    21300060: XZMJ_PC_30
+    21300062: XZMJ_PC_31
+    21300064: XZMJ_PC_32
+    21300066: XZMJ_PC_33
+    21300068: XZMJ_PC_34
+    21300070: XZMJ_PC_35
+    21300072: XZMJ_PC_36
+    21300074: XZMJ_PC_37
+    21300076: XZMJ_PC_38
+    21300078: XZMJ_PC_39
+    21300080: XZMJ_PC_40
+    21300082: XZMJ_PC_41
+    21300084: XZMJ_PC_42
+    21300086: XZMJ_PC_43
+    21300088: XZMJ_PC_44
+    21300090: XZMJ_PC_45
+    21300092: XZMJ_PC_46
+    21300094: XZMJ_PC_47
+    21300096: XZMJ_PC_48
+    21300098: XZMJ_PC_49
+    21300100: XZMJ_PC_50
+    21300102: XZMJ_PC_51
+    21300104: XZMJ_PC_52
+    21300106: XZMJ_PC_53
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.11111111
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 5
+  maxTextureSize: 4096
+  textureSettings:
+    filterMode: 2
+    aniso: 4
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 1
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Android
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: XZMJ_PC_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1256
+        width: 1032
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: XZMJ_PC_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 740
+        width: 1024
+        height: 514
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: XZMJ_PC_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1024
+        height: 738
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: XZMJ_PC_3
+      rect:
+        serializedVersion: 2
+        x: 1026
+        y: 290
+        width: 29
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: XZMJ_PC_4
+      rect:
+        serializedVersion: 2
+        x: 1055
+        y: 290
+        width: 147
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: XZMJ_PC_5
+      rect:
+        serializedVersion: 2
+        x: 1205
+        y: 290
+        width: 10
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: XZMJ_PC_6
+      rect:
+        serializedVersion: 2
+        x: 1231
+        y: 289
+        width: 88
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: XZMJ_PC_7
+      rect:
+        serializedVersion: 2
+        x: 1320
+        y: 300
+        width: 28
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: XZMJ_PC_8
+      rect:
+        serializedVersion: 2
+        x: 1349
+        y: 300
+        width: 28
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: XZMJ_PC_9
+      rect:
+        serializedVersion: 2
+        x: 1094
+        y: 268
+        width: 19
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: XZMJ_PC_10
+      rect:
+        serializedVersion: 2
+        x: 1189
+        y: 274
+        width: 53
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: XZMJ_PC_11
+      rect:
+        serializedVersion: 2
+        x: 1189
+        y: 249
+        width: 29
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: XZMJ_PC_12
+      rect:
+        serializedVersion: 2
+        x: 1272
+        y: 249
+        width: 10
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: XZMJ_PC_13
+      rect:
+        serializedVersion: 2
+        x: 1284
+        y: 275
+        width: 16
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: XZMJ_PC_14
+      rect:
+        serializedVersion: 2
+        x: 1302
+        y: 275
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: XZMJ_PC_15
+      rect:
+        serializedVersion: 2
+        x: 1220
+        y: 249
+        width: 33
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: XZMJ_PC_16
+      rect:
+        serializedVersion: 2
+        x: 1256
+        y: 251
+        width: 15
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: XZMJ_PC_17
+      rect:
+        serializedVersion: 2
+        x: 1284
+        y: 268
+        width: 4
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: XZMJ_PC_18
+      rect:
+        serializedVersion: 2
+        x: 1301
+        y: 219
+        width: 20
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: XZMJ_PC_19
+      rect:
+        serializedVersion: 2
+        x: 1323
+        y: 248
+        width: 18
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: XZMJ_PC_20
+      rect:
+        serializedVersion: 2
+        x: 1343
+        y: 248
+        width: 21
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: XZMJ_PC_21
+      rect:
+        serializedVersion: 2
+        x: 1044
+        y: 245
+        width: 19
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: XZMJ_PC_22
+      rect:
+        serializedVersion: 2
+        x: 1147
+        y: 246
+        width: 19
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: XZMJ_PC_23
+      rect:
+        serializedVersion: 2
+        x: 1284
+        y: 249
+        width: 8
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: XZMJ_PC_24
+      rect:
+        serializedVersion: 2
+        x: 1294
+        y: 249
+        width: 4
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: XZMJ_PC_25
+      rect:
+        serializedVersion: 2
+        x: 1366
+        y: 241
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: XZMJ_PC_26
+      rect:
+        serializedVersion: 2
+        x: 1189
+        y: 219
+        width: 110
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: XZMJ_PC_27
+      rect:
+        serializedVersion: 2
+        x: 1323
+        y: 221
+        width: 17
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: XZMJ_PC_28
+      rect:
+        serializedVersion: 2
+        x: 1351
+        y: 219
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: XZMJ_PC_29
+      rect:
+        serializedVersion: 2
+        x: 1374
+        y: 220
+        width: 16
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: XZMJ_PC_30
+      rect:
+        serializedVersion: 2
+        x: 1189
+        y: 163
+        width: 107
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: XZMJ_PC_31
+      rect:
+        serializedVersion: 2
+        x: 1309
+        y: 213
+        width: 530
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: XZMJ_PC_32
+      rect:
+        serializedVersion: 2
+        x: 1026
+        y: 193
+        width: 19
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: XZMJ_PC_33
+      rect:
+        serializedVersion: 2
+        x: 1168
+        y: 194
+        width: 19
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: XZMJ_PC_34
+      rect:
+        serializedVersion: 2
+        x: 1298
+        y: 118
+        width: 189
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: XZMJ_PC_35
+      rect:
+        serializedVersion: 2
+        x: 1348
+        y: 163
+        width: 25
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: XZMJ_PC_36
+      rect:
+        serializedVersion: 2
+        x: 1383
+        y: 168
+        width: 10
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: XZMJ_PC_37
+      rect:
+        serializedVersion: 2
+        x: 1395
+        y: 163
+        width: 38
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: XZMJ_PC_38
+      rect:
+        serializedVersion: 2
+        x: 1377
+        y: 173
+        width: 8
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: XZMJ_PC_39
+      rect:
+        serializedVersion: 2
+        x: 1435
+        y: 156
+        width: 6
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: XZMJ_PC_40
+      rect:
+        serializedVersion: 2
+        x: 1443
+        y: 118
+        width: 17
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: XZMJ_PC_41
+      rect:
+        serializedVersion: 2
+        x: 1044
+        y: 149
+        width: 19
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: XZMJ_PC_42
+      rect:
+        serializedVersion: 2
+        x: 1148
+        y: 143
+        width: 19
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: XZMJ_PC_43
+      rect:
+        serializedVersion: 2
+        x: 1189
+        y: 125
+        width: 212
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: XZMJ_PC_44
+      rect:
+        serializedVersion: 2
+        x: 1403
+        y: 118
+        width: 38
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: XZMJ_PC_45
+      rect:
+        serializedVersion: 2
+        x: 1094
+        y: 125
+        width: 19
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: XZMJ_PC_46
+      rect:
+        serializedVersion: 2
+        x: 1026
+        y: 0
+        width: 358
+        height: 123
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: XZMJ_PC_47
+      rect:
+        serializedVersion: 2
+        x: 1386
+        y: 90
+        width: 159
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: XZMJ_PC_48
+      rect:
+        serializedVersion: 2
+        x: 1546
+        y: 100
+        width: 28
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: XZMJ_PC_49
+      rect:
+        serializedVersion: 2
+        x: 1386
+        y: 32
+        width: 104
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: XZMJ_PC_50
+      rect:
+        serializedVersion: 2
+        x: 1492
+        y: 32
+        width: 42
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: XZMJ_PC_51
+      rect:
+        serializedVersion: 2
+        x: 1535
+        y: 39
+        width: 45
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: XZMJ_PC_52
+      rect:
+        serializedVersion: 2
+        x: 1386
+        y: 0
+        width: 120
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: XZMJ_PC_53
+      rect:
+        serializedVersion: 2
+        x: 1507
+        y: 0
+        width: 75
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    outline:
+    - - {x: 37, y: -998}
+      - {x: 54, y: -997}
+      - {x: 55, y: -996}
+      - {x: 86, y: -996}
+      - {x: 83, y: -1008}
+      - {x: 84, y: -1016}
+      - {x: 90, y: -1023}
+      - {x: 93, y: -1024}
+      - {x: 125, y: -1024}
+      - {x: 132, y: -1021}
+      - {x: 137, y: -1017}
+      - {x: 141, y: -1020}
+      - {x: 146, y: -1020}
+      - {x: 151, y: -1018}
+      - {x: 157, y: -1024}
+      - {x: 174, y: -1024}
+      - {x: 179, y: -1019}
+      - {x: 187, y: -1008}
+      - {x: 191, y: -999}
+      - {x: 197, y: -1000}
+      - {x: 209, y: -1000}
+      - {x: 220, y: -1002}
+      - {x: 229, y: -1001}
+      - {x: 234, y: -997}
+      - {x: 240, y: -1001}
+      - {x: 259, y: -1002}
+      - {x: 266, y: -996}
+      - {x: 267, y: -993}
+      - {x: 267, y: -992}
+      - {x: 275, y: -1004}
+      - {x: 281, y: -1010}
+      - {x: 284, y: -1011}
+      - {x: 303, y: -1011}
+      - {x: 307, y: -1010}
+      - {x: 312, y: -1014}
+      - {x: 320, y: -1013}
+      - {x: 326, y: -1019}
+      - {x: 329, y: -1020}
+      - {x: 350, y: -1020}
+      - {x: 355, y: -1016}
+      - {x: 356, y: -1013}
+      - {x: 356, y: -1005}
+      - {x: 355, y: -998}
+      - {x: 361, y: -990}
+      - {x: 361, y: -979}
+      - {x: 360, y: -973}
+      - {x: 359, y: -969}
+      - {x: 356, y: -966}
+      - {x: 360, y: -962}
+      - {x: 364, y: -967}
+      - {x: 361, y: -981}
+      - {x: 361, y: -991}
+      - {x: 367, y: -993}
+      - {x: 363, y: -996}
+      - {x: 361, y: -1006}
+      - {x: 360, y: -1010}
+      - {x: 361, y: -1013}
+      - {x: 361, y: -1021}
+      - {x: 364, y: -1024}
+      - {x: 510, y: -1024}
+      - {x: 512, y: -1022}
+      - {x: 514, y: -1024}
+      - {x: 554, y: -1024}
+      - {x: 557, y: -1023}
+      - {x: 559, y: -1020}
+      - {x: 559, y: -1012}
+      - {x: 560, y: -1007}
+      - {x: 560, y: -997}
+      - {x: 556, y: -993}
+      - {x: 549, y: -993}
+      - {x: 544, y: -998}
+      - {x: 542, y: -994}
+      - {x: 536, y: -992}
+      - {x: 525, y: -992}
+      - {x: 520, y: -993}
+      - {x: 517, y: -994}
+      - {x: 513, y: -996}
+      - {x: 510, y: -993}
+      - {x: 503, y: -991}
+      - {x: 509, y: -984}
+      - {x: 512, y: -984}
+      - {x: 515, y: -986}
+      - {x: 519, y: -987}
+      - {x: 526, y: -986}
+      - {x: 555, y: -986}
+      - {x: 559, y: -984}
+      - {x: 559, y: -971}
+      - {x: 557, y: -966}
+      - {x: 554, y: -963}
+      - {x: 549, y: -960}
+      - {x: 536, y: -960}
+      - {x: 531, y: -961}
+      - {x: 513, y: -961}
+      - {x: 503, y: -951}
+      - {x: 495, y: -947}
+      - {x: 483, y: -948}
+      - {x: 480, y: -949}
+      - {x: 475, y: -951}
+      - {x: 469, y: -957}
+      - {x: 465, y: -955}
+      - {x: 465, y: -939}
+      - {x: 462, y: -936}
+      - {x: 420, y: -936}
+      - {x: 416, y: -940}
+      - {x: 413, y: -939}
+      - {x: 402, y: -939}
+      - {x: 401, y: -937}
+      - {x: 398, y: -934}
+      - {x: 390, y: -934}
+      - {x: 386, y: -935}
+      - {x: 383, y: -939}
+      - {x: 378, y: -939}
+      - {x: 373, y: -935}
+      - {x: 369, y: -934}
+      - {x: 364, y: -938}
+      - {x: 361, y: -942}
+      - {x: 358, y: -940}
+      - {x: 350, y: -933}
+      - {x: 341, y: -928}
+      - {x: 331, y: -927}
+      - {x: 328, y: -923}
+      - {x: 325, y: -922}
+      - {x: 319, y: -921}
+      - {x: 308, y: -927}
+      - {x: 304, y: -924}
+      - {x: 288, y: -923}
+      - {x: 285, y: -923}
+      - {x: 282, y: -924}
+      - {x: 278, y: -919}
+      - {x: 274, y: -916}
+      - {x: 264, y: -910}
+      - {x: 254, y: -901}
+      - {x: 252, y: -901}
+      - {x: 368, y: -901}
+      - {x: 371, y: -900}
+      - {x: 377, y: -894}
+      - {x: 377, y: -904}
+      - {x: 381, y: -908}
+      - {x: 415, y: -908}
+      - {x: 419, y: -905}
+      - {x: 423, y: -907}
+      - {x: 429, y: -908}
+      - {x: 432, y: -907}
+      - {x: 437, y: -902}
+      - {x: 435, y: -906}
+      - {x: 428, y: -910}
+      - {x: 423, y: -913}
+      - {x: 419, y: -910}
+      - {x: 410, y: -910}
+      - {x: 406, y: -911}
+      - {x: 399, y: -910}
+      - {x: 390, y: -909}
+      - {x: 384, y: -914}
+      - {x: 381, y: -920}
+      - {x: 375, y: -915}
+      - {x: 374, y: -911}
+      - {x: 369, y: -906}
+      - {x: 364, y: -906}
+      - {x: 361, y: -909}
+      - {x: 360, y: -913}
+      - {x: 361, y: -929}
+      - {x: 364, y: -933}
+      - {x: 367, y: -934}
+      - {x: 374, y: -934}
+      - {x: 384, y: -933}
+      - {x: 392, y: -934}
+      - {x: 398, y: -934}
+      - {x: 404, y: -931}
+      - {x: 409, y: -934}
+      - {x: 422, y: -934}
+      - {x: 425, y: -931}
+      - {x: 430, y: -934}
+      - {x: 451, y: -934}
+      - {x: 456, y: -933}
+      - {x: 460, y: -934}
+      - {x: 471, y: -934}
+      - {x: 479, y: -936}
+      - {x: 486, y: -936}
+      - {x: 491, y: -934}
+      - {x: 494, y: -930}
+      - {x: 496, y: -926}
+      - {x: 548, y: -926}
+      - {x: 552, y: -922}
+      - {x: 552, y: -918}
+      - {x: 547, y: -913}
+      - {x: 494, y: -913}
+      - {x: 491, y: -910}
+      - {x: 476, y: -910}
+      - {x: 473, y: -913}
+      - {x: 469, y: -910}
+      - {x: 457, y: -909}
+      - {x: 450, y: -906}
+      - {x: 443, y: -906}
+      - {x: 443, y: -850}
+      - {x: 442, y: -847}
+      - {x: 439, y: -847}
+      - {x: 438, y: -836}
+      - {x: 433, y: -832}
+      - {x: 422, y: -831}
+      - {x: 416, y: -839}
+      - {x: 416, y: -847}
+      - {x: 411, y: -848}
+      - {x: 411, y: -824}
+      - {x: 409, y: -822}
+      - {x: 434, y: -822}
+      - {x: 436, y: -820}
+      - {x: 436, y: -818}
+      - {x: 463, y: -818}
+      - {x: 465, y: -816}
+      - {x: 464, y: -813}
+      - {x: 324, y: -813}
+      - {x: 322, y: -815}
+      - {x: 322, y: -820}
+      - {x: 324, y: -822}
+      - {x: 344, y: -823}
+      - {x: 337, y: -831}
+      - {x: 321, y: -822}
+      - {x: 313, y: -814}
+      - {x: 309, y: -813}
+      - {x: 815, y: -813}
+      - {x: 817, y: -811}
+      - {x: 817, y: -807}
+      - {x: 815, y: -805}
+      - {x: 367, y: -803}
+      - {x: 368, y: -800}
+      - {x: 368, y: -790}
+      - {x: 367, y: -787}
+      - {x: 363, y: -784}
+      - {x: 364, y: -780}
+      - {x: 364, y: -777}
+      - {x: 360, y: -773}
+      - {x: 364, y: -769}
+      - {x: 364, y: -766}
+      - {x: 360, y: -761}
+      - {x: 356, y: -761}
+      - {x: 352, y: -765}
+      - {x: 348, y: -761}
+      - {x: 344, y: -761}
+      - {x: 337, y: -755}
+      - {x: 332, y: -753}
+      - {x: 321, y: -754}
+      - {x: 320, y: -749}
+      - {x: 317, y: -748}
+      - {x: 299, y: -748}
+      - {x: 295, y: -749}
+      - {x: 289, y: -748}
+      - {x: 288, y: -742}
+      - {x: 285, y: -739}
+      - {x: 263, y: -739}
+      - {x: 259, y: -741}
+      - {x: 258, y: -744}
+      - {x: 258, y: -749}
+      - {x: 255, y: -745}
+      - {x: 248, y: -747}
+      - {x: 243, y: -748}
+      - {x: 237, y: -752}
+      - {x: 232, y: -754}
+      - {x: 230, y: -755}
+      - {x: 226, y: -751}
+      - {x: 220, y: -749}
+      - {x: 220, y: -745}
+      - {x: 217, y: -742}
+      - {x: 207, y: -739}
+      - {x: 165, y: -739}
+      - {x: 163, y: -741}
+      - {x: 164, y: -744}
+      - {x: 195, y: -744}
+      - {x: 194, y: -745}
+      - {x: 190, y: -744}
+      - {x: 169, y: -744}
+      - {x: 163, y: -750}
+      - {x: 163, y: -770}
+      - {x: 164, y: -773}
+      - {x: 167, y: -776}
+      - {x: 163, y: -779}
+      - {x: 162, y: -785}
+      - {x: 163, y: -789}
+      - {x: 166, y: -793}
+      - {x: 163, y: -799}
+      - {x: 163, y: -802}
+      - {x: 167, y: -806}
+      - {x: 170, y: -806}
+      - {x: 168, y: -806}
+      - {x: 165, y: -809}
+      - {x: 163, y: -814}
+      - {x: 157, y: -808}
+      - {x: 147, y: -809}
+      - {x: 142, y: -818}
+      - {x: 142, y: -824}
+      - {x: 143, y: -827}
+      - {x: 147, y: -831}
+      - {x: 150, y: -832}
+      - {x: 158, y: -832}
+      - {x: 163, y: -829}
+      - {x: 163, y: -854}
+      - {x: 165, y: -859}
+      - {x: 169, y: -864}
+      - {x: 165, y: -869}
+      - {x: 163, y: -874}
+      - {x: 163, y: -889}
+      - {x: 165, y: -894}
+      - {x: 171, y: -900}
+      - {x: 174, y: -901}
+      - {x: 236, y: -901}
+      - {x: 232, y: -903}
+      - {x: 221, y: -913}
+      - {x: 218, y: -918}
+      - {x: 208, y: -918}
+      - {x: 200, y: -923}
+      - {x: 198, y: -928}
+      - {x: 197, y: -933}
+      - {x: 192, y: -928}
+      - {x: 182, y: -927}
+      - {x: 164, y: -927}
+      - {x: 159, y: -932}
+      - {x: 157, y: -936}
+      - {x: 149, y: -928}
+      - {x: 131, y: -928}
+      - {x: 126, y: -930}
+      - {x: 121, y: -936}
+      - {x: 119, y: -935}
+      - {x: 119, y: -931}
+      - {x: 113, y: -924}
+      - {x: 112, y: -917}
+      - {x: 108, y: -911}
+      - {x: 101, y: -911}
+      - {x: 89, y: -913}
+      - {x: 76, y: -915}
+      - {x: 54, y: -919}
+      - {x: 47, y: -924}
+      - {x: 42, y: -930}
+      - {x: 35, y: -945}
+      - {x: 27, y: -956}
+      - {x: 22, y: -958}
+      - {x: 14, y: -967}
+      - {x: 8, y: -976}
+      - {x: 4, y: -983}
+      - {x: 2, y: -989}
+      - {x: 5, y: -832}
+      - {x: 8, y: -833}
+      - {x: 15, y: -833}
+      - {x: 18, y: -832}
+      - {x: 22, y: -828}
+      - {x: 23, y: -825}
+      - {x: 24, y: -818}
+      - {x: 18, y: -810}
+      - {x: 9, y: -810}
+      - {x: 3, y: -811}
+      - {x: 2, y: -814}
+      - {x: 2, y: -734}
+      - {x: 5, y: -736}
+      - {x: 12, y: -736}
+      - {x: 13, y: -735}
+      - {x: 30, y: -735}
+      - {x: 36, y: -736}
+      - {x: 41, y: -736}
+      - {x: 42, y: -735}
+      - {x: 60, y: -735}
+      - {x: 64, y: -736}
+      - {x: 69, y: -736}
+      - {x: 72, y: -737}
+      - {x: 67, y: -744}
+      - {x: 68, y: -753}
+      - {x: 76, y: -759}
+      - {x: 84, y: -758}
+      - {x: 91, y: -751}
+      - {x: 91, y: -743}
+      - {x: 90, y: -740}
+      - {x: 86, y: -736}
+      - {x: 89, y: -733}
+      - {x: 93, y: -736}
+      - {x: 167, y: -736}
+      - {x: 176, y: -735}
+      - {x: 179, y: -732}
+      - {x: 183, y: -736}
+      - {x: 187, y: -736}
+      - {x: 192, y: -733}
+      - {x: 194, y: -725}
+      - {x: 190, y: -721}
+      - {x: 185, y: -720}
+      - {x: 182, y: -721}
+      - {x: 179, y: -724}
+      - {x: 180, y: -715}
+      - {x: 180, y: -711}
+      - {x: 177, y: -707}
+      - {x: 174, y: -706}
+      - {x: 167, y: -703}
+      - {x: 153, y: -703}
+      - {x: 150, y: -706}
+      - {x: 144, y: -704}
+      - {x: 135, y: -703}
+      - {x: 129, y: -703}
+      - {x: 121, y: -706}
+      - {x: 115, y: -703}
+      - {x: 97, y: -703}
+      - {x: 92, y: -705}
+      - {x: 81, y: -703}
+      - {x: 69, y: -703}
+      - {x: 62, y: -710}
+      - {x: 57, y: -705}
+      - {x: 48, y: -705}
+      - {x: 46, y: -703}
+      - {x: 39, y: -703}
+      - {x: 33, y: -709}
+      - {x: 30, y: -704}
+      - {x: 27, y: -703}
+      - {x: 16, y: -703}
+      - {x: 12, y: -704}
+      - {x: 5, y: -705}
+      - {x: 2, y: -708}
+      - {x: 2, y: 116}
+      - {x: 0, y: 118}
+      - {x: -5, y: 125}
+      - {x: -8, y: 131}
+      - {x: -17, y: 144}
+      - {x: -17, y: 150}
+      - {x: -21, y: 153}
+      - {x: -27, y: 165}
+      - {x: -31, y: 169}
+      - {x: -34, y: 173}
+      - {x: -35, y: 178}
+      - {x: -40, y: 186}
+      - {x: -43, y: 190}
+      - {x: -47, y: 197}
+      - {x: -51, y: 201}
+      - {x: -53, y: 205}
+      - {x: -56, y: 210}
+      - {x: -70, y: 224}
+      - {x: -75, y: 230}
+      - {x: 8, y: 230}
+      - {x: 10, y: 232}
+      - {x: 10, y: 287}
+      - {x: 8, y: 289}
+      - {x: -1024, y: 289}
+      - {x: -1024, y: 230}
+      - {x: -954, y: 230}
+      - {x: -959, y: 223}
+      - {x: -961, y: 223}
+      - {x: -963, y: 221}
+      - {x: -966, y: 214}
+      - {x: -974, y: 207}
+      - {x: -979, y: 201}
+      - {x: -982, y: 194}
+      - {x: -983, y: 189}
+      - {x: -989, y: 183}
+      - {x: -1001, y: 165}
+      - {x: -1002, y: 160}
+      - {x: -1007, y: 154}
+      - {x: -1010, y: 145}
+      - {x: -1014, y: 141}
+      - {x: -1017, y: 137}
+      - {x: -1018, y: 129}
+      - {x: -1024, y: 123}
+      - {x: -1024, y: -1024}
+      - {x: 2, y: -1024}
+      - {x: 3, y: -1000}
+      - {x: 15, y: -1000}
+      - {x: 23, y: -999}
+    - - {x: 87, y: -879}
+      - {x: 82, y: -878}
+      - {x: 75, y: -878}
+      - {x: 68, y: -884}
+      - {x: 68, y: -895}
+      - {x: 73, y: -901}
+      - {x: 84, y: -901}
+      - {x: 91, y: -896}
+      - {x: 91, y: -885}
+    - - {x: 145, y: -865}
+      - {x: 140, y: -860}
+      - {x: 130, y: -860}
+      - {x: 122, y: -864}
+      - {x: 122, y: -882}
+      - {x: 128, y: -883}
+      - {x: 139, y: -883}
+      - {x: 140, y: -882}
+      - {x: 145, y: -878}
+    - - {x: 21, y: -854}
+      - {x: 18, y: -860}
+      - {x: 18, y: -868}
+      - {x: 19, y: -873}
+      - {x: 22, y: -877}
+      - {x: 35, y: -877}
+      - {x: 41, y: -875}
+      - {x: 41, y: -860}
+      - {x: 37, y: -854}
+    - - {x: 22, y: -758}
+      - {x: 18, y: -763}
+      - {x: 18, y: -776}
+      - {x: 25, y: -781}
+      - {x: 38, y: -781}
+      - {x: 41, y: -776}
+      - {x: 41, y: -760}
+      - {x: 36, y: -758}
+    - - {x: 125, y: -757}
+      - {x: 121, y: -762}
+      - {x: 121, y: -775}
+      - {x: 128, y: -780}
+      - {x: 141, y: -780}
+      - {x: 144, y: -775}
+      - {x: 144, y: -759}
+      - {x: 139, y: -757}
+    - - {x: 264, y: -734}
+      - {x: 266, y: -729}
+      - {x: 269, y: -736}
+      - {x: 274, y: -737}
+      - {x: 281, y: -735}
+      - {x: 287, y: -737}
+      - {x: 290, y: -737}
+      - {x: 295, y: -733}
+      - {x: 295, y: -726}
+      - {x: 322, y: -726}
+      - {x: 325, y: -723}
+      - {x: 328, y: -726}
+      - {x: 351, y: -726}
+      - {x: 355, y: -722}
+      - {x: 355, y: -717}
+      - {x: 350, y: -713}
+      - {x: 327, y: -713}
+      - {x: 324, y: -716}
+      - {x: 321, y: -713}
+      - {x: 303, y: -713}
+      - {x: 297, y: -710}
+      - {x: 292, y: -705}
+      - {x: 286, y: -703}
+      - {x: 270, y: -703}
+      - {x: 267, y: -706}
+      - {x: 262, y: -704}
+      - {x: 257, y: -703}
+      - {x: 239, y: -703}
+      - {x: 235, y: -704}
+      - {x: 232, y: -703}
+      - {x: 226, y: -702}
+      - {x: 223, y: -702}
+      - {x: 216, y: -704}
+      - {x: 209, y: -704}
+      - {x: 205, y: -706}
+      - {x: 205, y: -720}
+      - {x: 208, y: -732}
+      - {x: 214, y: -737}
+      - {x: 224, y: -736}
+      - {x: 229, y: -737}
+      - {x: 233, y: -737}
+      - {x: 237, y: -735}
+      - {x: 251, y: -736}
+      - {x: 261, y: -736}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
