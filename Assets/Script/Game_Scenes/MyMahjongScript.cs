@@ -283,19 +283,17 @@ public class MyMahjongScript : MonoBehaviour
 	{
 		for (int i = 0; i < handerCardList[0].Count; i++)
 		{
-			if (handerCardList[0] [i] == null) {
-				handerCardList[0].RemoveAt (i);
+			if (handerCardList[0][i] == null) {
+				handerCardList[0].RemoveAt(i);
 				i--;
 			} else {
-				handerCardList[0] [i].transform.localPosition = new Vector3 (handerCardList[0] [i].transform.localPosition.x, -292f); //从右到左依次对齐
-				handerCardList[0] [i].transform.GetComponent<bottomScript> ().selected = false;
+				handerCardList[0][i].transform.GetComponent<bottomScript>().SelectCard(false);
 			}
 		}
 		if (obj != null)
 		{
-			obj.transform.localPosition = new Vector3(obj.transform.localPosition.x, -272f);
-			obj.transform.GetComponent<bottomScript>().selected = true;
-		}
+			obj.transform.GetComponent<bottomScript>().SelectCard(true);
+        }
 	}
 
 	/// <summary>

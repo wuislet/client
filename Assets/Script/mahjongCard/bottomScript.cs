@@ -25,7 +25,7 @@ public class bottomScript : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     public delegate void EventHandler(GameObject obj);
     public event EventHandler onSendMessage;
 	public event EventHandler reSetPoisiton;
-	public bool selected = false;
+	private bool selected = false;
 
     // Use this for initialization
     void Start()
@@ -39,6 +39,8 @@ public class bottomScript : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     }
     public void OnDrag(PointerEventData eventData)
     {
+        return;
+        //删除拖牌到桌面打出的功能。
         if (GlobalDataScript.isDrag)
         {
 			dragFlag = true;
@@ -64,15 +66,21 @@ public class bottomScript : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     public void OnPointerUp(PointerEventData eventData)
     {
 		if (GlobalDataScript.isDrag) {
-			if (transform.localPosition.y > -122f)
+            if(dragFlag)
             {
-				sendObjectToCallBack ();
-			} else {
-				if (dragFlag) {
-					transform.localPosition = oldPosition;
-				} else {
-					reSetPoisitonCallBack ();
-				}
+                if (transform.localPosition.y > -122f) //拖牌的触发阈值
+                {
+                    reSetPoisitonCallBack();
+                    sendObjectToCallBack();
+                }
+                else
+                {
+                    transform.localPosition = oldPosition;
+                }
+            }
+            else
+            {
+				reSetPoisitonCallBack();
 			}
 			dragFlag = false;
 		}
@@ -125,4 +133,16 @@ public class bottomScript : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
        // Destroy(this.gameObject);
     }
 
+    public void SelectCard(bool isSelect)
+    {
+        selected = isSelect;
+        if (isSelect)
+        {
+            transform.localPosition = new Vector3(transform.localPosition.x, -272f);
+        }
+        else
+        {
+            transform.localPosition = new Vector3(transform.localPosition.x, -292f);
+        }
+    }
 }
