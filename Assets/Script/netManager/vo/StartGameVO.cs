@@ -7,7 +7,7 @@ namespace AssemblyCSharp
 	public class StartGameVO
 	{
 		public List<List<int>> paiArray;
-		public int bankerId;
+		public int bankerId;  // 庄
         public int gui;
         public int touzi;
 

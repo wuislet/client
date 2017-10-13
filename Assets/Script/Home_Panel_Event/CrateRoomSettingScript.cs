@@ -18,57 +18,84 @@ public class CrateRoomSettingScript : MonoBehaviour {
 
     public GameObject panelBoZhouSeeting;  //亳州
 
+
+    /// <summary>    /// 西凉金昌麻将界面    /// </summary>
+    public GameObject panelJinChang;
+    public GameObject panelJinChang_shuaijiuyao;
+    public GameObject panelJinChang_tuidaohu;
+
+
     public GameObject Button_zhuanzhuan1;
     public GameObject Button_zhuanzhuan;
     public GameObject Button_huashui1;
     public GameObject Button_huashui;
-
     public GameObject Button_changsha1;
     public GameObject Button_changsha;
-
     public GameObject Button_BoZhou1; // 亳州麻
     public GameObject Button_BoZhou;
 
-    public GameObject Btn_zhuanZ_liang;
-    public GameObject Btn_zhuanZ_dark;
-    public GameObject Btn_huaS_liang;
-    public GameObject Btn_huaS_dark;
-    public GameObject Btn_run_liang;
-    public GameObject Btn_run_dark;
+
+    /// <summary>    ///西凉金昌麻将按钮    /// </summary>
+    public GameObject Button_JinChang1;
+    public GameObject Button_JinChang;
+    public GameObject Button_JinChang_shuaijiuyao1;
+    public GameObject Button_JinChang_shuaijiuyao;
+    public GameObject Button_JinChang_tuidaohu1;
+    public GameObject Button_JinChang_tuidaohu;
+
+
+    public GameObject Btn_JinChang_liang;  //public GameObject Btn_zhuanZ_liang
+    public GameObject Btn_JinChang_dark;   //public GameObject Btn_zhuanZ_dark
+    public GameObject Btn_shuaijiuyao_liang;    //public GameObject Btn_huaS_liang
+    public GameObject Btn_shuaijiuyao_dark;     //public GameObject Btn_huaS_dark
+    public GameObject Btn_tuidaohu_liang;     //public GameObject Btn_run_liang
+    public GameObject Btn_tuidaohu_dark;      //public GameObject Btn_run_dark
 
     public GameObject Btn_BoZhou_liang;//亳州麻将 按钮亮
     public GameObject Btn_BoZhou_dark;
 
     public Image watingPanel;
-
     public Image button_Create_Sure;
-
-    //public GameObject xiazuiSelect;// 亳州麻将下嘴选项
 
     public List<Toggle> zhuanzhuanRoomCards;//转转麻将房卡数
 	public List<Toggle> changshaRoomCards;//长沙麻将房卡数
 	public List<Toggle> huashuiRoomCards;//划水麻将房卡数
     public List<Toggle> guangdongRoomCards;//广东麻将房卡数
-
     public List<Toggle> BoZhouRoomCards;//亳州麻将房卡数
+
+
+    public List<Toggle> JinChangRoomCards; //金昌麻将房卡数
+    public List<Toggle> JinChang_shuaijiuyaoRoomCards; // 金昌麻将甩九幺房卡数
+    public List<Toggle> JinChang_tuidaohuRoomCards; //金昌麻将推倒胡房卡数　
+
 
     public List<Toggle> zhuanzhuanGameRule;//转转麻将玩法
 	public List<Toggle> changshaGameRule;//长沙麻将玩法
 	public List<Toggle> huashuiGameRule;//划水麻将玩法
     public List<Toggle> guangdongGameRule;//广东麻将玩法
-
     public List<Toggle> BoZhouGameRule;//亳州麻将玩法
+
+
+    public List<Toggle> JinChangGameRule; //金昌麻将玩法
+    public List<Toggle> JinChang_shuaijiuyaoGameRule; // 金昌麻将甩九幺玩法
+    public List<Toggle> JinChang_tuidaohuGameRule; //金昌麻将推倒胡玩法　
+
 
     public List<Toggle> zhuanzhuanZhuama;//转转麻将抓码个数
 	public List<Toggle> changshaZhuama;//长沙麻将抓码个数
 	public List<Toggle> huashuixiayu;//划水麻将下鱼条数
     public List<Toggle> guangdongZhuama;//广东麻将抓码个数
-
     public List<Toggle> bozhouselfDrawn; //亳州自摸加倍
     public List<Toggle> bozhouxiazui; // 亳州下嘴个数
-    //public GameObject xiazuiBtn;  // 亳州麻将选择下嘴   游戏开始界面下嘴按钮才会出现
+
+
+    //public List<Toggle> JinChangdifen; //金昌麻将选择下底分
+    public List<Toggle> JinChang_shuaijiuyaodifen; // 金昌麻将甩九幺选择下底分
+    //public List<Toggle> JinChang_tuidaohudifen; //金昌麻将推倒胡选择下底分
+
 
     public List<Toggle> guangdongGui;//广东麻将鬼牌
+
 
 #pragma warning disable CS0169 // 从不使用字段“CrateRoomSettingScript.roomCardCount”
     private int roomCardCount;//房卡数
@@ -76,149 +103,203 @@ public class CrateRoomSettingScript : MonoBehaviour {
 #pragma warning disable CS0169 // 从不使用字段“CrateRoomSettingScript.gameSence”
 	private GameObject gameSence;
 #pragma warning restore CS0169 // 从不使用字段“CrateRoomSettingScript.gameSence”
+
 	private RoomCreateVo sendVo;//创建房间的信息
+
 	void Start () {
         int x = PlayerPrefs.GetInt("userDefaultMJ");
         if (x == 0)
         {
-            openZhuanzhuanSeetingPanel();
+            //openZhuanzhuanSeetingPanel();
+           openJinChangPanel();
         }
         else if(x == 1)
         {
-            openHuashuiSeetingPanel();
+            //openHuashuiSeetingPanel();
+            openshuaijiuyaoPanel();
         }
         else if (x == 2)
         {
-            //openChangshaSeetingPanel();
-            openBoZhouSeetingPanel();
+            //openBoZhouSeetingPanel();
+            opentuidaohuPanel();    
         }
-        else if (x == 3)
+        else
         {
-            openGuangDongSeetingPanel();
+            openDevloping();
         }
 
         SocketEventHandle.getInstance ().CreateRoomCallBack += onCreateRoomCallback;
-        //xiazuiBtn.SetActive(false);
-        //xiazuiSelect.SetActive(false);
-
 	}
 	
-	// Update is called once per frame
+
 	void Update () {
 	
 	}
 
-
     public void cancle() {
 		SoundCtrl.getInstance().playSoundByActionButton(1);
         watingPanel.gameObject.SetActive(false);
-
-
     }
-	/***
+
+     /// <summary>     /// 打开金昌麻将的界面     /// </summary>
+    public void openJinChangPanel()
+    {
+        SoundCtrl.getInstance().playSoundByActionButton(1);
+        PlayerPrefs.SetInt("userDefaultMJ", 0);
+
+        Btn_JinChang_liang.SetActive(true);
+        Btn_JinChang_dark.SetActive(false);
+        Btn_shuaijiuyao_liang.SetActive(false);
+        Btn_shuaijiuyao_dark.SetActive(true);
+        Btn_tuidaohu_liang.SetActive(false);
+        Btn_tuidaohu_dark.SetActive(true);
+
+        panelJinChang.SetActive(true);
+        panelJinChang_shuaijiuyao.SetActive(false);
+        panelJinChang_tuidaohu.SetActive(false);
+        panelDevoloping.SetActive(false);
+    }
+    /// <summary>     /// 打开金昌麻将甩九幺界面     /// </summary>
+    public void openshuaijiuyaoPanel()
+    {
+        SoundCtrl.getInstance().playSoundByActionButton(1);
+        PlayerPrefs.SetInt("userDefaultMJ", 1);
+
+        Btn_JinChang_liang.SetActive(false);
+        Btn_JinChang_dark.SetActive(true);
+        Btn_shuaijiuyao_liang.SetActive(true);
+        Btn_shuaijiuyao_dark.SetActive(false);
+        Btn_tuidaohu_liang.SetActive(false);
+        Btn_tuidaohu_dark.SetActive(true);
+
+        panelJinChang.SetActive(false);
+        panelJinChang_shuaijiuyao.SetActive(true);
+        panelJinChang_tuidaohu.SetActive(false);
+        panelDevoloping.SetActive(false);
+    }
+    /// <summary>     /// 打开金昌麻将推倒胡界面     /// </summary>
+    public void opentuidaohuPanel()
+    {
+        SoundCtrl.getInstance().playSoundByActionButton(1);
+        PlayerPrefs.SetInt("userDefaultMJ", 2);
+
+        Btn_JinChang_liang.SetActive(false);
+        Btn_JinChang_dark.SetActive(true);
+        Btn_shuaijiuyao_liang.SetActive(false);
+        Btn_shuaijiuyao_dark.SetActive(true);
+        Btn_tuidaohu_liang.SetActive(true);
+        Btn_tuidaohu_dark.SetActive(false);
+
+        panelJinChang.SetActive(false);
+        panelJinChang_shuaijiuyao.SetActive(false);
+        panelJinChang_tuidaohu.SetActive(true);
+        panelDevoloping.SetActive(false);
+    }
+
+    /***
 	 * 打开转转麻将设置面板
-	 */ 
-	public void openZhuanzhuanSeetingPanel(){
+	 */
+    //public void openZhuanzhuanSeetingPanel(){
 
-		SoundCtrl.getInstance().playSoundByActionButton(1);
-        PlayerPrefs.SetInt("userDefaultMJ",0);
+    //	SoundCtrl.getInstance().playSoundByActionButton(1);
+    //       PlayerPrefs.SetInt("userDefaultMJ",0);
 
-        Btn_zhuanZ_liang.SetActive(true);
-        Btn_zhuanZ_dark.SetActive(false);
-        Btn_huaS_liang.SetActive(false);
-        Btn_huaS_dark.SetActive(true);
-        Btn_run_liang.SetActive(false);
-        Btn_run_dark.SetActive(true);
+    //       Btn_zhuanZ_liang.SetActive(true);
+    //       Btn_zhuanZ_dark.SetActive(false);
+    //       Btn_huaS_liang.SetActive(false);
+    //       Btn_huaS_dark.SetActive(true);
+    //       Btn_run_liang.SetActive(false);
+    //       Btn_run_dark.SetActive(true);
 
-        panelZhuanzhuanSetting.SetActive (true);
-		panelChangshaSetting.SetActive (false);
-		panelHuashuiSetting.SetActive (false);
-        panelGuangDongSetting.SetActive(false);
-        panelDevoloping.SetActive (false);
+    //       panelZhuanzhuanSetting.SetActive (true);
+    //	panelChangshaSetting.SetActive (false);
+    //	panelHuashuiSetting.SetActive (false);
+    //       panelGuangDongSetting.SetActive(false);
+    //       panelDevoloping.SetActive (false);
 
-        Btn_BoZhou_liang.SetActive(false);
-        Btn_BoZhou_dark.SetActive(true);
-        panelBoZhouSeeting.SetActive(false);
-	}
+    //       Btn_BoZhou_liang.SetActive(false);
+    //       Btn_BoZhou_dark.SetActive(true);
+    //       panelBoZhouSeeting.SetActive(false);
+    //}
 
     /***
 	 * 打开长沙麻将设置面板
+     * 打开亳州麻将设置面板
 	 */
     /*public void openChangshaSeetingPanel()*/
-    //打开亳州麻将设置面板
-    public void openBoZhouSeetingPanel()
-    {
-		SoundCtrl.getInstance().playSoundByActionButton(1);
-        PlayerPrefs.SetInt("userDefaultMJ", 2);
-        Btn_zhuanZ_liang.SetActive(false);
-        Btn_zhuanZ_dark.SetActive(true);
-        Btn_huaS_liang.SetActive(false);
-        Btn_huaS_dark.SetActive(true);
-        Btn_run_liang.SetActive(false);
-        Btn_run_dark.SetActive(true);
+    //  public void openBoZhouSeetingPanel()
+    //  {
+    //SoundCtrl.getInstance().playSoundByActionButton(1);
+    //      PlayerPrefs.SetInt("userDefaultMJ", 2);
+    //      Btn_zhuanZ_liang.SetActive(false);
+    //      Btn_zhuanZ_dark.SetActive(true);
+    //      Btn_huaS_liang.SetActive(false);
+    //      Btn_huaS_dark.SetActive(true);
+    //      Btn_run_liang.SetActive(false);
+    //      Btn_run_dark.SetActive(true);
 
-        panelZhuanzhuanSetting.SetActive (false);
-		panelChangshaSetting.SetActive (false);
-		panelHuashuiSetting.SetActive (false);
-        panelGuangDongSetting.SetActive(false);
-        panelDevoloping.SetActive (false);
+    //      panelZhuanzhuanSetting.SetActive (false);
+    //panelChangshaSetting.SetActive (false);
+    //panelHuashuiSetting.SetActive (false);
+    //      panelGuangDongSetting.SetActive(false);
+    //      panelDevoloping.SetActive (false);
 
-        Btn_BoZhou_liang.SetActive(true);
-        Btn_BoZhou_dark.SetActive(false);
-        panelBoZhouSeeting.SetActive(true);
-    }
+    //      Btn_BoZhou_liang.SetActive(true);
+    //      Btn_BoZhou_dark.SetActive(false);
+    //      panelBoZhouSeeting.SetActive(true);
+    //  }
 
-	/***
+    /***
 	 * 打开划水麻将设置面板
-	 */ 
-	public void openHuashuiSeetingPanel(){
-		SoundCtrl.getInstance().playSoundByActionButton(1);
-        PlayerPrefs.SetInt("userDefaultMJ", 1);
-        Btn_zhuanZ_liang.SetActive(false);
-        Btn_zhuanZ_dark.SetActive(true);
-        Btn_huaS_liang.SetActive(true);
-        Btn_huaS_dark.SetActive(false);
-        Btn_run_liang.SetActive(false);
-        Btn_run_dark.SetActive(true);
+	 */
+    //public void openHuashuiSeetingPanel(){
+    //	SoundCtrl.getInstance().playSoundByActionButton(1);
+    //       PlayerPrefs.SetInt("userDefaultMJ", 1);
+    //       Btn_zhuanZ_liang.SetActive(false);
+    //       Btn_zhuanZ_dark.SetActive(true);
+    //       Btn_huaS_liang.SetActive(true);
+    //       Btn_huaS_dark.SetActive(false);
+    //       Btn_run_liang.SetActive(false);
+    //       Btn_run_dark.SetActive(true);
 
-        panelZhuanzhuanSetting.SetActive (false);
-		panelChangshaSetting.SetActive (false);
-		panelHuashuiSetting.SetActive (true);
-        panelGuangDongSetting.SetActive(false);
-        panelDevoloping.SetActive (false);
+    //       panelZhuanzhuanSetting.SetActive (false);
+    //	panelChangshaSetting.SetActive (false);
+    //	panelHuashuiSetting.SetActive (true);
+    //       panelGuangDongSetting.SetActive(false);
+    //       panelDevoloping.SetActive (false);
 
-        Btn_BoZhou_liang.SetActive(false);
-        Btn_BoZhou_dark.SetActive(true);
-        panelBoZhouSeeting.SetActive(false);
-    }
+    //       Btn_BoZhou_liang.SetActive(false);
+    //       Btn_BoZhou_dark.SetActive(true);
+    //       panelBoZhouSeeting.SetActive(false);
+    //   }
 
     /***
 	 * 打开广东麻将设置面板
 	 */
-    public void openGuangDongSeetingPanel()
-    {
+    //public void openGuangDongSeetingPanel()
+    //{
 
-        SoundCtrl.getInstance().playSoundByActionButton(1);
-        PlayerPrefs.SetInt("userDefaultMJ", 3);
+    //    SoundCtrl.getInstance().playSoundByActionButton(1);
+    //    PlayerPrefs.SetInt("userDefaultMJ", 3);
 
-        Btn_zhuanZ_liang.SetActive(false);
-        Btn_zhuanZ_dark.SetActive(true);
-        Btn_huaS_liang.SetActive(false);
-        Btn_huaS_dark.SetActive(true);
-        Btn_run_liang.SetActive(true);
-        Btn_run_dark.SetActive(false);
+    //    Btn_zhuanZ_liang.SetActive(false);
+    //    Btn_zhuanZ_dark.SetActive(true);
+    //    Btn_huaS_liang.SetActive(false);
+    //    Btn_huaS_dark.SetActive(true);
+    //    Btn_run_liang.SetActive(true);
+    //    Btn_run_dark.SetActive(false);
 
-        panelZhuanzhuanSetting.SetActive(false);
-        panelChangshaSetting.SetActive(false);
-        panelHuashuiSetting.SetActive(false);
-        panelGuangDongSetting.SetActive(true);
-        panelDevoloping.SetActive(false);
+    //    panelZhuanzhuanSetting.SetActive(false);
+    //    panelChangshaSetting.SetActive(false);
+    //    panelHuashuiSetting.SetActive(false);
+    //    panelGuangDongSetting.SetActive(true);
+    //    panelDevoloping.SetActive(false);
 
-        Btn_BoZhou_liang.SetActive(false);
-        Btn_BoZhou_dark.SetActive(true);
-        panelBoZhouSeeting.SetActive(false);
+    //    Btn_BoZhou_liang.SetActive(false);
+    //    Btn_BoZhou_dark.SetActive(true);
+    //    panelBoZhouSeeting.SetActive(false);
 
-    }
+    //}
 
     public void Button_down()
     {
@@ -226,9 +307,6 @@ public class CrateRoomSettingScript : MonoBehaviour {
         Application.OpenURL("http://a.app.qq.com/o/simple.jsp?pkgname=com.pengyoupdk.poker");
 
     }
-
-
-
 
     public void openDevloping(){
 		SoundCtrl.getInstance().playSoundByActionButton(1);
@@ -239,6 +317,10 @@ public class CrateRoomSettingScript : MonoBehaviour {
 		panelDevoloping.SetActive (true);
 
         panelBoZhouSeeting.SetActive(false);
+
+        panelJinChang.SetActive(false);
+        panelJinChang_shuaijiuyao.SetActive(false);
+        panelJinChang_tuidaohu.SetActive(false);
     }
 
 	public void closeDialog(){
@@ -248,20 +330,6 @@ public class CrateRoomSettingScript : MonoBehaviour {
 		Destroy (this);
 		Destroy (gameObject);
 	}
-
-   // public void closeXiazui()// 关闭下嘴选项页面
-   // {
-   //     xiazuiSelect.SetActive(false);
-   //     //SoundCtrl.getInstance().playSoundByActionButton(1);
-   //     //MyDebug.Log("closeXiazui");
-   //     //SocketEventHandle.getInstance().CreateRoomCallBack -= onCreateRoomCallback;
-   //     //Destroy(this);
-   //     //Destroy(gameObject);
-   // }
-   // public void showXiazui()
-   // {
-   //     xiazuiSelect.SetActive(true);
-   // }
 
 	/**
 	 * 创建转转麻将房间
@@ -581,8 +649,79 @@ public class CrateRoomSettingScript : MonoBehaviour {
 
     }
 
- 
-    
+    /**
+   * 创建金昌麻将房间
+   */
+    public void createJinChangRoom()
+    {
+         SoundCtrl.getInstance().playSoundByActionButton(1);
+    }
+    /**
+   * 创建甩九幺麻将房间
+   */
+    public void createShuaiJiuYaoRoom()
+    {
+        SoundCtrl.getInstance().playSoundByActionButton(1);
+        int roundNumber = 4;//房卡数量
+        int bottomScore = 1;//默认底分：1分 
+        int ShuaidaihuiHu =1;  // 甩九幺胡法限制  自摸  收炮(不算胡)
+        bool OneAndOneColorTrain = false;   // 清一色、一条龙
+
+        for (int i = 0; i < JinChang_shuaijiuyaoRoomCards.Count; i++)
+        {
+            Toggle item = JinChang_shuaijiuyaoRoomCards[i];
+            if (item.isOn){
+                if (i == 0)
+                    roundNumber = 4;
+                else if (i == 1)
+                    roundNumber = 8;
+                else if (i == 2)
+                    roundNumber = 16;
+                break;
+            }
+        }
+            if (JinChang_shuaijiuyaoGameRule[0].isOn)
+                OneAndOneColorTrain = true;
+
+        for (int i = 0; i < JinChang_shuaijiuyaoRoomCards.Count; i++)
+        {
+            Toggle var = JinChang_shuaijiuyaoRoomCards[i];
+            if (var.isOn){
+                if (i == 0)
+                    bottomScore = 1;
+                else if (i == 1)
+                    bottomScore = 2;
+                else if (i == 2)
+                    bottomScore = 5;
+                else if (i == 2)
+                    bottomScore = 10;
+                break;
+            }
+        }
+            sendVo = new RoomCreateVo();
+            sendVo.roundNumber = roundNumber;
+            sendVo.BottomScore = bottomScore;
+            sendVo.huXianzhi = ShuaidaihuiHu;
+            sendVo.OneAndOneColorTrain = OneAndOneColorTrain ? 0:1;
+            sendVo.sevenDouble = true;
+            sendVo.addWordCard = true;
+            string sendmsgstr = JsonMapper.ToJson(sendVo);
+            if (GlobalDataScript.loginResponseData.account.roomcard > 0)
+            {
+                watingPanel.gameObject.SetActive(true);
+                CustomSocket.getInstance().sendMsg(new CreateRoomRequest(sendmsgstr));
+            }else{
+                TipsManagerScript.getInstance().setTips("你的房卡数量不足，不能创建房间");
+            }
+       
+    }
+    /**
+   * 创建推倒胡麻将房间
+   */
+    public void createTuiDaoHuRoom()
+    {
+        SoundCtrl.getInstance().playSoundByActionButton(1);
+    }
 
 
     //	public void toggleHongClick(){
