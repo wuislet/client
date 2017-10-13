@@ -57,6 +57,10 @@ namespace AssemblyCSharp
         public const int START_XIAZUI_RESPONSE = 0x107778;  // 亳州麻将开始下嘴通知
         public const int XIAZUI_RESPONSE = 0x107779;  // 亳州麻将下嘴通知
 
+        public const int SHUAIJIUYAO_REQUEST = 0x108887; // 甩九幺麻将扔牌请求
+        public const int START_SHUAIJIUYAO_RESPONSE = 0x10888;  // 甩九幺麻将开始扔牌通知
+        public const int SHUAIJIUYAO_RESPONSE = 0x108889;  // 甩九幺麻将扔牌通知
+
         public const int BACK_LOGIN_REQUEST = 0x001001;//掉线后重新登录查询当前牌桌情况请求
         public const int BACK_LOGIN_RESPONSE = 0x001002;//掉线后重新登录查询当前牌桌情况返回
 

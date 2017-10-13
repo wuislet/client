@@ -79,7 +79,7 @@ public class MyMahjongScript : MonoBehaviour
     /// <summary>
     /// 庄家的索引
     /// </summary>
-    private int bankerId;
+    public int bankerId;
 	private int curDirIndex;
 #pragma warning disable CS0649 // 从未对字段“MyMahjongScript.curCard”赋值，字段将一直保持其默认值 null
 	private GameObject curCard;
@@ -1843,7 +1843,7 @@ public class MyMahjongScript : MonoBehaviour
                 str += "清一色 番X2\n";
             }
             else {
-                str += "一条龙 番X4\n";
+                str += "一条龙 番X2\n";
             }
             if (roomvo.SJYHu == 1)
                 str += "自摸";

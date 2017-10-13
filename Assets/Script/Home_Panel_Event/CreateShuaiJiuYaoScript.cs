@@ -13,8 +13,7 @@ public class CreateShuaiJiuYaoScript : MonoBehaviour
 {
     private void onStartShuaiJiuYaoCallback(ClientResponse SJYrespone)
     {
-        //TODO SJY 
-        //创建预制件
+        GlobalDataScript.gamePlayPanel = PrefabManage.loadPerfab("Prefab/ShuaiJiuYao_Panel");
     }
 
     private void gameReadyNotice(ClientResponse response)
@@ -30,14 +29,14 @@ public class CreateShuaiJiuYaoScript : MonoBehaviour
 
     public void addListener()
     {
-        //SocketEventHandle.getInstance().StartShuaiJiuYaoCallback += onStartShuaiJiuYaoCallback;
+        SocketEventHandle.getInstance().StartShuaiJiuYaoCallback += onStartShuaiJiuYaoCallback;
         SocketEventHandle.getInstance().StartGameNotice += gameReadyNotice;
         SocketEventHandle.getInstance().ShuaiJiuYaoCallback += onShuaiJiuYaoCallBack;
     }
 
     public void removeListener()
     {
-        //SocketEventHandle.getInstance().StartShuaiJiuYaoCallback -= onStartShuaiJiuYaoCallback;
+        SocketEventHandle.getInstance().StartShuaiJiuYaoCallback -= onStartShuaiJiuYaoCallback;
         SocketEventHandle.getInstance().StartGameNotice -= gameReadyNotice;
         SocketEventHandle.getInstance().ShuaiJiuYaoCallback -= onShuaiJiuYaoCallBack;
     }

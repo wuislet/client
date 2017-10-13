@@ -200,7 +200,19 @@ namespace AssemblyCSharp
                     StartXiazuiCallBack(response);
                 }
                 break;
-            case APIS.PENGPAI_RESPONSE:
+            case APIS.SHUAIJIUYAO_RESPONSE:
+                if (ShuaiJiuYaoCallback != null)
+                {
+                    ShuaiJiuYaoCallback(response);
+                }
+                break;
+            case APIS.START_SHUAIJIUYAO_RESPONSE:
+                if (StartShuaiJiuYaoCallback != null)
+                {
+                    StartShuaiJiuYaoCallback(response);
+                }
+                break;
+                case APIS.PENGPAI_RESPONSE:
                 if (PengCardCallBack != null)
                 {
                     PengCardCallBack(response);
