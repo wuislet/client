@@ -17,7 +17,7 @@ public class LoginSystemScript : MonoBehaviour {
 
 	public Text versionText;
 
-    // public InputField testloginID;   测试用的数字id登录
+    public InputField testloginID;   //测试用的数字id登录
 
 	private int tapCount = 0;//点击次数
 	public GameObject watingPanel;
@@ -150,26 +150,26 @@ public class LoginSystemScript : MonoBehaviour {
     }
 	public void doLogin(){
         StartCoroutine(ConnectTime(10, 0));
-		#if UNITY_EDITOR
+		//#if UNITY_EDITOR
         	//用于测试 不用微信登录
-        	CustomSocket.getInstance().sendMsg(new LoginRequest(null));
-		#else
-        	GlobalDataScript.getInstance ().wechatOperate.login ();
-		#endif
-        //if (testloginID.text == "null")     测试登录
-        //{
-        //    CustomSocket.getInstance().sendMsg(new LoginRequest(null));
-        //}
-        //else if(!string.IsNullOrEmpty(testloginID.text))
-        //{
-        //    int num = int.Parse(testloginID.text);
-        //    CustomSocket.getInstance().sendMsg(new LoginRequest(num));
-        //}
-        //else
-        //{
-        //    GlobalDataScript.getInstance().wechatOperate.login();
-        //}
-	}
+        	//CustomSocket.getInstance().sendMsg(new LoginRequest(null));
+//#else
+        	//GlobalDataScript.getInstance ().wechatOperate.login ();
+//#endif
+        if (testloginID.text == "null") //测试登录
+        {
+            CustomSocket.getInstance().sendMsg(new LoginRequest(null));
+        }
+        else if (!string.IsNullOrEmpty(testloginID.text))
+        {
+            int num = int.Parse(testloginID.text);
+            CustomSocket.getInstance().sendMsg(new LoginRequest(num));
+        }
+        else
+        {
+            GlobalDataScript.getInstance().wechatOperate.login();
+        }
+    }
 
 	public void LoginCallBack(ClientResponse response){
 		if (watingPanel != null) {
