@@ -26,6 +26,7 @@ public class bottomScript : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     public event EventHandler onSendMessage;
 	public event EventHandler reSetPoisiton;
 	private bool selected = false;
+    private bool enable = true;
 
     // Use this for initialization
     void Start()
@@ -41,49 +42,57 @@ public class bottomScript : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     {
         return;
         //删除拖牌到桌面打出的功能。
-        if (GlobalDataScript.isDrag)
+        if (!GlobalDataScript.isDrag || !enable)
         {
-			dragFlag = true;
-            GetComponent<RectTransform>().pivot.Set(0, 0);
-            transform.position = Input.mousePosition;
+            return;
         }
+
+		dragFlag = true;
+        GetComponent<RectTransform>().pivot.Set(0, 0);
+        transform.position = Input.mousePosition;
     }
 
 
     public void OnPointerDown(PointerEventData eventData)
     {
-		if (GlobalDataScript.isDrag) {
-			if (selected == false) {
-				selected = true;
-				oldPosition = transform.localPosition;
-			} else {
-				sendObjectToCallBack ();
-			}
+        if (!GlobalDataScript.isDrag || !enable)
+        {
+            return;
+        }
+
+		if (selected == false) {
+			selected = true;
+			oldPosition = transform.localPosition;
+		} else {
+			sendObjectToCallBack ();
 		}
 
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
-		if (GlobalDataScript.isDrag) {
-            if(dragFlag)
+        if (!GlobalDataScript.isDrag || !enable)
+        {
+            return;
+        }
+
+        if(dragFlag)
+        {
+            if (transform.localPosition.y > -122f) //拖牌的触发阈值
             {
-                if (transform.localPosition.y > -122f) //拖牌的触发阈值
-                {
-                    reSetPoisitonCallBack();
-                    sendObjectToCallBack();
-                }
-                else
-                {
-                    transform.localPosition = oldPosition;
-                }
+                reSetPoisitonCallBack();
+                sendObjectToCallBack();
             }
             else
             {
-				reSetPoisitonCallBack();
-			}
-			dragFlag = false;
+                transform.localPosition = oldPosition;
+            }
+        }
+        else
+        {
+			reSetPoisitonCallBack();
 		}
+		dragFlag = false;
     }
 
 	private void sendObjectToCallBack(){
@@ -143,6 +152,19 @@ public class bottomScript : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         else
         {
             transform.localPosition = new Vector3(transform.localPosition.x, -292f);
+        }
+    }
+
+    public void EnableCard(bool isEnable)
+    {
+        enable = isEnable;
+        if (isEnable)
+        {
+            //TODO SJY 自己变白
+        }
+        else
+        {
+            //TODO SJY 自己变黑
         }
     }
 }

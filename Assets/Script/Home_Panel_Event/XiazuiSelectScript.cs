@@ -9,7 +9,9 @@ using LitJson;
 public class XiazuiSelectScript : MonoBehaviour {
     public List<Toggle> xiazuiList; // 下嘴组合的列表  0.不下嘴   1. 147     2. 258    3. 369
     public List<Toggle> beishu;  // 1.  5倍   2.   10倍    3. 20倍
-    
+
+    private XiazuiVO xiazuiVO;
+
     public void createXiazui()
     {
         gameObject.SetActive(false);
@@ -50,25 +52,25 @@ public class XiazuiSelectScript : MonoBehaviour {
             }
         }
 
-        ReadyVO readyVO = new ReadyVO();
-        readyVO.phase = 1;
-        XiazuiVO xiazuiVO = new XiazuiVO();
+        xiazuiVO = new XiazuiVO();
         xiazuiVO.xiazuiList = XZList;
         xiazuiVO.xiazuiMultiple = XZbeishu;
-        string sendmsg = JsonMapper.ToJson(xiazuiVO);
-        CustomSocket.getInstance().sendMsg(new GameReadyRequest(readyVO));
-        CustomSocket.getInstance().sendMsg(new XiazuiRequest(xiazuiVO));
+        AfterSelect();
     }
  
     public void quxiaoXiazui()
     {
         gameObject.SetActive(false);
-        ReadyVO readyVO = new ReadyVO();
-        readyVO.phase = 1;
-        XiazuiVO xiazuiVO = new XiazuiVO();
+        xiazuiVO = new XiazuiVO();
         xiazuiVO.xiazuiList = 0;
         xiazuiVO.xiazuiMultiple = 0;
-        string sendmsg = JsonMapper.ToJson(xiazuiVO);
+        AfterSelect();
+    }
+
+    private void AfterSelect()
+    {
+        ReadyVO readyVO = new ReadyVO();
+        readyVO.phase = 1;
         CustomSocket.getInstance().sendMsg(new GameReadyRequest(readyVO));
         CustomSocket.getInstance().sendMsg(new XiazuiRequest(xiazuiVO));
     }

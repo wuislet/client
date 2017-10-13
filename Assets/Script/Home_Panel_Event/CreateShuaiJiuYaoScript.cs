@@ -6,117 +6,39 @@ using AssemblyCSharp;
 using UnityEngine.UI;
 using LitJson;
 
-/// <summary>/// 甩九幺/// </summary>
+/// <summary>
+/// 甩九幺
+/// </summary>
 public class CreateShuaiJiuYaoScript : MonoBehaviour
 {
+    private void onStartShuaiJiuYaoCallback(ClientResponse SJYrespone)
+    {
+        //TODO SJY 
+        //创建预制件
+    }
 
-    private int bankerID;   // 庄
-    public List<List<int>> SJYpaiList; //扔掉九幺牌组
-   
-    public MyMahjongScript cardChange;
-    public MyMahjongScript cardSelect;
-    public MyMahjongScript HandCardList;
-  
-    private Vector3 oldPosition;
-    public delegate void EventHandler(GameObject[] obj);
-    public event EventHandler SendSJYMessage;
-    public event EventHandler ReSetPoisiton;
-    public bool dragFlag = false;
-    public bool selected = false;
+    private void gameReadyNotice(ClientResponse response)
+    {
+        //显示甩牌的结果
+    }
 
-    public void onShuaiJiuYaoCallBack(ClientResponse SJYrespone)
+    private void onShuaiJiuYaoCallBack(ClientResponse SJYrespone)
     {
         ShuaiJiuYaoVo SJYvo = JsonMapper.ToObject<ShuaiJiuYaoVo>(SJYrespone.message);
-        GlobalDataScript.sjyVo = SJYvo;      
-    }
-
-    public void onDealShuaiJiuYaoCallback(ClientResponse SJYrespone) //甩九幺的事件是在发牌之后发生的  TODO 
-    {
-        StartGameVO sgvo = JsonMapper.ToObject<StartGameVO>(SJYrespone.message);
-        SJYpaiList = sgvo.paiArray;
-        List<List<GameObject>> shuaiPai = HandCardList.handerCardList;
-        for (int i = 0; i < SJYpaiList[0].Count; i++)
-        {
-            int a = SJYpaiList[0][i] % 9; //扔掉幺，九牌型
-            int b = SJYpaiList[0][i] - 26;//扔掉东南西北中发白
-
-            if (a == 1 || b > 0 || a == 1 && b > 0)
-            {
-                dragFlag = true;
-                shuaiPai[0][SJYpaiList[0][i]].transform.localPosition = new Vector3(transform.localPosition.x, -122f, transform.localPosition.z);
-                shuaiPai[0][i].transform.position = Input.mousePosition;
-
-                if (GlobalDataScript.isDrag && selected == false)
-                {
-                    selected = true;
-                    oldPosition = shuaiPai[0][SJYpaiList[0][i]].transform.localPosition;
-                }
-                else if (shuaiPai[0][SJYpaiList[0][i]].transform.localPosition.y > -122f)
-                {
-                    if (bankerID == sgvo.bankerId)
-                    {
-                        GlobalDataScript.gamePlayPanel = PrefabManage.loadPerfab("Prefab/SJY_tishi_zhuang"); // 庄家甩4张、7张、10张 九幺牌          
-                        if (SJYpaiList[0].Count == 4)
-                        {
-                            
-                        }
-                        else if (SJYpaiList[0].Count == 7)
-                        {
-
-                        }
-                        else if (SJYpaiList[0].Count == 10)
-                        {
-
-                        }
-                    }
-                    else
-                    {
-                        GlobalDataScript.gamePlayPanel = PrefabManage.loadPerfab("Prefab/SJY_tishi_player"); // 普通玩家甩3张、6张、9张 九幺牌
-                        if (SJYpaiList.Count == 3)
-                        {
-
-                        }
-                        else if (SJYpaiList.Count == 6)
-                        {
-
-                        }
-                        else if (SJYpaiList.Count == 9)
-                        {
-
-                        }
-                    }
-                }
-                else
-                {
-                    if (dragFlag)
-                    {
-                        shuaiPai[0][SJYpaiList[0][i]].transform.localPosition = oldPosition;
-                    }
-                }
-                dragFlag = false;
-            }
-        }
-    }
-
-    public void gameReadyNotice(ClientResponse response)
-    {
+        GlobalDataScript.shuaijiuyaoVo = SJYvo;
     }
 
     public void addListener()
     {
+        //SocketEventHandle.getInstance().StartShuaiJiuYaoCallback += onStartShuaiJiuYaoCallback;
         SocketEventHandle.getInstance().StartGameNotice += gameReadyNotice;
-        SocketEventHandle.getInstance().SJYCallBack += onShuaiJiuYaoCallBack;
-        //SocketEventHandle.getInstance().DealSJYCallBack += onDealShuaiJiuYaoCallback;
+        SocketEventHandle.getInstance().ShuaiJiuYaoCallback += onShuaiJiuYaoCallBack;
     }
 
     public void removeListener()
     {
+        //SocketEventHandle.getInstance().StartShuaiJiuYaoCallback -= onStartShuaiJiuYaoCallback;
         SocketEventHandle.getInstance().StartGameNotice -= gameReadyNotice;
-        SocketEventHandle.getInstance().SJYCallBack -= onShuaiJiuYaoCallBack;
-        //SocketEventHandle.getInstance().DealSJYCallBack -= onDealShuaiJiuYaoCallback;
+        SocketEventHandle.getInstance().ShuaiJiuYaoCallback -= onShuaiJiuYaoCallBack;
     }
 }
-
-
-            
-        

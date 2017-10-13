@@ -29,11 +29,11 @@ namespace AssemblyCSharp
 	    public ServerCallBackEvent gangCardNotice;//
 		public ServerCallBackEvent btnActionShow;//碰杠行为按钮显示
 
-        public ServerCallBackEvent XiazuiCallBack;   // 下嘴回调
         public ServerCallBackEvent StartXiazuiCallBack;   // 开始下嘴回调
+        public ServerCallBackEvent XiazuiCallBack;        // 下嘴回调
 
-        public ServerCallBackEvent SJYCallBack;     // 甩九幺回调 
-        public ServerCallBackEvent DealSJYCallBack;// 发牌甩九幺回调 
+        public ServerCallBackEvent StartShuaiJiuYaoCallback;// 发牌甩九幺回调 
+        public ServerCallBackEvent ShuaiJiuYaoCallback;     // 甩九幺回调 
 
         public ServerCallBackEvent outRoomCallback;//退出房间回调
 		public ServerCallBackEvent dissoliveRoomResponse;
@@ -201,11 +201,11 @@ namespace AssemblyCSharp
                 }
                 break;
             case APIS.PENGPAI_RESPONSE:
-            if (PengCardCallBack != null)
-            {
-                PengCardCallBack(response);
-            }
-            break;
+                if (PengCardCallBack != null)
+                {
+                    PengCardCallBack(response);
+                }
+                break;
             case APIS.GANGPAI_RESPONSE:
 			    if (GangCardCallBack != null)
 			    {
