@@ -26,14 +26,9 @@ public class GlobalDataScript
     public static XiazuiVO xiazuiVo = new XiazuiVO(); 
     public static bool xiazui = false;  /**全局游戏下嘴返回数据**/
 
-    public static ShuaiJiuYaoVo sjyVo = new ShuaiJiuYaoVo();
-    public static bool shuaijiuyao = false; /**全局游戏下嘴返回数据**/
-
     public static int mainUuid;
     /**房间成员信息**/
     public static List<AvatarVO> roomAvatarVoList;
-
-    public static List<ShuaiJiuYaoVo> roomSJYlist;     /**房间甩九幺的信息**/
 
     //	public static Dictionary<int, Account > palyerBaseInfo = new Dictionary<int, Account> (); 
 
@@ -88,8 +83,6 @@ public class GlobalDataScript
         isDrag = false;
 
         xiazui = false;  // 初始化下嘴
-
-        shuaijiuyao = false;   // 初始化甩九幺
 
         loginResponseData = null;
         roomJoinResponseData = null;

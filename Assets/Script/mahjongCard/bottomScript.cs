@@ -64,8 +64,7 @@ public class bottomScript : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     public void OnPointerUp(PointerEventData eventData)
     {
 		if (GlobalDataScript.isDrag) {
-			if (transform.localPosition.y > -122f)
-            {
+			if (transform.localPosition.y > -122f) {
 				sendObjectToCallBack ();
 			} else {
 				if (dragFlag) {

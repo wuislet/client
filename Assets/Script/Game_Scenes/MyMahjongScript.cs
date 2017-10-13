@@ -402,24 +402,6 @@ public class MyMahjongScript : MonoBehaviour
         {
             LeavedCardsNum = 136;
         }
-        else if(RoomType == 6)  // 金昌麻将带风136张  不带风108张
-        {
-            LeavedCardsNum = 108;
-            if(roomCreateVo.addWordCard) {
-                LeavedCardsNum = 136;
-            }
-        }
-        else if (RoomType == 7)  // 金昌甩九幺麻将带风136张
-        {
-                LeavedCardsNum = 136;
-        }
-        else if (RoomType == 8)  // 推倒胡麻将带风136张  不带风108张
-        {
-            LeavedCardsNum = 108;
-            if (roomCreateVo.addWordCard) {
-                LeavedCardsNum = 136;
-            }
-        }
         LeavedCardsNum = LeavedCardsNum - 53;
 		LeavedCastNumText.text = (LeavedCardsNum)+"";
 
@@ -1379,6 +1361,7 @@ public class MyMahjongScript : MonoBehaviour
 			putOutCardPointAvarIndex =getIndexByDir(getDirection(getMyIndexFromList ())) ;
 			CustomSocket.getInstance ().sendMsg (new PutOutCardRequest(cardvo));
 		}
+
 	}
 
 	private void cardGotoTable() //动画第二段
@@ -1431,7 +1414,7 @@ public class MyMahjongScript : MonoBehaviour
 				int cardPoint = handerCardList[0][i].GetComponent<bottomScript>().getPoint();//得到所有牌指针
 				if (cardPoint >=curCardPoint )//牌指针>=当前牌的时候插入
 				{
-					handerCardList[0].Insert(i, item);
+					handerCardList[0].Insert(i, item);//在
 					return;
 				}
 			}
@@ -1823,65 +1806,7 @@ public class MyMahjongScript : MonoBehaviour
             str += "圈数：" + roomvo.roundNumber + "\n\n";
         }
 
-        if( roomvo.roomType == 6 ) // 金昌麻将
-        {
-            str += "金昌麻将\n";
-            if (roomvo.ReadyHand)
-                str += "报听\n";
-            if (roomvo.addWordCard) {
-                str += "有风牌\n";
-            }else {
-                str += "无风牌\n";
-            }
-            if (roomvo.huXianzhi == 1)
-                str += "仅能自摸胡";
-            if (roomvo.sevenDouble)
-                str += "可胡七对\n";
-        }
-        else if (roomvo.roomType == 7)
-        {
-            str += "金昌甩九幺\n";
-            if (roomvo.OneAndOneColorTrain == 1){
-                str += "清一色 番X2\n";
-            }
-            else {
-                str += "一条龙 番X4\n";
-            }
-            if (roomvo.SJYHu == 1)
-                str += "自摸";
-
-            if (roomvo.BottomScore == 1){
-                str += "底分X1\n";
-            }
-            else if (roomvo.BottomScore == 2){
-                str += "底分X2\n";
-            }
-            else if (roomvo.BottomScore == 3) {
-                str += "底分X5\n";
-            }
-            else if (roomvo.BottomScore == 4) {
-                str += "底分X10\n";
-            }
-                
-        }
-        else if(roomvo.roomType ==8 )
-        {
-            str += "推倒胡";
-            if (roomvo.ReadyHand)
-                str += "报听\n";
-            if (roomvo.addWordCard){
-                str += "有风牌\n";
-            }else{
-                str += "无风牌\n";
-            }
-            if (roomvo.huXianzhi == 1)
-                str += "仅能自摸胡";
-            if (roomvo.gui == 4)
-                str += "带会\n";
-        }
-
-
-       else if (roomvo.roomType == 5)
+        if (roomvo.roomType == 5)
         {  //-----亳州
             str += "亳州麻将\n";
             if (roomvo.bozhouHu == 1)

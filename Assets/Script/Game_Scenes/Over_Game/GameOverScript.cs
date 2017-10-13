@@ -260,21 +260,11 @@ public class GameOverScript : MonoBehaviour {
 			title.text = "广东麻将";
 		} else if (GlobalDataScript.roomVo.roomType == GameConfig.GAME_TYPE_BOZHOU) {
 			title.text = "亳州麻将";
-		}else if (GlobalDataScript.roomVo.roomType == GameConfig.GAME_TYPE_JinChang)
-        {
-            title.text = "金昌麻将";
-        }else if (GlobalDataScript.roomVo.roomType == GameConfig.GAME_TYPE_ShuaiJiuyao)
-        {
-            title.text = "甩九幺麻将";
-        } else if (GlobalDataScript.roomVo.roomType == GameConfig.GAME_TYPE_TuiDaohu)
-        {
-            title.text = "推倒胡麻将";
-        }
-
-        //  wanfa.text = MyMahjongScript.roomRemark_tv;
+		}
+//  wanfa.text = MyMahjongScript.roomRemark_tv;
 
 
-        MyDebug.Log("--setUI-------------------initRoomBaseInfo-------设置文字完毕--------------");
+MyDebug.Log("--setUI-------------------initRoomBaseInfo-------设置文字完毕--------------");
         /**
 		if (mDispalyFlag == 1) {
 			TitleText.text = "棋牌结束";
