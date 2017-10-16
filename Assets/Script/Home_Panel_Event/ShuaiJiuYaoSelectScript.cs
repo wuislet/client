@@ -20,7 +20,7 @@ public class ShuaiJiuYaoSelectScript : MonoBehaviour
 
     private void Start()
     {
-        //TODO SJY 
+        //TODO SJY
         //初始化所有变量
         CardList = new List<GameObject>();
         //判断是否庄家显示不同提示
@@ -31,7 +31,7 @@ public class ShuaiJiuYaoSelectScript : MonoBehaviour
     }
     private void ThrowingPrompt()   //扔牌提示
     {
-        if (isBank())
+        if (myScript.IsSelfBanker())
         {
             MsgTxt.text = "庄家请扔掉四、七、十张幺、九牌";
         }
@@ -62,23 +62,6 @@ public class ShuaiJiuYaoSelectScript : MonoBehaviour
         }
     }
 
-    private bool isBank()  //判断是否为庄
-    {
-        int bankid = myScript.bankerId;
-        print("   zhuangjia  id  " + bankid);
-        int bankuuid = myScript.avatarList[bankid].account.uuid;
-        print("    zhuangjia  uuid" + bankuuid);
-        print("    my   uuid " + GlobalDataScript.loginResponseData.account.uuid);
-        if (GlobalDataScript.loginResponseData.account.uuid == bankuuid)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-
     public void OnBackCard()
     {
         print("   back card ");
@@ -94,7 +77,7 @@ public class ShuaiJiuYaoSelectScript : MonoBehaviour
     {
         print("  on confirm ");
         //庄家扔幺九牌张数为四、七、十     普通玩家扔幺九牌张数为三、六、九
-        if (isBank())
+        if (myScript.IsSelfBanker())
         {
             if (CardList.Count != 4 || CardList.Count != 7 || CardList.Count != 10)
             {

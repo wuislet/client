@@ -79,7 +79,7 @@ public class MyMahjongScript : MonoBehaviour
     /// <summary>
     /// 庄家的索引
     /// </summary>
-    public int bankerId;
+    public int bankerId = -1;
 	private int curDirIndex;
 #pragma warning disable CS0649 // 从未对字段“MyMahjongScript.curCard”赋值，字段将一直保持其默认值 null
 	private GameObject curCard;
@@ -152,7 +152,7 @@ public class MyMahjongScript : MonoBehaviour
 
 	//private bool isSelfPickCard = false;
 
-
+    
   
 	void Start()
 	{
@@ -266,41 +266,11 @@ public class MyMahjongScript : MonoBehaviour
 
 	}
 
-	/**
-	private void initPerson(){
-		GameOverPlayerCoins = new List<int> (4);
-		GameOverPlayerCoins.Add(1000);
-		GameOverPlayerCoins.Add(1000);
-		GameOverPlayerCoins.Add(1000);
-		GameOverPlayerCoins.Add(1000);
-	}
-	*/
-	/// <summary>
-	/// Cards the select.
-	/// </summary>
-	/// <param name="obj">Object.</param>
-	public void cardSelect(GameObject obj)
-	{
-		for (int i = 0; i < handerCardList[0].Count; i++)
-		{
-			if (handerCardList[0][i] == null) {
-				handerCardList[0].RemoveAt(i);
-				i--;
-			} else {
-				handerCardList[0][i].transform.GetComponent<bottomScript>().SelectCard(false);
-			}
-		}
-		if (obj != null)
-		{
-			obj.transform.GetComponent<bottomScript>().SelectCard(true);
-        }
-	}
-
-	/// <summary>
-	/// 开始游戏
-	/// </summary>
-	/// <param name="response">Response.</param>
-	public void startGame(ClientResponse response)
+    /// <summary>
+    /// 开始游戏
+    /// </summary>
+    /// <param name="response">Response.</param>
+    public void startGame(ClientResponse response)
 	{
 		GlobalDataScript.roomAvatarVoList = avatarList;
 		//GlobalDataScript.surplusTimes -= 1;
@@ -325,7 +295,6 @@ public class MyMahjongScript : MonoBehaviour
 		GlobalDataScript.finalGameEndVo = null;
 		GlobalDataScript.mainUuid = avatarList [bankerId].account.uuid;
 		initArrayList ();
-		curDirString = getDirection (bankerId);
 		playerItems [curDirIndex].setbankImgEnable (true);
 		SetDirGameObjectAction();
 		isFirstOpen = false;
@@ -341,15 +310,10 @@ public class MyMahjongScript : MonoBehaviour
 		initMyCardListAndOtherCard (13,13,13);
 
 		ShowLeavedCardsNumForInit();
-
-		if (curDirString == DirectionEnum.Bottom) {
-			//isSelfPickCard = true;
-			GlobalDataScript.isDrag = true;
-		} else {
-			//isSelfPickCard = false;
-			GlobalDataScript.isDrag = false;
-		}
-	}
+        
+        //GlobalDataScript.isDrag = (curDirString == DirectionEnum.Bottom);
+        GlobalDataScript.isDrag = IsSelfBanker();
+    }
 
 	private void cleanGameplayUI(){
 		canClickButtonFlag = true;
@@ -593,25 +557,14 @@ public class MyMahjongScript : MonoBehaviour
 		initOtherCardList (DirectionEnum.Right,rightCount);
 		initOtherCardList (DirectionEnum.Top,topCount);
 
-		if (bankerId == getMyIndexFromList ()) {
+		if (IsSelfBanker()) {
 			SetPosition (true);//设置位置
 			MyDebug.Log ("初始化数据自己为庄家");
-		//	checkHuPai();
 		} else {
 			SetPosition (false);
 			otherPickCardAndCreate (bankerId);
 		}
 	}
-
-	/*
-	private bool addPointAndCheckHu(int cardPoint){
-		bool result = false;
-		putCardIntoMineList (cardPoint);
-		result = checkHuPai ();
-		pushOutFromMineList (cardPoint);
-		return result;
-	}
-	*/
 
 	private void setAllPlayerReadImgVisbleToFalse(){
 		for (int i = 0; i < playerItems.Count; i++) {
@@ -1350,6 +1303,7 @@ public class MyMahjongScript : MonoBehaviour
 			Pointertemp.transform.localPosition = new Vector3 (0f, parent.transform.GetComponent<RectTransform> ().sizeDelta.y / 2 + 10);
 		}
 	}//顶针实现
+
 	/// <summary>
 	/// 自己打出来的牌
 	/// </summary>
@@ -1379,7 +1333,31 @@ public class MyMahjongScript : MonoBehaviour
 		}
 	}
 
-	private void cardGotoTable() //动画第二段
+    /// <summary>
+    /// Cards the select.
+    /// </summary>
+    /// <param name="obj">Object.</param>
+    public void cardSelect(GameObject obj)
+    {
+        for (int i = 0; i < handerCardList[0].Count; i++)
+        {
+            if (handerCardList[0][i] == null)
+            {
+                handerCardList[0].RemoveAt(i);
+                i--;
+            }
+            else
+            {
+                handerCardList[0][i].transform.GetComponent<bottomScript>().SelectCard(false);
+            }
+        }
+        if (obj != null)
+        {
+            obj.transform.GetComponent<bottomScript>().SelectCard(true);
+        }
+    }
+
+    private void cardGotoTable() //动画第二段
 	{
 		MyDebug.Log ("==cardGotoTable=Invoke=====>");
 
@@ -2055,7 +2033,6 @@ public class MyMahjongScript : MonoBehaviour
 			for (int i = 0; i < avatarList.Count; i++)
 			{
 				if (avatarList[i].account.uuid == GlobalDataScript.loginResponseData.account.uuid ||avatarList[i].account.openid == GlobalDataScript.loginResponseData.account.openid)
-
 				{
 					GlobalDataScript.loginResponseData.account.uuid = avatarList [i].account.uuid;
 					MyDebug.Log ("数据正常返回"+i);
@@ -2069,11 +2046,16 @@ public class MyMahjongScript : MonoBehaviour
 		return 0;
 	}
 
-	private int getIndex(int uuid){
+    public bool IsSelfBanker()
+    {
+        return bankerId == getMyIndexFromList();
+    }
+
+    private int getIndex(int uuid){
 		if (avatarList != null) {
 			for (int i = 0; i < avatarList.Count; i++) {
 				if(avatarList[i].account != null){
-					if (avatarList[i].account.uuid ==uuid) {
+					if (avatarList[i].account.uuid == uuid) {
 						return i;
 					}
 				}
@@ -2300,15 +2282,13 @@ public class MyMahjongScript : MonoBehaviour
 	public void quiteRoom(){
 
         //LeaveRoomScript lrs = dialog_fanhui.GetComponent<LeaveRoomScript>();
-        if (bankerId == getMyIndexFromList())
+        if (IsSelfBanker())
         {
             dialog_fanhui_text.text = "亲，确定要解散房间吗?";
-            //lrs.setTip("亲，确定要解散房间吗?");
         }
         else
         {
             dialog_fanhui_text.text = "亲，确定要离开房间吗?";
-            //lrs.setTip("亲，确定要离开房间吗?");
         }
 
         dialog_fanhui.gameObject.SetActive(true);
@@ -2388,10 +2368,10 @@ public class MyMahjongScript : MonoBehaviour
         {
             ss.canClickButtonFlag = canClickButtonFlag;
             ss.jiesanBtn.GetComponentInChildren<Text>().text = "申请解散房间";
-            ss.type = 2;            
+            ss.type = 2;
         }
         else {
-            if (bankerId == getMyIndexFromList()) //我是房主
+            if (IsSelfBanker()) //我是房主
             {
                 ss.canClickButtonFlag = canClickButtonFlag;
                 ss.jiesanBtn.GetComponentInChildren<Text>().text = "解散房间";
@@ -2593,7 +2573,7 @@ public class MyMahjongScript : MonoBehaviour
 						gob.transform.localScale =new Vector3(1.1f,1.1f,1);
 						gob.GetComponent<bottomScript>().onSendMessage += cardChange;//发送消息fd
 						gob.GetComponent<bottomScript>().reSetPoisiton += cardSelect;
-						gob.GetComponent<bottomScript>().setPoint(i, GlobalDataScript.roomVo.guiPai);//设置指针                                                                                                                 
+						gob.GetComponent<bottomScript>().setPoint(i, GlobalDataScript.roomVo.guiPai);//设置指针
 						handerCardList[0].Add(gob);//增加游戏对象
 					}
 				}
