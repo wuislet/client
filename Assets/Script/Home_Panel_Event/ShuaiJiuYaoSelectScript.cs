@@ -31,12 +31,7 @@ public class ShuaiJiuYaoSelectScript : MonoBehaviour
     }
     private void ThrowingPrompt()   //扔牌提示
     {
-        int bankid = myScript.bankerId;
-        print("   zhuangjia  id  " + bankid);
-        int bankuuid = myScript.avatarList[bankid].account.uuid;
-        print("    zhuangjia  uuid" + bankuuid);
-        print("    my   uuid " + GlobalDataScript.loginResponseData.account.uuid);
-        if (GlobalDataScript.loginResponseData.account.uuid == bankuuid)
+        if (isBank())
         {
             MsgTxt.text = "庄家请扔掉四、七、十张幺、九牌";
         }
@@ -62,8 +57,22 @@ public class ShuaiJiuYaoSelectScript : MonoBehaviour
                     obj.EnableCard(false);
                 }
             }
+        }        
+    }
+
+    private bool isBank()  //判断是否为庄
+    {
+        int bankid = myScript.bankerId;
+        print("   zhuangjia  id  " + bankid);
+        int bankuuid = myScript.avatarList[bankid].account.uuid;
+        print("    zhuangjia  uuid" + bankuuid);
+        print("    my   uuid " + GlobalDataScript.loginResponseData.account.uuid);
+        if (GlobalDataScript.loginResponseData.account.uuid == bankuuid)
+        {        
+            return true;
         }
-        
+        else           
+            return false;
     }
 
     public void OnBackCard()
@@ -80,10 +89,22 @@ public class ShuaiJiuYaoSelectScript : MonoBehaviour
     public void OnConfirm()
     {
         print("  on confirm ");
-        if(CardList.Count != 3 || CardList.Count != 6 || CardList.Count != 9)
+        //庄家扔幺九牌张数为四、七、十     普通玩家扔幺九牌张数为三、六、九
+        if (isBank())
         {
-            //提示牌数不对。
-            return;
+            if (CardList.Count != 4 || CardList.Count != 7 || CardList.Count != 10)
+            {
+                MsgTxt.text = "扔出的牌数不对，请扔四张、七张或者十张";
+                MsgTxt.color = Color.red;
+            }
+        }
+        else
+        {
+            if (CardList.Count != 3 || CardList.Count != 6 || CardList.Count != 9)
+            {
+                MsgTxt.text = "扔出的牌数不对，请扔三张、六张或者九张";
+                MsgTxt.color = Color.red;
+            }
         }
         gameObject.SetActive(false);
         shuaijiuyaoVO = new ShuaiJiuYaoVo();
