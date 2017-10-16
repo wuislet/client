@@ -13,28 +13,29 @@ namespace AssemblyCSharp
 
         public bool addWordCard;  // 是否带风
 		public int huXianzhi;//胡法的限制 0：可以点炮；1：只能自摸；2：自摸 + 抢杠胡
+        public int listenType;//听牌规则 0：不特别限制，不显示文字；1：必须听牌；2：允许听牌行为；3：不允许听牌
         public bool sevenDouble; //能否胡七小对
         public int gui;   //鬼牌（或叫赖子，即万能牌） 0无鬼；1白板；2翻鬼；3红中；4带会(金昌财神即为赖子)
         public int guiPai = -1;
 
-        //划水麻将
+        //划水麻将专属规则
         public int xiaYu;
 
-        //广东麻将
+        //广东麻将专属规则
         public int ma;
 
-        //亳州专属规则
+        //亳州麻将专属规则
         public int bozhouHu; // 1.推倒胡   2.断一门
         public int xiazui;   // 1.不下嘴   2.下嘴
         public bool nolisterToBeard;   //不报听可胡
         public bool angangLiang;  // 暗杠亮
         public int bozhouZimoMagnification;//亳州麻将自摸倍数
 
-        // 金昌专属规则
-        public int OneAndOneColorTrain;  //0、清一色  1、一条龙   
+        //金昌麻将专属规则
+        public int OneAndOneColorTrain;  //0x1：清一色  0x10：一条龙
         public bool ReadyHand;           //报听
-        public int BottomScore;          //底分:1、1分   2、2分   3、5分    4、10分
-        public int SJYHu;                //甩九幺：1、自摸   2、收炮（不算胡）
+        public int BottomScore;          //底分  1：1分  2：2分  3：5分  4：10分
+        public int SJYHu;                //甩九幺   1：自摸  2：收炮（不算胡）
 
         public List<AvatarVO> playerList;
 
@@ -52,6 +53,7 @@ namespace AssemblyCSharp
 
             this.addWordCard = other.addWordCard;
             this.huXianzhi = other.huXianzhi;
+            this.listenType = other.listenType;
             this.sevenDouble = other.sevenDouble;
             this.gui = other.gui;
             this.guiPai = other.guiPai;

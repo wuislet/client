@@ -27,17 +27,7 @@ public class bottomScript : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
 	public event EventHandler reSetPoisiton;
 	private bool selected = false;
     private bool enable = true;
-
-    // Use this for initialization
-    void Start()
-    {
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+    
     public void OnDrag(PointerEventData eventData)
     {
         return;
