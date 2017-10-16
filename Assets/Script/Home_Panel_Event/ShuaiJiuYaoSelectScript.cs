@@ -12,21 +12,23 @@ public class ShuaiJiuYaoSelectScript : MonoBehaviour
 {
     public Text MsgTxt;
     public MyMahjongScript myScript;
+
     private Transform CardParent;
-    private List<GameObject> CardList;
+
     private ShuaiJiuYaoVo shuaijiuyaoVO;
-    private StartGameVO gameVO ;
-    
+    private StartGameVO gameVO;
+
+    private List<GameObject> CardList;
+    private Dictionary<int, bottomScript.EventHandler> EventHandlers;
 
     private void Start()
     {
-        //TODO SJY
-        //初始化所有变量
         CardList = new List<GameObject>();
+        EventHandlers = new Dictionary<int, bottomScript.EventHandler>();
         //判断是否庄家显示不同提示
         ThrowingPrompt();
         //注册pickcard
-        //For所有手牌，选出九幺牌。 同时黑掉其他牌。
+        //遍历所有手牌，选出九幺牌，注册点击事件。黑掉其他牌。
         PoppingCard();
     }
     private void ThrowingPrompt()   //扔牌提示
@@ -43,16 +45,17 @@ public class ShuaiJiuYaoSelectScript : MonoBehaviour
 
     private void PoppingCard()      //幺、九牌向上弹出
     {
-        CardList = GetComponent<MyMahjongScript>().handerCardList[0];
-        if (CardList.Count > 0)
+        var list = myScript.handerCardList[0];
+        if (list.Count > 0)
         {
-            for(int i =0; i<CardList.Count;i++)
+            for(int i =0; i<list.Count;i++)
             {
-                bottomScript obj = CardList[i].GetComponent<bottomScript>();
+                bottomScript obj = list[i].GetComponent<bottomScript>();
                 int point = obj.getPoint();
                 if (point % 9 < 2 || point > 26) //幺九字牌。
                 {
                     obj.SelectCard(true);
+                    //EventHandlers.Add(i, obj.onSendMessage);
                 }
                 else
                 {
@@ -95,7 +98,7 @@ public class ShuaiJiuYaoSelectScript : MonoBehaviour
         }
         gameObject.SetActive(false);
         shuaijiuyaoVO = new ShuaiJiuYaoVo();
-        shuaijiuyaoVO.JiuYaoList = null;
+        shuaijiuyaoVO.JiuYaoList.Add(CardList.Count);
         AfterSelect();
     }
 
@@ -104,7 +107,7 @@ public class ShuaiJiuYaoSelectScript : MonoBehaviour
         print("  on cancel ");
         gameObject.SetActive(false);
         shuaijiuyaoVO = new ShuaiJiuYaoVo();
-        shuaijiuyaoVO.JiuYaoList.Add(CardList.Count);
+        shuaijiuyaoVO.JiuYaoList.Add(0);
         AfterSelect();
     }
 
