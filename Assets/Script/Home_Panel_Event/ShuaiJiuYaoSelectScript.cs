@@ -36,7 +36,9 @@ public class ShuaiJiuYaoSelectScript : MonoBehaviour
             MsgTxt.text = "庄家请扔掉四、七、十张幺、九牌";
         }
         else
+        {
             MsgTxt.text = "请扔掉三、六、九张幺、九牌";
+        }
     }
 
     private void PoppingCard()      //幺、九牌向上弹出
@@ -57,7 +59,7 @@ public class ShuaiJiuYaoSelectScript : MonoBehaviour
                     obj.EnableCard(false);
                 }
             }
-        }        
+        }
     }
 
     private bool isBank()  //判断是否为庄
@@ -68,11 +70,13 @@ public class ShuaiJiuYaoSelectScript : MonoBehaviour
         print("    zhuangjia  uuid" + bankuuid);
         print("    my   uuid " + GlobalDataScript.loginResponseData.account.uuid);
         if (GlobalDataScript.loginResponseData.account.uuid == bankuuid)
-        {        
+        {
             return true;
         }
-        else           
+        else
+        {
             return false;
+        }
     }
 
     public void OnBackCard()
