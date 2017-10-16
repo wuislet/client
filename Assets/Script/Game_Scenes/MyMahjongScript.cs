@@ -96,9 +96,10 @@ public class MyMahjongScript : MonoBehaviour
 	private GameObject putOutCard;
 
     private CreateXiazuiScript createXiazuiScript;
+    private CreateShuaiJiuYaoScript createShuaiJiuYaoScript;
 
 #pragma warning disable CS0169 // 从不使用字段“MyMahjongScript.otherMoCardPoint”
-	private int otherMoCardPoint;
+    private int otherMoCardPoint;
 #pragma warning restore CS0169 // 从不使用字段“MyMahjongScript.otherMoCardPoint”
 	private GameObject Pointertemp;
 	private int putOutCardPoint = -1;//打出的牌
@@ -165,6 +166,8 @@ public class MyMahjongScript : MonoBehaviour
 		//===========================================================================================
 		btnActionScript = gameObject.GetComponent<ButtonActionScript> ();
         createXiazuiScript = GetComponent<CreateXiazuiScript>();
+        createShuaiJiuYaoScript = GetComponent<CreateShuaiJiuYaoScript>();
+        print(" createShuaiJiuYaoScript " + createShuaiJiuYaoScript);
         addListener ();
 		initPanel ();
 		initArrayList ();
@@ -219,6 +222,7 @@ public class MyMahjongScript : MonoBehaviour
 		SocketEventHandle.getInstance ().gameFollowBanderNotice += gameFollowBanderNotice;
         
         createXiazuiScript.addListener();
+        createShuaiJiuYaoScript.addListener();
     }
 
 	private void removeListener(){
@@ -246,6 +250,7 @@ public class MyMahjongScript : MonoBehaviour
 		SocketEventHandle.getInstance ().gameFollowBanderNotice -= gameFollowBanderNotice;
 
         createXiazuiScript.removeListener();
+        createShuaiJiuYaoScript.removeListener();
     }
 
 

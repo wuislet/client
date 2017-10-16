@@ -705,6 +705,7 @@ public class CrateRoomSettingScript : MonoBehaviour {
             sendVo.OneAndOneColorTrain = OneAndOneColorTrain ? 0:1;
             sendVo.sevenDouble = true;
             sendVo.addWordCard = true;
+            sendVo.roomType = GameConfig.GAME_TYPE_ShuaiJiuyao;
             string sendmsgstr = JsonMapper.ToJson(sendVo);
             if (GlobalDataScript.loginResponseData.account.roomcard > 0)
             {

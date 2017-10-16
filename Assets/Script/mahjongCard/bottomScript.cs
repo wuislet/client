@@ -17,6 +17,7 @@ public class bottomScript : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
 	private bool dragFlag = false;
     //==================================================
     public Image image;
+    public GameObject Image_bg_color;
     public Image guiIcon;
     public Text showLabel;
     public float speed = 1.0f;
@@ -27,7 +28,12 @@ public class bottomScript : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
 	public event EventHandler reSetPoisiton;
 	private bool selected = false;
     private bool enable = true;
-    
+
+    private void Start()
+    {
+        Image_bg_color.SetActive(false);
+    }
+
     public void OnDrag(PointerEventData eventData)
     {
         return;
@@ -150,11 +156,11 @@ public class bottomScript : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         enable = isEnable;
         if (isEnable)
         {
-            //TODO SJY 自己变白
+            Image_bg_color.SetActive(false);
         }
         else
         {
-            //TODO SJY 自己变黑
+            Image_bg_color.SetActive(true);
         }
     }
 }
