@@ -167,6 +167,7 @@ public class MyMahjongScript : MonoBehaviour
 		btnActionScript = gameObject.GetComponent<ButtonActionScript> ();
         createXiazuiScript = GetComponent<CreateXiazuiScript>();
         createShuaiJiuYaoScript = GetComponent<CreateShuaiJiuYaoScript>();
+        createShuaiJiuYaoScript.script = this;
         print(" createShuaiJiuYaoScript " + createShuaiJiuYaoScript);
         addListener ();
 		initPanel ();

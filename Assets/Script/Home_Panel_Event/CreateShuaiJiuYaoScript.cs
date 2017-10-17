@@ -11,14 +11,29 @@ using LitJson;
 /// </summary>
 public class CreateShuaiJiuYaoScript : MonoBehaviour
 {
+    public MyMahjongScript script;
+    int count = 0;
     private void onStartShuaiJiuYaoCallback(ClientResponse SJYrespone)
     {
-        GlobalDataScript.gamePlayPanel = PrefabManage.loadPerfab("Prefab/ShuaiJiuYao_Panel");
+        var panel = PrefabManage.loadPerfab("Prefab/ShuaiJiuYao_Panel");
+        panel.GetComponent<ShuaiJiuYaoSelectScript>().myScript = script;
     }
 
     private void gameReadyNotice(ClientResponse response)
     {
-        //显示甩牌的结果
+        print(" gameReadyNotice 1 " + count);
+        count += 1;
+        if (count == 4)
+        {
+            //显示甩牌的结果
+            //还原牌的状态
+            var list = script.handerCardList[0];
+            for (int i = 0; i < list.Count; i++)
+            {
+                bottomScript obj = list[i].GetComponent<bottomScript>();
+                obj.isSpecialClick = false;
+            }
+        }
     }
 
     private void onShuaiJiuYaoCallBack(ClientResponse SJYrespone)

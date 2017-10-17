@@ -11,6 +11,8 @@ using LitJson;
 public class ShuaiJiuYaoSelectScript : MonoBehaviour
 {
     public Text MsgTxt;
+
+    [System.NonSerialized]
     public MyMahjongScript myScript;
 
     private Transform CardParent;
@@ -25,13 +27,11 @@ public class ShuaiJiuYaoSelectScript : MonoBehaviour
     {
         CardList = new List<GameObject>();
         EventHandlers = new Dictionary<int, bottomScript.EventHandler>();
-        //判断是否庄家显示不同提示
-        ThrowingPrompt();
-        //注册pickcard
+        InitTips();
         //遍历所有手牌，选出九幺牌，注册点击事件。黑掉其他牌。
         PoppingCard();
     }
-    private void ThrowingPrompt()   //扔牌提示
+    private void InitTips()   //判断是否庄家显示不同提示
     {
         if (myScript.IsSelfBanker())
         {
@@ -46,80 +46,113 @@ public class ShuaiJiuYaoSelectScript : MonoBehaviour
     private void PoppingCard()      //幺、九牌向上弹出
     {
         var list = myScript.handerCardList[0];
-        if (list.Count > 0)
+        for(int i = 0; i<list.Count;i++)
         {
-            for(int i =0; i<list.Count;i++)
+            bottomScript obj = list[i].GetComponent<bottomScript>();
+            obj.isSpecialClick = true;
+            int point = obj.getPoint();
+            if ((point + 1) % 9 < 2 || point > 26) //幺九字牌。
             {
-                bottomScript obj = list[i].GetComponent<bottomScript>();
-                int point = obj.getPoint();
-                if (point % 9 < 2 || point > 26) //幺九字牌。
-                {
-                    obj.SelectCard(true);
-                    //EventHandlers.Add(i, obj.onSendMessage);
-                }
-                else
-                {
-                    obj.EnableCard(false);
-                }
+                OnPickCard(list[i]);
+                obj.onSpecialClick += OnPickCard;
+                //var eventlist = GlobalDataScript.GetAllEvent(obj, "onSendMessage");
+                //bottomScript.EventHandler handler = null;
+                //foreach (var e in eventlist)
+                //{
+                //    print("  for method  name " + e.Method.Name);
+                    //handler.
+                    // obj.onSendMessage += e.Method.MethodHandle;
+                //}
+                //EventHandlers.Add(i, handler);
+            }
+            else
+            {
+                obj.EnableCard(false);
             }
         }
     }
 
-    public void OnBackCard()
+    public void OnPickCard(GameObject card)
     {
-        print("   back card ");
-        //返回之后，选出来
-    }
+        bottomScript script = card.GetComponent<bottomScript>();
+        print("   OnPickCard " + script.isSelect);
+        script.SelectCard(!script.isSelect);
 
-    public void OnPickCard()
-    {
-        print("   pick card ");
+        if (script.isSelect)
+        {
+            CardList.Add(card);
+        }
+        else
+        {
+            CardList.Remove(card);
+        }
     }
 
     public void OnConfirm()
     {
-        print("  on confirm ");
-        //庄家扔幺九牌张数为四、七、十     普通玩家扔幺九牌张数为三、六、九
-        if (myScript.IsSelfBanker())
+       if (CardList.Count != 0)
         {
-            if (CardList.Count != 4 || CardList.Count != 7 || CardList.Count != 10)
+            //庄家扔幺九牌张数为四、七、十     普通玩家扔幺九牌张数为三、六、九
+            if (myScript.IsSelfBanker())
             {
-                MsgTxt.text = "扔出的牌数不对，请扔四张、七张或者十张";
-                MsgTxt.color = Color.red;
+                if (!(CardList.Count == 4 || CardList.Count == 7 || CardList.Count == 10))
+                {
+                    MsgTxt.text = "扔出的牌数不对，请扔四张、七张或者十张";
+                    MsgTxt.color = Color.red;
+                    return;
+                }
+            }
+            else
+            {
+                if (!(CardList.Count == 3 || CardList.Count == 6 || CardList.Count == 9))
+                {
+                    MsgTxt.text = "扔出的牌数不对，请扔三张、六张或者九张";
+                    MsgTxt.color = Color.red;
+                    return;
+                }
             }
         }
-        else
+        shuaijiuyaoVO = new ShuaiJiuYaoVo();
+        shuaijiuyaoVO.cardList = new List<int>();
+        var list = myScript.handerCardList[0];
+        for (int i = 0; i < list.Count; i++)
         {
-            if (CardList.Count != 3 || CardList.Count != 6 || CardList.Count != 9)
-            {
-                MsgTxt.text = "扔出的牌数不对，请扔三张、六张或者九张";
-                MsgTxt.color = Color.red;
-            }
+            bottomScript obj = list[i].GetComponent<bottomScript>();
+            int point = obj.getPoint();
+            shuaijiuyaoVO.cardList.Add(point);
         }
-        gameObject.SetActive(false);
-        shuaijiuyaoVO = new ShuaiJiuYaoVo();
-        shuaijiuyaoVO.JiuYaoList.Add(CardList.Count);
-        AfterSelect();
-    }
-
-    public void OnCancel()
-    {
-        print("  on cancel ");
-        gameObject.SetActive(false);
-        shuaijiuyaoVO = new ShuaiJiuYaoVo();
-        shuaijiuyaoVO.JiuYaoList.Add(0);
         AfterSelect();
     }
 
     private void AfterSelect()
     {
-        //恢复牌的选择
-        //恢复黑牌
-        //注销pickcard
+        //还原牌的状态
+        var list = myScript.handerCardList[0];
+        for (int i = 0; i < list.Count; i++)
+        {
+            bottomScript obj = list[i].GetComponent<bottomScript>();
+            int point = obj.getPoint();
+            if ((point + 1) % 9 < 2 || point > 26) //幺九字牌。
+            {
+                obj.SelectCard(false);
+                obj.onSpecialClick -= OnPickCard;
+            }
+            else
+            {
+                obj.EnableCard(true);
+            }
+        }
+
+        foreach(var obj in CardList)
+        {
+            obj.SetActive(false);
+        }
 
         ReadyVO readyVO = new ReadyVO();
         readyVO.phase = 2;
         CustomSocket.getInstance().sendMsg(new GameReadyRequest(readyVO));
         CustomSocket.getInstance().sendMsg(new ShuaiJiuYaoRequest(shuaijiuyaoVO));
+        gameObject.SetActive(false);
+        Destroy(gameObject, 0.1f);
     }
 }

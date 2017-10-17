@@ -14,7 +14,6 @@ public class bottomScript : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     private int cardPoint;
     private Vector3 RawPosition;
     private Vector3 oldPosition;
-	private bool dragFlag = false;
     //==================================================
     public Image image;
     public GameObject Image_bg_color;
@@ -27,7 +26,13 @@ public class bottomScript : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     public event EventHandler onSendMessage;
 	public event EventHandler reSetPoisiton;
 	private bool selected = false;
-    private bool enable = true;
+    public bool isSelect
+    {
+        get { return selected; }
+    }
+    public bool cardenable = true;
+    public bool isSpecialClick = false;
+    public event EventHandler onSpecialClick;
 
     private void Start()
     {
@@ -38,12 +43,10 @@ public class bottomScript : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     {
         return;
         //删除拖牌到桌面打出的功能。
-        if (!GlobalDataScript.isDrag || !enable)
+        if (!GlobalDataScript.isDrag || !cardenable)
         {
             return;
         }
-
-		dragFlag = true;
         GetComponent<RectTransform>().pivot.Set(0, 0);
         transform.position = Input.mousePosition;
     }
@@ -51,8 +54,17 @@ public class bottomScript : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        if (!GlobalDataScript.isDrag || !enable)
+        if (!GlobalDataScript.isDrag || !cardenable)
         {
+            return;
+        }
+
+        if(isSpecialClick)
+        {
+            if(onSpecialClick != null)
+            {
+                onSpecialClick(gameObject);
+            }
             return;
         }
 
@@ -67,35 +79,24 @@ public class bottomScript : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        if (!GlobalDataScript.isDrag || !enable)
+        if (!GlobalDataScript.isDrag || !cardenable)
         {
             return;
         }
 
-        if(dragFlag)
+        if(isSpecialClick)
         {
-            if (transform.localPosition.y > -122f) //拖牌的触发阈值
-            {
-                reSetPoisitonCallBack();
-                sendObjectToCallBack();
-            }
-            else
-            {
-                transform.localPosition = oldPosition;
-            }
+            return;
         }
-        else
-        {
-			reSetPoisitonCallBack();
-		}
-		dragFlag = false;
+
+		reSetPoisitonCallBack();
     }
 
 	private void sendObjectToCallBack(){
-		if (onSendMessage != null)     //发送消息
-		{
-			onSendMessage(gameObject);//发送当前游戏物体消息
-		}
+        if (onSendMessage != null)     //发送消息
+        {
+            onSendMessage(gameObject);//发送当前游戏物体消息
+        }
 	}
 
 	private void reSetPoisitonCallBack(){
@@ -138,10 +139,10 @@ public class bottomScript : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
        // Destroy(this.gameObject);
     }
 
-    public void SelectCard(bool isSelect)
+    public void SelectCard(bool select)
     {
-        selected = isSelect;
-        if (isSelect)
+        selected = select;
+        if (select)
         {
             transform.localPosition = new Vector3(transform.localPosition.x, -272f);
         }
@@ -153,7 +154,7 @@ public class bottomScript : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
 
     public void EnableCard(bool isEnable)
     {
-        enable = isEnable;
+        cardenable = isEnable;
         if (isEnable)
         {
             Image_bg_color.SetActive(false);

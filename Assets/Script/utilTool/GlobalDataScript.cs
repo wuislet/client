@@ -7,6 +7,8 @@ using System.Net;
 using System.Text.RegularExpressions;
 using System.IO;
 using System.Text;
+using System.Reflection;
+using System.ComponentModel;
 
 public class GlobalDataScript
 {
@@ -166,6 +168,32 @@ public class GlobalDataScript
     }
 
 
+    /// <summary>
+    /// 清空控件的事件列表
+    /// </summary>
+    /// <param name="obj">要清空事件列表的控件</param>
+    /// <param name="pEventName">事件名</param>
+    public static Delegate[] GetAllEvent(object obj, string pEventName)
+    {
+        if (obj == null) return null;
+        if (string.IsNullOrEmpty(pEventName)) return null;
 
+        /* 下面的代码是用来获取btnDemo的Click事件注册的方法的 */
+        BindingFlags mPropertyFlags = BindingFlags.Instance | BindingFlags.Public
+            | BindingFlags.Static | BindingFlags.NonPublic;//筛选
+        PropertyInfo propertyInfo = obj.GetType().GetProperty("Events", mPropertyFlags);
+        if (propertyInfo == null) return null;
+
+        EventHandlerList eventList = (EventHandlerList)propertyInfo.GetValue(obj, null);//事件列表
+        BindingFlags mFieldFlags = BindingFlags.Static | BindingFlags.NonPublic;
+        FieldInfo fieldInfo = obj.GetType().GetField("Event" + pEventName, mFieldFlags);
+        if (fieldInfo == null) return null;
+
+        Delegate delegateInfo = eventList[fieldInfo.GetValue(obj)];
+        if (delegateInfo == null) return null;
+        Delegate[] delegateList = delegateInfo.GetInvocationList();
+
+        return delegateList;
+    }
 }
 

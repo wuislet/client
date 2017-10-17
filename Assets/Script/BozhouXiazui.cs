@@ -9,7 +9,7 @@ public class BozhouXiazui : MonoBehaviour {
     public void showSelect()
     {
         gameObject.SetActive(false);
-        GlobalDataScript.gamePlayPanel = PrefabManage.loadPerfab("Prefab/Room_Game_xiazuiSelect");
+        PrefabManage.loadPerfab("Prefab/Room_Game_xiazuiSelect");
     }
 
     public void cancelXiazui()

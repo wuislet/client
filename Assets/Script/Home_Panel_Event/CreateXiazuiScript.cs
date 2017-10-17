@@ -9,7 +9,7 @@ public class CreateXiazuiScript : MonoBehaviour {
 
     private void onStartXiazuiCallback(ClientResponse StartXiazuiRespone)
     {
-        GlobalDataScript.gamePlayPanel = PrefabManage.loadPerfab("Prefab/xiazui_btnList");
+        PrefabManage.loadPerfab("Prefab/xiazui_btnList");
     }
 
     private void gameReadyNotice(ClientResponse response)
