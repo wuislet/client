@@ -28,8 +28,6 @@ public class GlobalDataScript
     public static XiazuiVO xiazuiVo = new XiazuiVO(); 
     public static bool xiazui = false;  /**全局游戏下嘴返回数据**/
 
-    public static ShuaiJiuYaoVo shuaijiuyaoVo = new ShuaiJiuYaoVo();
-
     public static int mainUuid;
     /**房间成员信息**/
     public static List<AvatarVO> roomAvatarVoList;

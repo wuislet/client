@@ -22,10 +22,10 @@ public class CreateShuaiJiuYaoScript : MonoBehaviour
     private void gameReadyNotice(ClientResponse response)
     {
         print(" gameReadyNotice 1 " + count);
+        
         count += 1;
         if (count == 4)
         {
-            //显示甩牌的结果
             //还原牌的状态
             var list = script.handerCardList[0];
             for (int i = 0; i < list.Count; i++)
@@ -38,8 +38,9 @@ public class CreateShuaiJiuYaoScript : MonoBehaviour
 
     private void onShuaiJiuYaoCallBack(ClientResponse SJYrespone)
     {
+        //显示甩牌的结果
         ShuaiJiuYaoVo SJYvo = JsonMapper.ToObject<ShuaiJiuYaoVo>(SJYrespone.message);
-        GlobalDataScript.shuaijiuyaoVo = SJYvo;
+        print("  shuai jiu yao result " + SJYvo.cardList.ToString());
     }
 
     public void addListener()
