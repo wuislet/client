@@ -716,7 +716,7 @@ public class MyMahjongScript : MonoBehaviour
 	/// </summary>
 	/// <param name="cardPoint">Card point.</param>
 	/// <param name="curAvatarIndex">Current avatar index.</param>
-	private void createPutOutCardAndPlayAction(int cardPoint, int curAvatarIndex)
+	public void createPutOutCardAndPlayAction(int cardPoint, int curAvatarIndex)
 	{
 		MyDebug.Log ("put out cardPoint"+cardPoint+"-----------------------1---------------");;
 		SoundCtrl.getInstance ().playSound (cardPoint,avatarList [curAvatarIndex].account.sex);
@@ -1363,7 +1363,7 @@ public class MyMahjongScript : MonoBehaviour
         }
     }
 
-    private void cardGotoTable() //动画第二段
+    public void cardGotoTable() //动画第二段
 	{
 		MyDebug.Log ("==cardGotoTable=Invoke=====>");
 
@@ -2034,7 +2034,7 @@ public class MyMahjongScript : MonoBehaviour
 	/// Gets my index from list.
 	/// </summary>
 	/// <returns>The my index from list.</returns>
-	private int getMyIndexFromList(){
+	public int getMyIndexFromList(){
 		if (avatarList != null) {
 			for (int i = 0; i < avatarList.Count; i++)
 			{

@@ -702,7 +702,7 @@ public class CrateRoomSettingScript : MonoBehaviour {
             sendVo.roundNumber = roundNumber;
             sendVo.BottomScore = bottomScore;
             sendVo.huXianzhi = ShuaidaihuiHu;
-            sendVo.OneAndOneColorTrain = OneAndOneColorTrain ? 0:1;
+            sendVo.OneAndOneColorTrain = OneAndOneColorTrain ?1:0;
             sendVo.sevenDouble = true;
             sendVo.addWordCard = true;
             sendVo.roomType = GameConfig.GAME_TYPE_ShuaiJiuyao;
@@ -713,8 +713,7 @@ public class CrateRoomSettingScript : MonoBehaviour {
                 CustomSocket.getInstance().sendMsg(new CreateRoomRequest(sendmsgstr));
             }else{
                 TipsManagerScript.getInstance().setTips("你的房卡数量不足，不能创建房间");
-            }
-       
+            }    
     }
     /**
    * 创建推倒胡麻将房间

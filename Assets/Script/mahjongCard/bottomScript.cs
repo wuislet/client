@@ -47,6 +47,7 @@ public class bottomScript : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         {
             return;
         }
+        
         GetComponent<RectTransform>().pivot.Set(0, 0);
         transform.position = Input.mousePosition;
     }
@@ -58,7 +59,7 @@ public class bottomScript : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         {
             return;
         }
-
+        
         if(isSpecialClick)
         {
             if(onSpecialClick != null)
@@ -74,7 +75,6 @@ public class bottomScript : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
 		} else {
 			sendObjectToCallBack ();
 		}
-
     }
 
     public void OnPointerUp(PointerEventData eventData)
@@ -83,13 +83,11 @@ public class bottomScript : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         {
             return;
         }
-
-        if(isSpecialClick)
+        if (isSpecialClick)
         {
             return;
         }
-
-		reSetPoisitonCallBack();
+        reSetPoisitonCallBack();
     }
 
 	private void sendObjectToCallBack(){

@@ -27,20 +27,14 @@ public class ShuaiJiuYaoSelectScript : MonoBehaviour
     {
         CardList = new List<GameObject>();
         EventHandlers = new Dictionary<int, bottomScript.EventHandler>();
+        GlobalDataScript.isDrag = true; //开始甩九幺的时候允许所有人打牌。
         InitTips();
         //遍历所有手牌，选出九幺牌，注册点击事件。黑掉其他牌。
         PoppingCard();
     }
     private void InitTips()   //判断是否庄家显示不同提示
     {
-        if (myScript.IsSelfBanker())
-        {
-            MsgTxt.text = "庄家请扔掉四、七、十张幺、九牌";
-        }
-        else
-        {
-            MsgTxt.text = "请扔掉三、六、九张幺、九牌";
-        }
+            MsgTxt.text = "请扔掉三、六、九张幺、九牌\n";
     }
 
     private void PoppingCard()      //幺、九牌向上弹出
@@ -90,34 +84,20 @@ public class ShuaiJiuYaoSelectScript : MonoBehaviour
 
     public void OnConfirm()
     {
-       if (CardList.Count != 0)
-        {
-            //庄家扔幺九牌张数为四、七、十     普通玩家扔幺九牌张数为三、六、九
-            if (myScript.IsSelfBanker())
+        if (CardList.Count != 0)
+        {        
+            if (!(CardList.Count == 3 || CardList.Count == 6 || CardList.Count == 9))
             {
-                if (!(CardList.Count == 4 || CardList.Count == 7 || CardList.Count == 10))
-                {
-                    MsgTxt.text = "扔出的牌数不对，请扔四张、七张或者十张";
-                    MsgTxt.color = Color.red;
-                    return;
-                }
-            }
-            else
-            {
-                if (!(CardList.Count == 3 || CardList.Count == 6 || CardList.Count == 9))
-                {
-                    MsgTxt.text = "扔出的牌数不对，请扔三张、六张或者九张";
-                    MsgTxt.color = Color.red;
-                    return;
-                }
-            }
+                //MsgTxt.text = "扔出的牌数不对，请扔三张、六张或者九张";
+                MsgTxt.color = Color.red;
+                return;     
+            }        
         }
         shuaijiuyaoVO = new ShuaiJiuYaoVo();
         shuaijiuyaoVO.cardList = new List<int>();
-        var list = myScript.handerCardList[0];
-        for (int i = 0; i < list.Count; i++)
+        for (int i = 0; i < CardList.Count; i++)
         {
-            bottomScript obj = list[i].GetComponent<bottomScript>();
+            bottomScript obj = CardList[i].GetComponent<bottomScript>();
             int point = obj.getPoint();
             shuaijiuyaoVO.cardList.Add(point);
         }
@@ -145,14 +125,15 @@ public class ShuaiJiuYaoSelectScript : MonoBehaviour
 
         foreach(var obj in CardList)
         {
-            obj.SetActive(false);
+            Destroy(obj);
+            myScript.handerCardList[0].Remove(obj);
         }
+        myScript.SetPosition(false);      
 
         ReadyVO readyVO = new ReadyVO();
         readyVO.phase = 2;
         CustomSocket.getInstance().sendMsg(new GameReadyRequest(readyVO));
         CustomSocket.getInstance().sendMsg(new ShuaiJiuYaoRequest(shuaijiuyaoVO));
         gameObject.SetActive(false);
-        Destroy(gameObject, 0.1f);
     }
 }
