@@ -88,7 +88,7 @@ public class ShuaiJiuYaoSelectScript : MonoBehaviour
         {        
             if (!(CardList.Count == 3 || CardList.Count == 6 || CardList.Count == 9))
             {
-                //MsgTxt.text = "扔出的牌数不对，请扔三张、六张或者九张";
+                MsgTxt.text = "扔出的牌数不对，请扔三张、六张或者九张";
                 MsgTxt.color = Color.red;
                 return;     
             }        

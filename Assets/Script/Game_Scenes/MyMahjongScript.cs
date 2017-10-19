@@ -102,7 +102,7 @@ public class MyMahjongScript : MonoBehaviour
     private int otherMoCardPoint;
 #pragma warning restore CS0169 // 从不使用字段“MyMahjongScript.otherMoCardPoint”
 	private GameObject Pointertemp;
-	private int putOutCardPoint = -1;//打出的牌
+	public int putOutCardPoint = -1;//打出的牌
 	private int putOutCardPointAvarIndex=-1;//最后一个打出牌的人的index
 	private string outDir;
 	private int SelfAndOtherPutoutCard = -1;
@@ -588,7 +588,7 @@ public class MyMahjongScript : MonoBehaviour
 	/// </summary>
 	/// <returns>The index by dir.</returns>
 	/// <param name="dir">Dir.</param>
-	private int getIndexByDir(string dir){
+	public int getIndexByDir(string dir){
 		int result = 0;
 		switch (dir)
 		{
@@ -766,7 +766,7 @@ public class MyMahjongScript : MonoBehaviour
 	/// </summary>
 	/// <returns>The direction.</returns>
 	/// <param name="avatarIndex">Avatar index.</param>
-	private String getDirection(int avatarIndex)
+	public String getDirection(int avatarIndex)
 	{
 		String result = DirectionEnum.Bottom;
 		int myselfIndex = getMyIndexFromList();

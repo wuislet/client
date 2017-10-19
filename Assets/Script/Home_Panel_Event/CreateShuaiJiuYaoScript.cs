@@ -29,11 +29,58 @@ public class CreateShuaiJiuYaoScript : MonoBehaviour
         //显示甩牌的结果
         ShuaiJiuYaoVo SJYvo = JsonMapper.ToObject<ShuaiJiuYaoVo>(SJYrespone.message);
         print("  shuai jiu yao result " + SJYvo.cardList.Count);
+        print("  >>>>> + <<<<< " + SJYvo.avatarIndex);
+        var curAvatarIndex = SJYvo.avatarIndex;// 0  1  2  3
+        string currentDir = script.getDirection(curAvatarIndex);
 
-        if (count == 9)
+        if (currentDir == DirectionEnum.Bottom)
         {
-            PrefabManage.loadPerfab("Prefab/Panel_ShuaiJiuYaoTishi");
+            for (int i = 0; i < SJYvo.cardList.Count; i++)
+            {
+                GameObject temp = script.handerCardList[0][i];
+                int tempCardPoint = temp.GetComponent<bottomScript>().getPoint();
+                if (tempCardPoint == script.putOutCardPoint)
+                {
+                    script.handerCardList[0].RemoveAt(i);
+                    Destroy(temp);
+                }
+            }
+        }
+        else
+        {
+            List<GameObject> tempCardList = script.handerCardList[script.getIndexByDir(currentDir)];
+            if (tempCardList != null)
+            {
+                for (int i = 0; i < SJYvo.cardList.Count; i++)//消除其他的人牌碰牌长度
+                {
+                    GameObject temp = tempCardList[0];
+                    Destroy(temp);
+                    tempCardList.RemoveAt(0);
+                }
+            }
+        }
 
+        if (SJYvo.cardList.Count == 3)
+        {
+            var panel_shuiajiuyao = PrefabManage.loadPerfab("Prefab/Panel_ShuaiJiuYaoTishi");
+            if (currentDir == DirectionEnum.Bottom)
+            {
+                panel_shuiajiuyao.transform.localPosition = new Vector3(-480, -190);
+            }
+            else if (currentDir == DirectionEnum.Right)
+            {
+                panel_shuiajiuyao.transform.localPosition = new Vector3(480, -150);
+            }
+
+            else if (currentDir == DirectionEnum.Top)
+            {
+                panel_shuiajiuyao.transform.localPosition = new Vector3(320, 250);
+            }
+
+            else if (currentDir == DirectionEnum.Left)
+            {
+                panel_shuiajiuyao.transform.localPosition = new Vector3(-480, 300);
+            }
         }
 
         count += 1;
