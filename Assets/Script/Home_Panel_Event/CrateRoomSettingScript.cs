@@ -89,9 +89,9 @@ public class CrateRoomSettingScript : MonoBehaviour {
     public List<Toggle> bozhouxiazui; // 亳州下嘴个数
 
 
-    //public List<Toggle> JinChangdifen; //金昌麻将选择下底分
+    public List<Toggle> JinChangdifen; //金昌麻将选择下底分
     public List<Toggle> JinChang_shuaijiuyaodifen; // 金昌麻将甩九幺选择下底分
-    //public List<Toggle> JinChang_tuidaohudifen; //金昌麻将推倒胡选择下底分
+    public List<Toggle> JinChang_tuidaohudifen; //金昌麻将推倒胡选择下底分
 
 
     public List<Toggle> guangdongGui;//广东麻将鬼牌
@@ -655,6 +655,70 @@ public class CrateRoomSettingScript : MonoBehaviour {
     public void createJinChangRoom()
     {
          SoundCtrl.getInstance().playSoundByActionButton(1);
+        int roundNumber = 4;//房卡数量
+        int bottomScore = 1;//默认底分：1分 
+        bool baoting = false;
+        bool isSevenDoube = false;
+        bool isFengpai = false;
+        bool isZimo =false;
+
+        for (int i = 0; i < JinChangRoomCards.Count; i++)
+        {
+            Toggle item = JinChangRoomCards[i];
+            if (item.isOn)
+            {
+                if (i == 0)
+                    roundNumber = 4;
+                else if (i == 1)
+                    roundNumber = 8;
+                else if (i == 2)
+                    roundNumber = 16;
+                break;
+            }
+        }
+        if (JinChangGameRule[0].isOn)
+            isFengpai = true;
+        if (JinChangGameRule[1].isOn)
+            isSevenDoube = true;
+        if (JinChangGameRule[2].isOn)
+            baoting = true;
+        if (JinChangGameRule[3].isOn)
+            isZimo = true;
+
+        for (int i = 0; i < JinChangdifen.Count; i++)
+        {
+            Toggle var = JinChangdifen[i];
+            if (var.isOn)
+            {
+                if (i == 0)
+                    bottomScore = 1;
+                else if (i == 1)
+                    bottomScore = 2;
+                else if (i == 2)
+                    bottomScore = 5;
+                else if (i == 3)
+                    bottomScore = 10;
+                break;
+            }
+        }
+        sendVo = new RoomCreateVo();
+        sendVo.roundNumber = roundNumber;
+        sendVo.addWordCard = isFengpai;
+        sendVo.sevenDouble = isSevenDoube;
+        sendVo.ReadyHand = baoting;
+        sendVo.huXianzhi = isZimo?1:0;
+        sendVo.BottomScore = bottomScore;
+        sendVo.roomType = GameConfig.GAME_TYPE_JinChang;
+        string sendmsgstr = JsonMapper.ToJson(sendVo);
+        if (GlobalDataScript.loginResponseData.account.roomcard > 0)
+        {
+            watingPanel.gameObject.SetActive(true);
+            CustomSocket.getInstance().sendMsg(new CreateRoomRequest(sendmsgstr));
+        }
+        else
+        {
+            TipsManagerScript.getInstance().setTips("你的房卡数量不足，不能创建房间");
+        }
     }
     /**
    * 创建甩九幺麻将房间
@@ -693,7 +757,7 @@ public class CrateRoomSettingScript : MonoBehaviour {
                     bottomScore = 2;
                 else if (i == 2)
                     bottomScore = 5;
-                else if (i == 2)
+                else if (i == 3)
                     bottomScore = 10;
                 break;
             }
@@ -721,6 +785,70 @@ public class CrateRoomSettingScript : MonoBehaviour {
     public void createTuiDaoHuRoom()
     {
         SoundCtrl.getInstance().playSoundByActionButton(1);
+        int roundNumber = 4;//房卡数量
+        int bottomScore = 1;//默认底分：1分 
+        bool baoting = false;
+        int daihui = 0;  // 金昌推倒胡带会 （牌的最后一张是会）
+        bool isFengpai = false;
+        bool isZimo = false;
+
+        for (int i = 0; i < JinChang_tuidaohuRoomCards.Count; i++)
+        {
+            Toggle item = JinChang_tuidaohuRoomCards[i];
+            if (item.isOn)
+            {
+                if (i == 0)
+                    roundNumber = 4;
+                else if (i == 1)
+                    roundNumber = 8;
+                else if (i == 2)
+                    roundNumber = 16;
+                break;
+            }
+        }
+        if (JinChang_tuidaohuGameRule[0].isOn)
+            isFengpai = true;
+        if (JinChang_tuidaohuGameRule[1].isOn)
+            daihui = 4;
+        if (JinChang_tuidaohuGameRule[2].isOn)
+            baoting = true;
+        if (JinChang_tuidaohuGameRule[3].isOn)
+            isZimo = true;
+
+        for (int i = 0; i < JinChang_tuidaohudifen.Count; i++)
+        {
+            Toggle var = JinChang_tuidaohudifen[i];
+            if (var.isOn)
+            {
+                if (i == 0)
+                    bottomScore = 1;
+                else if (i == 1)
+                    bottomScore = 2;
+                else if (i == 2)
+                    bottomScore = 5;
+                else if (i == 3)
+                    bottomScore = 10;
+                break;
+            }
+        }
+        sendVo = new RoomCreateVo();
+        sendVo.roundNumber = roundNumber;
+        sendVo.addWordCard = isFengpai;
+        sendVo.gui = daihui;
+        sendVo.ReadyHand = baoting;
+        sendVo.SJYHu = isZimo?1:0;
+        sendVo.BottomScore = bottomScore;
+        sendVo.roomType = GameConfig.GAME_TYPE_TuiDaohu;
+        string sendmsgstr = JsonMapper.ToJson(sendVo);
+        if (GlobalDataScript.loginResponseData.account.roomcard > 0)
+        {
+            watingPanel.gameObject.SetActive(true);
+            CustomSocket.getInstance().sendMsg(new CreateRoomRequest(sendmsgstr));
+        }
+        else
+        {
+            TipsManagerScript.getInstance().setTips("你的房卡数量不足，不能创建房间");
+        }
     }
 
 

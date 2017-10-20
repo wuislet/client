@@ -1808,17 +1808,21 @@ public class MyMahjongScript : MonoBehaviour
         if( roomvo.roomType == 6 ) // 金昌麻将
         {
             str += "金昌麻将\n";
-            if (roomvo.ReadyHand)
-                str += "报听\n";
             if (roomvo.addWordCard) {
                 str += "有风牌\n";
             }else {
                 str += "无风牌\n";
             }
-            if (roomvo.huXianzhi == 1)
-                str += "仅能自摸胡";
             if (roomvo.sevenDouble)
-                str += "可胡七对\n";
+                str += "七小对\n";
+            if (roomvo.ReadyHand)
+                str += "报听\n";
+            if (roomvo.huXianzhi == 1)
+                str += "自摸胡\n";
+            if (roomvo.BottomScore > 0)
+            {
+                str += "底分：" + roomvo.BottomScore + "";
+            }
         }
         else if (roomvo.roomType == 7)
         {
@@ -1830,36 +1834,31 @@ public class MyMahjongScript : MonoBehaviour
                 str += "一条龙 番X2\n";
             }
             if (roomvo.SJYHu == 1)
-                str += "自摸";
-
-            if (roomvo.BottomScore == 1){
-                str += "底分X1\n";
+                str += "自摸\n";
+            if (roomvo.BottomScore > 0)
+            {
+                str += "底分：" + roomvo.BottomScore + "";
             }
-            else if (roomvo.BottomScore == 2){
-                str += "底分X2\n";
-            }
-            else if (roomvo.BottomScore == 3) {
-                str += "底分X5\n";
-            }
-            else if (roomvo.BottomScore == 4) {
-                str += "底分X10\n";
-            }
-                
         }
         else if(roomvo.roomType ==8 )
         {
-            str += "推倒胡";
-            if (roomvo.ReadyHand)
-                str += "报听\n";
-            if (roomvo.addWordCard){
-                str += "有风牌\n";
-            }else{
+            str += "推倒胡\n";
+            if (roomvo.addWordCard) {
+                str += "风牌\n";
+            }
+            else{
                 str += "无风牌\n";
             }
-            if (roomvo.huXianzhi == 1)
-                str += "仅能自摸胡";
             if (roomvo.gui == 4)
                 str += "带会\n";
+            if (roomvo.ReadyHand)
+                str += "报听\n";         
+            if (roomvo.huXianzhi == 1)
+                str += "自摸胡\n";
+            if (roomvo.BottomScore > 0)
+            {
+                str += "底分：" + roomvo.BottomScore + "";
+            }
         }
 
 
